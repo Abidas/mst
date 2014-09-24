@@ -16,31 +16,31 @@
 			<h1>М-стайл</h1>
 		</div>
 
-		<div data-role="content">
+		<div data-role="content" class="main">
 
-			<div id="one" class="ui-content">
+			<div id="news" class="ui-content">
 				<ul data-role="listview">
-						<li><a href="#">
+						<li><a href="#news_1">
 							<img src="./img/album-bb.jpg">
 							<h2>Заголовок</h2>
 							<p>Текст</p>
 						</a></li>
-						<li><a href="#">
+						<li><a href="#news_1">
 							<img src="./img/album-bb.jpg">
 							<h2>Заголовок</h2>
 							<p>Текст</p>
 						</a></li>
-						<li><a href="#">
+						<li><a href="#news_1">
 							<img src="./img/album-bb.jpg">
 							<h2>Заголовок</h2>
 							<p>Текст</p>
 						</a></li>
-						<li><a href="#">
+						<li><a href="#news_1">
 							<img src="./img/album-bb.jpg">
 							<h2>Заголовок</h2>
 							<p>Текст</p>
 						</a></li>
-						<li><a href="#">
+						<li><a href="#news_1">
 							<img src="./img/album-bb.jpg">
 							<h2>Заголовок</h2>
 							<p>Текст</p>
@@ -48,17 +48,111 @@
 				</ul>
 			</div>
 
+			<div id="news_1" class="ui-content">
+				<img src="./img/album-bb.jpg">
+				<p>ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст </p>
+				<p>Текст</p>
+			</div>
+
+
+			<div id="seminars" class="ui-content">
+				<h1>Семинары Компании "М-Стайл"</h1>
+				<ul data-role="listview">
+					<li>
+						<h2>Заголовок</h2>
+						<p>Текст</p>
+						<button>Записаться</button>
+					</li>
+					<li>
+						<h2>Заголовок</h2>
+						<p>Текст</p>
+						<button>Записаться</button>
+					</li>
+					<li>
+						<h2>Заголовок</h2>
+						<p>Текст</p>
+						<button>Записаться</button>
+					</li>
+				</ul>
+			</div>
+
+
+			<div id="doc_search" class="ui-content">
+				<h1>Подборка документов</h1>
+				<ul data-role="listview">
+					<li>
+						<h2>Заголовок</h2>
+						<p>Текст</p>
+						<button>Заказать</button>
+					</li>
+					<li>
+						<h2>Заголовок</h2>
+						<p>Текст</p>
+						<button>Заказать</button>
+					</li>
+					<li>
+						<h2>Заголовок</h2>
+						<p>Текст</p>
+						<button>Заказать</button>
+					</li>
+				</ul>
+			</div>
+
+
+			<div id="doc_order" class="ui-content">
+				<h1>Заказ документов на email</h1>
+				<form>
+					<input type="text" name="text-1" id="text-1" value=""  placeholder="Название документа">
+					<input type="text" name="text-1" id="text-1" value="" placeholder="Номер документа">
+					<input type="date" name="text-1" id="text-1" value="">
+					<input type="text" name="text-1" id="text-1" value="" placeholder="Принявший орган">
+					<button>Отправить</button>
+				</form>
+			</div>
+
+
+			<div id="media" class="ui-content">
+				<div data-role="tabs">
+						<div data-role="navbar">
+								<ul>
+									<li><a href="#video" data-theme="a" data-ajax="false">one</a></li>
+									<li><a href="#audio" data-theme="a" data-ajax="false">two</a></li>
+								</ul>
+						</div>
+						<div id="video" class="ui-content1">
+						<h1>First tab contents</h1>
+						</div>
+						<div id="audio" class="ui-content1">
+								<ul data-role="listview">
+										<li><a href="#">Acura</a></li>
+										<li><a href="#">Audi</a></li>
+										<li><a href="#">BMW</a></li>
+										<li><a href="#">Cadillac</a></li>
+										<li><a href="#">Ferrari</a></li>
+								</ul>
+						</div>
+				</div>
+			</div>
+
+
+			<div id="call" class="ui-content">
+				<strong>Горяча линия консультант плюс</strong>
+				<a href="http://www.m-style.spb.su" rel="external" target="_blank">Внешняя ссылка</a>
+			</div>
+
+
+
 		</div> <!-- content -->
 
 		<div data-role="footer" data-position="fixed">
 			<div data-role="navbar">
 				<ul id="main_menu">
-					<li class="mytab"><a href="#one" data-ajax="false">one</a></li>
-					<li class="mytab"><a href="#two" data-ajax="false">two</a></li>
-					<li class="mytab"><a href="#three" data-ajax="false">three</a></li>
-					<li class="mytab"><a href="#four" data-ajax="false">four</a></li>
-					<li class="mytab"><a href="#five" data-ajax="false">five</a></li>
-					<li class="mytab"><a href="#six" data-ajax="false">six</a></li>
+					<li class="mytab"><a href="#news" data-ajax="false">one</a></li>
+					<li class="mytab"><a href="#seminars" data-ajax="false">two</a></li>
+					<li class="mytab"><a href="#doc_search" data-ajax="false">three</a></li>
+					<li class="mytab"><a href="#doc_order" data-ajax="false">four</a></li>
+					<li class="mytab"><a href="#media" data-ajax="false">five</a></li>
+					<li class="mytab"><a href="#call" data-ajax="false">six</a></li>
 				</ul>
 			</div>
 		</div> 

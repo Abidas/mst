@@ -2,3 +2,18 @@
     width: 16.6% !important;
     clear: none !important;
 }
+
+.ui-content {
+display: none;
+}
+
+.ui-content1 {
+border-width: 0;
+overflow: visible;
+overflow-x: hidden;
+padding: 1em;
+}
+
+.main {
+  display: block;
+}
