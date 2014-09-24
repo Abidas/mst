@@ -12,8 +12,11 @@
 	<body>
 
 	<div data-role="page" id="one" data-quicklinks="true">
-		<div data-role="header">
+		<div data-role="header" data-position="fixed" class="header">
 			<h1>М-стайл</h1>
+			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
+				<a data-rel="dialog" data-iconpos="notext" data-icon="gear" data-role="button" href="#auth_dialog"></a>
+			</div>
 		</div>
 
 		<div data-role="content" class="main">
@@ -177,6 +180,25 @@
 				</ul>
 			</div>
 		</div> 
+
+	</div> <!-- page -->
+
+	<div id="auth_dialog" data-role="dialog">
+		<div data-role="header">
+			<h1>Авторизация</h1>
+		</div>
+		<div data-role="content">
+			<input type="text" name="uin" placeholder="UIN клиента">
+			<input type="password" name="pwd" placeholder="Пароль">
+			<a data-rel="dialog" href="#temp_reg_dialog">Регистрация временного доступа</a>
+			<a href="#" data-rel="back">xxxx</a>
+			<div data-role="navbar">
+				<ul>
+						<li><a href="#" data-rel="back">Отмена</a></li>
+						<li><a href="#" data-rel="back">Войти</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
 
 	</body>

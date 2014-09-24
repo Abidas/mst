@@ -21,3 +21,8 @@ padding: 1em;
 .inside {
   overflow-y: scroll;
 }
+
+.header h1 {
+  text-align:left;
+  margin-left:15px;
+}
