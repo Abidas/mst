@@ -17,3 +17,7 @@ padding: 1em;
 .main {
   display: block;
 }
+
+.inside {
+  overflow-y: scroll;
+}
