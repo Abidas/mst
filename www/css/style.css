@@ -18,6 +18,10 @@ padding: 1em;
   display: block;
 }
 
+.ui-panel {
+  overflow-y: hidden;
+}
+
 .inside {
   overflow-y: scroll;
 }

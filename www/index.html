@@ -15,11 +15,80 @@
 		<div data-role="header" data-position="fixed" class="header">
 			<h1>М-стайл</h1>
 			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
-				<a data-rel="dialog" data-iconpos="notext" data-icon="gear" data-role="button" href="#auth_dialog"></a>
+				<a data-rel="popup" data-position-to="window" data-transition="pop" data-iconpos="notext" data-icon="gear" data-role="button" href="#auth_dialog"></a>
 			</div>
 		</div>
 
+		<div id="auth_dialog" data-role="popup" data-dismissible="false">
+			<div data-role="header">
+				<h1>Авторизация</h1>
+			</div>
+			<div data-role="main">
+				<input type="text" name="uin" placeholder="UIN клиента">
+				<input type="password" name="pwd" placeholder="Пароль">
+				<a data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
+				<div data-role="navbar">
+					<ul>
+							<li><a href="#" data-rel="back">Отмена</a></li>
+							<li><a href="javascript:u.doAuth()">Войти</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="need_auth" data-role="popup" data-dismissible="false">
+			<div data-role="header">
+				<h1>Внимание</h1>
+			</div>
+			<div data-role="main">
+				<p>Данный вид материалов доступен только клиентам компании "М-СТАЙЛ", либо после получения полного доступа.</p>
+				<div data-role="navbar">
+					<ul>
+							<li><a href="#" data-rel="back">ОК</a></li>
+							<li><a href="#" data-rel="back">Оплатить</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="msg" data-role="popup" data-dismissible="false">
+			<div data-role="header">
+				<h1 id="msg_title"></h1>
+			</div>
+			<div data-role="main">
+				<p id="msg_content" style="min-width:400px"></p>
+				<div data-role="navbar">
+					<ul>
+							<li><a href="javascript:i7e.msg.close()">ОК</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
 		<div data-role="content" class="main">
+
+			<div id="register" class="ui-content">
+					<div>
+						* 
+						<input type="email" name="email" placeholder="E-mail">
+					</div>
+					<div>
+						* 
+						<input type="password" name="pwd" placeholder="Пароль">
+					</div>
+					<div>
+						* 
+						<input type="text" name="fio" placeholder="ФИО пользователя">
+					</div>
+					<div>
+						<input type="text" name="org" placeholder="Наименование организации">
+					</div>
+					<div>
+						<input type="tel" name="tel" placeholder="Контактный телефон">
+					</div>
+					<button onClick="u.register()">Регистрация</button>
+			</div>
 
 			<div id="news" class="ui-content">
 				<ul data-role="listview">
@@ -107,10 +176,10 @@
 			<div id="doc_order" class="ui-content">
 				<h1>Заказ документов на email</h1>
 				<form>
-					<input type="text" name="text-1" id="text-1" value=""  placeholder="Название документа">
-					<input type="text" name="text-1" id="text-1" value="" placeholder="Номер документа">
-					<input type="date" name="text-1" id="text-1" value="">
-					<input type="text" name="text-1" id="text-1" value="" placeholder="Принявший орган">
+					<input type="text" name="text-1" value="" placeholder="Название документа">
+					<input type="text" name="text-1" value="" placeholder="Номер документа">
+					<input type="date" name="text-1" value="">
+					<input type="text" name="text-1" value="" placeholder="Принявший орган">
 					<button>Отправить</button>
 				</form>
 			</div>
@@ -183,23 +252,7 @@
 
 	</div> <!-- page -->
 
-	<div id="auth_dialog" data-role="dialog">
-		<div data-role="header">
-			<h1>Авторизация</h1>
-		</div>
-		<div data-role="content">
-			<input type="text" name="uin" placeholder="UIN клиента">
-			<input type="password" name="pwd" placeholder="Пароль">
-			<a data-rel="dialog" href="#temp_reg_dialog">Регистрация временного доступа</a>
-			<a href="#" data-rel="back">xxxx</a>
-			<div data-role="navbar">
-				<ul>
-						<li><a href="#" data-rel="back">Отмена</a></li>
-						<li><a href="#" data-rel="back">Войти</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+
 
 	</body>
 </html>
