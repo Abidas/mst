@@ -51,7 +51,7 @@
 				<div data-role="navbar">
 					<ul>
 							<li><a href="#" data-rel="back">ОК</a></li>
-							<li><a href="#" data-rel="back">Оплатить</a></li>
+							<li><a href="javascript:i7e.openPay()">Оплатить</a></li>
 					</ul>
 				</div>
 			</div>
@@ -75,6 +75,7 @@
 		<div data-role="content" class="main">
 
 			<div id="register" class="ui-content">
+          <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
 					<div>
 						* 
 						<input type="email" name="email" placeholder="E-mail">

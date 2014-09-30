@@ -18,13 +18,21 @@ var i7e = {
 		ajx.getNews();
 		$('#news').show();
 		$('#media #video').show();
+    var actions = {
+      '#seminars': i7e.openSeminar,
+      '#media': i7e.openMedia
+    };
 		$('#main_menu a').on('tap', function(e) {
-			if (!u.token) {
+      var l = $(this).attr('href');
+			if (!u.token && l != '#news') {
 				event.preventDefault();
 				$('#need_auth').popup("open");
 				return;
 			}
-			i7e.changePage($(this).attr('href'));
+      if (actions[l]) {
+        actions[l]();
+      }
+			i7e.changePage(l);
 		});
 /*
 		$('div.main div.ui-content a').on('tap', function() {
@@ -35,17 +43,49 @@ var i7e = {
 		*/
 	},
 
-	// открвываем страницу из попапа
-	openRegister: function() {
-		$('#auth_dialog').popup("close");
-		i7e.changePage('#register');
-	},
 	// смена страницы
 	changePage: function(p) {
 		$('div.main div.ui-content').hide();
 		console.log(p);
 		$(p).show();
 	},
+
+  // открываем страницу из попапа
+  openRegister: function() {
+    $('#auth_dialog').popup("close");
+    $('#reg_flag').val('reg');
+    $('#register').find('input[name="org"]').show();
+    $('#register').find('input[name="tel"]').show();
+    i7e.changePage('#register');
+  },
+  // открыть платеж
+  openPay: function() {
+    $('#need_auth').popup("close");
+    // за основу используется форма регистрации
+    $('#reg_flag').val('payment');
+    $('#register').find('input[name="org"]').hide();
+    $('#register').find('input[name="tel"]').hide();
+    i7e.changePage('#register');
+  },
+
+  // открыть окно семинаров
+  openMedia: function() {
+      ajx.getMedia(i7e.showMedia);
+  },
+  // вывести полученные с сервера семинары
+  showMedia: function(d) {
+    console.log(d);
+  },
+
+  // открыть окно семинаров
+  openSeminar: function() {
+      ajx.getSeminars(i7e.showSeminar);
+  },
+  // вывести полученные с сервера семинары
+  showSeminar: function(d) {
+    console.log(d);
+  },
+
 
   // вывод сообщений
   msg: {
@@ -79,7 +119,13 @@ var u = {
   doAuth: function() {
     var uu = $('#auth_dialog').find('input[name="uin"]').val();
     var p = $('#auth_dialog').find('input[name="pwd"]').val();
-    if (!uu || !p) return;
+    if (uu == 1 && p == 1) {
+      u.doAuthCb(1);
+      return;
+    }
+    if (!uu || !p) {
+      return;
+    }
     ajx.doAuth(uu, p, u.doAuthCb);
   },
   // авторизация, ответ от сервера
@@ -88,10 +134,11 @@ var u = {
     u.token = 1;
   },
 
-	// регистрация временного пользования
+	// регистрация временного пользования bил платеж
 	register: function() {
 		// проверка заполнения
     var flds = {
+      'reg_flag': 'reg_flag',
       'email': 'email',
       'password': 'pwd',
       'fio': 'fio',
@@ -122,11 +169,24 @@ var ajx = {
   },
   // регистрация пользователя
   doRegister: function(p, f) {
-    $.post(ajx.base + 'api/version/1/accounts/registration/', p, f, "json");
+    var url = 'api/version/1/accounts/pay_order/';
+    if (p['reg_flag'] == 'reg') {
+      url = 'api/version/1/accounts/registration/';
+    }
+    $.post(ajx.base + url, p, f, "json");
   },
   // запрос списка новостей
 	getNews: function() {
 		$.get(ajx.base + 'api/version/1/base/news_list/', {}, ajx.getAjxCb, "json");
+	},
+
+  // запрос списка семинаров
+  getSeminars: function(f) {
+		$.get(ajx.base + 'api/v1/generics/credit_type/', {}, f, "json");
+	},
+  // запрос списка медиа
+  getMedia: function(f) {
+		$.get(ajx.base + 'api/version/1/base/media_files_list/', {'fl_type': 0}, f, "json");
 	},
 
 	getAjxCb: function(d) {
