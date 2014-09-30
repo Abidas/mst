@@ -1,4 +1,57 @@
-.mytab {
+.ui-content{
+	background:#ffffff;
+	color:#000000;
+	}
+.ui-overlay-b .ui-page-theme-b{
+	background:#ffffff;
+	color:#000000;
+	}
+html .ui-page-theme-b .ui-btn{
+	color:#000000;
+	}
+.ui-page-theme-b .ui-li-has-thumb{
+	border-bottom: 1px solid #6DCAEC;
+	margin:5px;
+	padding:5px;
+	}
+html .ui-page-theme-b .ui-footer .ui-btn{
+	color:#ffffff;
+	}
+.ui-block-a,
+.ui-grid-d > .ui-block-b,
+.ui-grid-d > .ui-block-c,
+.ui-grid-d > .ui-block-d,
+.ui-grid-d > .ui-block-e,
+.ui-grid-d > .ui-block-f{
+	width:16.6%;
+	}
+.ui-navbar{
+	display:table;
+	width:100%;
+	}
+.ui-footer .ui-navbar a.ui-btn{
+	display:table-cell;
+	}
+.ui-footer .ui-navbar a.ui-btn.bg-orange{
+	background:orange;
+	}
+.ui-footer .ui-navbar a.ui-btn.bg-blue{
+	background:blue;
+	}
+.ui-footer .ui-navbar a.ui-btn.bg-gray{
+	background:gray;
+	}
+.ui-footer .ui-navbar a.ui-btn.bg-purple{
+	background:purple;
+	}
+.ui-footer .ui-navbar a.ui-btn.bg-lightgray{
+	background:#c6c6c6;
+	}
+.ui-footer .ui-navbar a.ui-btn.bg-green{
+	background:green;
+	}
+
+  .mytab {
     width: 16.6% !important;
     clear: none !important;
 }

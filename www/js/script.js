@@ -15,7 +15,7 @@ var i7e = {
 			$($(this).attr('href')).show();
 		});
 		*/
-//		ajx.getNews();
+		ajx.getNews();
 		$('#news').show();
 		$('#media #video').show();
 		$('#main_menu a').on('tap', function(e) {
@@ -92,17 +92,17 @@ var u = {
 	register: function() {
 		// проверка заполнения
     var flds = {
-      'uin': 'email',
-      'pwd': 'pwd',
+      'email': 'email',
+      'password': 'pwd',
       'fio': 'fio',
       'org': 'org',
-      'tel': 'tel'
+      'phone': 'tel'
     };
     var p = {};
     for(var k in flds) {
       p[k] = $('#register').find('input[name="' + flds[k] + '"]').val();
     }
-    if (!p['uin'] || !p['pwd']) return;
+    if (!p['email'] || !p['password'] || !p['fio']) return;
     ajx.doRegister(p, u.registerCb);
 	},
   // регистрация, обработка ответа сервера
@@ -118,27 +118,23 @@ var ajx = {
 
   // аутентификация пользователя
   doAuth: function(uu, p, f) {
-    //ajx.base + 'api-auth/login/',
-    $.post('./ajxt.html', {'username': uu, 'password': p}, f, "json");
+    $.post(ajx.base + 'api-auth/login/', {'username': uu, 'password': p}, f, "json");
   },
   // регистрация пользователя
-  doRegister: function(uu, p, f) {
-    //ajx.base + 'api-auth/login/',
-    $.post('./ajxt.html', {'username': uu, 'password': p}, f, "json");
+  doRegister: function(p, f) {
+    $.post(ajx.base + 'api/version/1/accounts/registration/', p, f, "json");
   },
   // запрос списка новостей
 	getNews: function() {
-		//$.get(ajx.base + 'api/version/1/news_list/', {}, ajx.getAjxCb);
-		var d =     [{
-        "id": 2,
-        "title": "100 \u043c\u0431\u0438\u0442",
-        "desc": "1",
-        "created": "2014-09-22T15:17:26.454Z"
-    }];
-		ajx.getAjxCb(d);
+		$.get(ajx.base + 'api/version/1/base/news_list/', {}, ajx.getAjxCb, "json");
 	},
 
 	getAjxCb: function(d) {
 		console.log(d);
 	}
 };
+
+function mycallback(data)
+{
+  console.log(data);
+}

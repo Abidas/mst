@@ -1,25 +1,31 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>m-style</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="./css/font-awesome.min.css" />
 		<link rel="stylesheet" href="./css/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.css" />
+    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" />
+    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" />
 		<link rel="stylesheet" href="./css/style.css" />
 		<script src="./js/jquery.min.js"></script>
 		<script src="./js/jquery.mobile.min.js"></script>
 		<script src="./js/script.js"></script>
-	</head>
+  </head>
 	<body>
 
-	<div data-role="page" id="one" data-quicklinks="true">
-		<div data-role="header" data-position="fixed" class="header">
-			<h1>М-стайл</h1>
-			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
+	<div data-role="page" id="one" data-quicklinks="true" data-theme='b'>
+		<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b' class1="header">
+      <a href="/" data-ajax="false"><i class="fa fa-bars"></i></a>
+      <h1><img src="./images/design/logo.png" alt="m-style"></h1>
+			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-right" data-theme="a">
 				<a data-rel="popup" data-position-to="window" data-transition="pop" data-iconpos="notext" data-icon="gear" data-role="button" href="#auth_dialog"></a>
 			</div>
 		</div>
 
-		<div id="auth_dialog" data-role="popup" data-dismissible="false">
+		<div id="auth_dialog" data-role="popup" data-dismissible="false" data-theme="a">
 			<div data-role="header">
 				<h1>Авторизация</h1>
 			</div>
@@ -36,7 +42,7 @@
 			</div>
 		</div>
 
-		<div id="need_auth" data-role="popup" data-dismissible="false">
+		<div id="need_auth" data-role="popup" data-dismissible="false" data-theme="a">
 			<div data-role="header">
 				<h1>Внимание</h1>
 			</div>
@@ -91,7 +97,7 @@
 			</div>
 
 			<div id="news" class="ui-content">
-				<ul data-role="listview">
+				<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
 						<li><a href="#news_1">
 							<img src="./img/album-bb.jpg">
 							<h2>Заголовок</h2>
@@ -237,16 +243,14 @@
 
 		</div> <!-- content -->
 
-		<div data-role="footer" data-position="fixed">
-			<div data-role="navbar">
-				<ul id="main_menu">
-					<li class="mytab"><a href="#news" data-ajax="false">one</a></li>
-					<li class="mytab"><a href="#seminars" data-ajax="false">two</a></li>
-					<li class="mytab"><a href="#doc_search" data-ajax="false">three</a></li>
-					<li class="mytab"><a href="#doc_order" data-ajax="false">four</a></li>
-					<li class="mytab"><a href="#media" data-ajax="false">five</a></li>
-					<li class="mytab"><a href="#call" data-ajax="false">six</a></li>
-				</ul>
+		<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+			<div data-role="navbar" id="main_menu">
+					<a href="#news" data-ajax="false" class="bg-orange"><i class='blIcon fa fa-rss'></i></a>
+					<a href="#seminars" data-ajax="false" class="bg-blue"><i class='blIcon fa fa-user'></i></a>
+					<a href="#doc_search" data-ajax="false" class="bg-gray"><i class='blIcon fa fa-play-circle-o'></i></a>
+					<a href="#doc_order" data-ajax="false" class="bg-purple"><i class='blIcon fa fa-long-arrow-down'></i></a>
+					<a href="#media" data-ajax="false" class="bg-lightgray"><i class='blIcon fa fa-table'></i></a>
+					<a href="#call" data-ajax="false" class="bg-green"><i class='blIcon fa fa-phone'></i></a>
 			</div>
 		</div> 
 
