@@ -18,11 +18,8 @@
 
 	<div data-role="page" id="one" data-quicklinks="true" data-theme='b'>
 		<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b' class1="header">
-      <a href="/" data-ajax="false"><i class="fa fa-bars"></i></a>
-      <h1><img src="./images/design/logo.png" alt="m-style"></h1>
-			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-right" data-theme="a">
-				<a data-rel="popup" data-position-to="window" data-transition="pop" data-iconpos="notext" data-icon="gear" data-role="button" href="#auth_dialog"></a>
-			</div>
+			<h1><img src="./images/design/logo.png" alt="m-style"></h1>
+			<a class="ui-btn-right" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button" href="#auth_dialog"><i class='fa fa-ellipsis-v'></i></a>
 		</div>
 
 		<div id="auth_dialog" data-role="popup" data-dismissible="false" data-theme="a">
@@ -30,19 +27,21 @@
 				<h1>Авторизация</h1>
 			</div>
 			<div data-role="main">
-				<input type="text" name="uin" placeholder="UIN клиента">
-				<input type="password" name="pwd" placeholder="Пароль">
-				<a data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
-				<div data-role="navbar">
-					<ul>
+				<form action="#" method="post" id="auth_form">
+					<input type="text" name="uin" placeholder="UIN клиента">
+					<input type="password" name="pwd" placeholder="Пароль">
+					<a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
+					<div data-role="navbar">
+						<ul>
 							<li><a href="#" data-rel="back">Отмена</a></li>
 							<li><a href="javascript:u.doAuth()">Войти</a></li>
-					</ul>
-				</div>
+						</ul>
+					</div>
+				</form>
 			</div>
 		</div>
 
-		<div id="need_auth" data-role="popup" data-dismissible="false" data-theme="a">
+		<div id="need_auth" data-role="popup" data-dismissible="false" data-theme="a" class="warning-popup">
 			<div data-role="header">
 				<h1>Внимание</h1>
 			</div>
@@ -50,22 +49,22 @@
 				<p>Данный вид материалов доступен только клиентам компании "М-СТАЙЛ", либо после получения полного доступа.</p>
 				<div data-role="navbar">
 					<ul>
-							<li><a href="#" data-rel="back">ОК</a></li>
-							<li><a href="javascript:i7e.openPay()">Оплатить</a></li>
+						<li><a href="#" data-rel="back">ОК</a></li>
+						<li><a href="javascript:i7e.openPay()">Оплатить</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 
-		<div id="msg" data-role="popup" data-dismissible="false">
+		<div id="msg" data-role="popup" data-dismissible="false" class="warning-popup">
 			<div data-role="header">
-				<h1 id="msg_title"></h1>
+				<h1 id="msg_title">Ошибка</h1>
 			</div>
 			<div data-role="main">
-				<p id="msg_content" style="min-width:400px"></p>
+				<p id="msg_content">Пожалуйста, заполните все обязательные (<i class='fa fa-circle color-red'></i>) поля</p>
 				<div data-role="navbar">
 					<ul>
-							<li><a href="javascript:i7e.msg.close()">ОК</a></li>
+						<li><a href="javascript:i7e.msg.close()">ОК</a></li>
 					</ul>
 				</div>
 			</div>
@@ -73,191 +72,213 @@
 
 
 		<div data-role="content" class="main">
-
-			<div id="register" class="ui-content">
-          <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
-					<div>
-						* 
-						<input type="email" name="email" placeholder="E-mail">
+			<div id="register" class="ui-content light-theme">
+				<form action="#" method="post" id="register_form">
+					<input type="hidden" id="reg_flag" name="reg_flag" value="reg">
+					<div data-role="fieldcontain">
+						<label for="email"><i class='fa fa-circle color-red'></i></label>
+						<input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
 					</div>
-					<div>
-						* 
-						<input type="password" name="pwd" placeholder="Пароль">
+					<div data-role="fieldcontain">
+						<label for="pwd"><i class='fa fa-circle color-red'></i></label>
+						<input type="password" name="pwd" id="pwd" value="" data-clear-btn="true" placeholder="Пароль">
 					</div>
-					<div>
-						* 
-						<input type="text" name="fio" placeholder="ФИО пользователя">
+					<div data-role="fieldcontain">
+						<label for="fio"><i class='fa fa-circle color-red'></i></label>
+						<input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">
 					</div>
-					<div>
-						<input type="text" name="org" placeholder="Наименование организации">
+					<div data-role="fieldcontain">
+						<label for="org"></label>
+						<input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Наименование организации">
 					</div>
-					<div>
-						<input type="tel" name="tel" placeholder="Контактный телефон">
+					<div data-role="fieldcontain">
+						<label for="tel"></label>
+						<input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Контактный телефон">
 					</div>
+					<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>
 					<button onClick="u.register()">Регистрация</button>
+				</form>
 			</div>
 
 			<div id="news" class="ui-content">
 				<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
-						<li><a href="#news_1">
-							<img src="./img/album-bb.jpg">
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-						</a></li>
-						<li><a href="#news_1">
-							<img src="./img/album-bb.jpg">
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-						</a></li>
-						<li><a href="#news_1">
-							<img src="./img/album-bb.jpg">
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-						</a></li>
-						<li><a href="#news_1">
-							<img src="./img/album-bb.jpg">
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-						</a></li>
-						<li><a href="#news_1">
-							<img src="./img/album-bb.jpg">
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-						</a></li>
+					<li><a href="#need_auth" data-rel="popup" data-position-to="window" data-transition="pop" >
+						<img src="./img/album-bb.jpg">
+						<h2>Нужна авторизация</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#news_1">
+						<img src="./img/album-bb.jpg">
+						<h2>Текст новости</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#seminars">
+						<img src="./img/album-bb.jpg">
+						<h2>Список семинаров</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#doc_order">
+						<img src="./img/album-bb.jpg">
+						<h2>Заказ документов на email</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#doc_search">
+						<img src="./img/album-bb.jpg">
+						<h2>Подборка документов</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#media">
+						<img src="./img/album-bb.jpg">
+						<h2>MEDIA</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#call">
+						<img src="./img/album-bb.jpg">
+						<h2>Контакты</h2>
+						<p>Текст</p>
+					</a></li>
 				</ul>
 			</div>
 
 			<div id="news_1" class="ui-content">
 				<div class="inside">
+					<h1>Комплексный отраслевой стандарт в XXI веке</h1>
 					<img src="./img/album-bb.jpg">
-					<p>ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст ТекстТекстТекстТекстТекст </p>
+					<p>Согласно предыдущему, рекламная поддержка инновационна. Примерная структура маркетингового исследования инновационна. Пресс-клиппинг основан на опыте повседневного применения. Медиабизнес основан на тщательном анализе данных. Формат события детерминирует рыночный принцип восприятия.</p>
+					<p>Создание приверженного покупателя концентрирует потребительский анализ зарубежного опыта. Контекстная реклама трансформирует институциональный бизнес-план. Исходя из структуры пирамиды Маслоу, опросная анкета разнородно синхронизирует конструктивный BTL. Программа лояльности, анализируя результаты рекламной кампании, оправдывает ролевой пак-шот.</p>
+					<p>Целевая аудитория очевидна не для всех. Ценовая стратегия продуцирует типичный анализ рыночных цен, учитывая современные тенденции. Сегментация рынка определяет комплексный анализ ситуации. Поэтому искусство медиапланирования регулярно охватывает нестандартный подход. Спонсорство, суммируя приведенные примеры, как всегда непредсказуемо.</p>
 					<p>Текст</p>
+					<p>CTR по-прежнему устойчив к изменениям спроса. Организация практического взаимодействия детерминирует повседневный медийный канал, невзирая на действия конкурентов. Привлечение аудитории развивает стратегический план размещения. Жизненный цикл продукции спорадически уравновешивает коллективный презентационный материал. В соответствии с законом Ципфа, экспертиза выполненного проекта индуцирует опрос, учитывая современные тенденции.</p>
+					<p>Бизнес-план, как принято считать, охватывает диктат потребителя. Личность топ менеджера, безусловно, решительно раскручивает диктат потребителя. Торговая марка экономит побочный PR-эффект.</p>
+					<p>Изменение глобальной стратегии упорядочивает продуктовый ассортимент. Тактика выстраивания отношений с коммерсчекими агентами без оглядки на авторитеты порождена временем. Привлечение аудитории не критично. Емкость рынка, безусловно, экономит конвергентный медиавес. Осведомленность о бренде, согласно Ф.Котлеру, однородно отталкивает инвестиционный продукт. Мониторинг активности, как принято считать, искажает рейтинг.</p>
 				</div>
 			</div>
 
-
-			<div id="seminars" class="ui-content">
-				<h1>Семинары Компании "М-Стайл"</h1>
-				<ul data-role="listview">
-					<li>
-						<h2>Заголовок</h2>
-						<p>Текст</p>
-						<button>Записаться</button>
-					</li>
-					<li>
-						<h2>Заголовок</h2>
-						<p>Текст</p>
-						<button>Записаться</button>
-					</li>
-					<li>
-						<h2>Заголовок</h2>
-						<p>Текст</p>
-						<button>Записаться</button>
-					</li>
-				</ul>
+			<div id="seminars" class="ui-content light-theme">
+				<div class="inside">
+					<h1>Семинары Компании "М-Стайл"</h1>
+					<ul data-role="listview">
+						<li>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+							<a class="light-btn" href="#doc_search" data-role="button">Записаться</a>
+						</li>
+						<li>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+							<button class="light-btn">Записаться</button>
+						</li>
+						<li>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+							<button class="light-btn">Записаться</button>
+						</li>
+					</ul>
+				</div>
 			</div>
 
-
-			<div id="doc_search" class="ui-content">
-				<h1>Подборка документов</h1>
-				<ul data-role="listview">
-					<li>
-						<h2>Заголовок</h2>
-						<p>Текст</p>
-						<button>Заказать</button>
-					</li>
-					<li>
-						<h2>Заголовок</h2>
-						<p>Текст</p>
-						<button>Заказать</button>
-					</li>
-					<li>
-						<h2>Заголовок</h2>
-						<p>Текст</p>
-						<button>Заказать</button>
-					</li>
-				</ul>
+			<div id="doc_search" class="ui-content light-theme">
+				<div class="inside">
+					<h1>Подборка документов</h1>
+					<ul data-role="listview" class="separated-list">
+						<li>
+							<button class="grey-btn right-doc-btn">Заказать</button>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+						</li>
+						<li>
+							<button class="grey-btn right-doc-btn">Заказать</button>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+						</li>
+						<li>
+							<button class="grey-btn right-doc-btn">Заказать</button>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+						</li>
+					</ul>
+				</div>
 			</div>
 
-
-			<div id="doc_order" class="ui-content">
-				<h1>Заказ документов на email</h1>
-				<form>
-					<input type="text" name="text-1" value="" placeholder="Название документа">
-					<input type="text" name="text-1" value="" placeholder="Номер документа">
-					<input type="date" name="text-1" value="">
-					<input type="text" name="text-1" value="" placeholder="Принявший орган">
-					<button>Отправить</button>
-				</form>
+			<div id="doc_order" class="ui-content light-theme">
+				<div class="inside">
+					<h1>Заказ документов на email</h1>
+					<form>
+						<input type="text" name="text-1" value="" placeholder="Название документа">
+						<input type="text" name="text-1" value="" placeholder="Номер документа">
+						<input type="date" name="text-1" value="">
+						<input type="text" name="text-1" value="" placeholder="Принявший орган">
+						<button class="center-btn">Отправить</button>
+					</form>
+				</div>
 			</div>
 
 
 			<div id="media" class="ui-content">
 				<div data-role="tabs">
-						<div data-role="navbar">
-								<ul>
-									<li><a href="#video" data-theme="a" data-ajax="false">one</a></li>
-									<li><a href="#audio" data-theme="a" data-ajax="false">two</a></li>
-								</ul>
-						</div>
-						<div id="video" class="ui-content1">
-								<ul data-role="listview">
-										<li>
-											<img src="./img/album-bb.jpg">
-											<h2>Название</h2>
-										</li>
-										<li>
-											<img src="./img/album-bb.jpg">
-											<h2>Название</h2>
-										</li>
-										<li>
-											<img src="./img/album-bb.jpg">
-											<h2>Название</h2>
-										</li>
-										<li>
-											<img src="./img/album-bb.jpg">
-											<h2>Название</h2>
-										</li>
-								</ul>
-						</div>
-						<div id="audio" class="ui-content1">
-								<ul data-role="listview">
-										<li><a href="#">трек 1</a></li>
-										<li><a href="#">трек 2</a></li>
-										<li><a href="#">трек 3</a></li>
-										<li><a href="#">трек 4</a></li>
-								</ul>
-						</div>
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#video" data-theme="a" data-ajax="false">Video</a></li>
+							<li><a href="#audio" data-theme="a" data-ajax="false">Music</a></li>
+						</ul>
+					</div>
+					<div id="video" class="ui-content1">
+						<ul data-role="listview" class="list-separated-blue">
+							<li>
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+							</li>
+							<li>
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+							</li>
+							<li>
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+							</li>
+							<li>
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+							</li>
+						</ul>
+					</div>
+					<div id="audio" class="ui-content1">
+						<ul data-role="listview" class="list-separated-blue">
+							<li><a href="#">трек 1</a></li>
+							<li><a href="#">трек 2</a></li>
+							<li><a href="#">трек 3</a></li>
+							<li><a href="#">трек 4</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
-
-
-			<div id="call" class="ui-content">
-				<strong>Горяча линия консультант плюс</strong>
-				<a href="javascript:window.open('http://www.m-style.spb.su', '_system');">Внешняя ссылка</a>
-				<a href="tel:89253437571">8-925-343-7571</a>
-				<a href="skype:arekus.1">arekus.1</a>
-				<a href="viber:qwe">viber</a>
+			<div id="call" class="ui-content light-theme">
+				<div class="inside">
+					<strong class="blue-title">Горячая линия<br> Консультант плюс</strong>
+					<p>Горячая линия компании "М-стайл" работает с 09-30 до 18-00 часов по будним дням.</p>
+					<div class="big-links-block">
+						<a href="javascript:window.open('http://www.m-style.spb.su', '_system');">Внешняя ссылка</a><br>
+						<a href="tel:89253437571">8-925-343-7571</a><br>
+						<a href="skype:arekus.1">arekus.1</a><br>
+						<a href="viber:qwe">viber</a><br><br><br>
+					</div>
+					<a href="http://vk.com/" class="circle-icon blue"><i class='blIcon fa fa-vk'></i></a>
+					<a class="circle-icon lightblue" href="http://twitter.com/"><i class='blIcon fa fa-twitter'></i></a>
+					<a class="circle-icon fblue" href="http://facebook.com/"><i class='blIcon fa fa-facebook'></i></a>
+					<a class="circle-icon red" href="http://google.com/"><i class='blIcon fa fa-google'></i></a>
+				</div>
 			</div>
-
-
-
 		</div> <!-- content -->
-
 		<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-tap-toggle="false" data-theme='b'>
 			<div data-role="navbar" id="main_menu">
-					<a href="#news" data-ajax="false" class="bg-orange"><i class='blIcon fa fa-rss'></i></a>
-					<a href="#seminars" data-ajax="false" class="bg-blue"><i class='blIcon fa fa-user'></i></a>
-					<a href="#doc_search" data-ajax="false" class="bg-gray"><i class='blIcon fa fa-play-circle-o'></i></a>
-					<a href="#doc_order" data-ajax="false" class="bg-purple"><i class='blIcon fa fa-long-arrow-down'></i></a>
-					<a href="#media" data-ajax="false" class="bg-lightgray"><i class='blIcon fa fa-table'></i></a>
-					<a href="#call" data-ajax="false" class="bg-green"><i class='blIcon fa fa-phone'></i></a>
+				<a href="#news" data-ajax="false" class="bg-orange"><i class='blIcon fa fa-rss'></i></a>
+				<a href="#seminars" data-ajax="false" class="bg-blue"><i class='blIcon fa fa-user'></i></a>
+				<a href="#doc_search" data-ajax="false" class="bg-gray"><i class='blIcon fa fa-play-circle-o'></i></a>
+				<a href="#doc_order" data-ajax="false" class="bg-purple"><i class='blIcon fa fa-long-arrow-down'></i></a>
+				<a href="#media" data-ajax="false" class="bg-lightgray"><i class='blIcon fa fa-table'></i></a>
+				<a href="#call" data-ajax="false" class="bg-green"><i class='blIcon fa fa-phone'></i></a>
 			</div>
 		</div> 
-
 	</div> <!-- page -->
-
-
-
 	</body>
 </html>
