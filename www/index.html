@@ -73,70 +73,34 @@
 
 		<div data-role="content" class="main">
 			<div id="register" class="ui-content light-theme">
-				<form action="#" method="post" id="register_form">
-					<input type="hidden" id="reg_flag" name="reg_flag" value="reg">
-					<div data-role="fieldcontain">
-						<label for="email"><i class='fa fa-circle color-red'></i></label>
-						<input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="pwd"><i class='fa fa-circle color-red'></i></label>
-						<input type="password" name="pwd" id="pwd" value="" data-clear-btn="true" placeholder="Пароль">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="fio"><i class='fa fa-circle color-red'></i></label>
-						<input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="org"></label>
-						<input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Наименование организации">
-					</div>
-					<div data-role="fieldcontain">
-						<label for="tel"></label>
-						<input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Контактный телефон">
-					</div>
-					<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>
-					<button onClick="u.register()">Регистрация</button>
-				</form>
+        <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
+        <div data-role="fieldcontain">
+          <label for="email"><i class='fa fa-circle color-red'></i></label>
+          <input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="pwd"><i class='fa fa-circle color-red'></i></label>
+          <input type="password" name="pwd" id="pwd" value="" data-clear-btn="true" placeholder="Пароль">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="fio"><i class='fa fa-circle color-red'></i></label>
+          <input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="org"></label>
+          <input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Наименование организации">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="tel"></label>
+          <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Контактный телефон">
+        </div>
+        <!--<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>-->
+        <button onClick="u.register()">Регистрация</button>
 			</div>
 
 			<div id="news" class="ui-content">
 				<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
-					<li><a href="#need_auth" data-rel="popup" data-position-to="window" data-transition="pop" >
-						<img src="./img/album-bb.jpg">
-						<h2>Нужна авторизация</h2>
-						<p>Текст</p>
-					</a></li>
-					<li><a href="#news_1">
-						<img src="./img/album-bb.jpg">
-						<h2>Текст новости</h2>
-						<p>Текст</p>
-					</a></li>
-					<li><a href="#seminars">
-						<img src="./img/album-bb.jpg">
-						<h2>Список семинаров</h2>
-						<p>Текст</p>
-					</a></li>
-					<li><a href="#doc_order">
-						<img src="./img/album-bb.jpg">
-						<h2>Заказ документов на email</h2>
-						<p>Текст</p>
-					</a></li>
-					<li><a href="#doc_search">
-						<img src="./img/album-bb.jpg">
-						<h2>Подборка документов</h2>
-						<p>Текст</p>
-					</a></li>
-					<li><a href="#media">
-						<img src="./img/album-bb.jpg">
-						<h2>MEDIA</h2>
-						<p>Текст</p>
-					</a></li>
-					<li><a href="#call">
-						<img src="./img/album-bb.jpg">
-						<h2>Контакты</h2>
-						<p>Текст</p>
-					</a></li>
+					<li>... загрузка ...</li>
 				</ul>
 			</div>
 
@@ -159,42 +123,18 @@
 					<h1>Семинары Компании "М-Стайл"</h1>
 					<ul data-role="listview">
 						<li>
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-							<a class="light-btn" href="#doc_search" data-role="button">Записаться</a>
-						</li>
-						<li>
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-							<button class="light-btn">Записаться</button>
-						</li>
-						<li>
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-							<button class="light-btn">Записаться</button>
+							<h2>... загрузка ...</h2>
 						</li>
 					</ul>
 				</div>
 			</div>
 
-			<div id="doc_search" class="ui-content light-theme">
+			<div id="docs" class="ui-content light-theme">
 				<div class="inside">
 					<h1>Подборка документов</h1>
 					<ul data-role="listview" class="separated-list">
 						<li>
-							<button class="grey-btn right-doc-btn">Заказать</button>
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-						</li>
-						<li>
-							<button class="grey-btn right-doc-btn">Заказать</button>
-							<h2>Заголовок</h2>
-							<p>Текст</p>
-						</li>
-						<li>
-							<button class="grey-btn right-doc-btn">Заказать</button>
-							<h2>Заголовок</h2>
-							<p>Текст</p>
+              <h2>... загрузка ...</h2>
 						</li>
 					</ul>
 				</div>
@@ -203,13 +143,11 @@
 			<div id="doc_order" class="ui-content light-theme">
 				<div class="inside">
 					<h1>Заказ документов на email</h1>
-					<form>
-						<input type="text" name="text-1" value="" placeholder="Название документа">
-						<input type="text" name="text-1" value="" placeholder="Номер документа">
-						<input type="date" name="text-1" value="">
-						<input type="text" name="text-1" value="" placeholder="Принявший орган">
-						<button class="center-btn">Отправить</button>
-					</form>
+          <input type="text" name="name" value="" placeholder="Название документа">
+          <input type="text" name="num" value="" placeholder="Номер документа">
+          <input type="date" name="date" value="">
+          <input type="text" name="org" value="" placeholder="Принявший орган">
+          <button class="center-btn" onclick="docs.orderForm()">Отправить</button>
 				</div>
 			</div>
 
@@ -273,7 +211,7 @@
 			<div data-role="navbar" id="main_menu">
 				<a href="#news" data-ajax="false" class="bg-orange"><i class='blIcon fa fa-rss'></i></a>
 				<a href="#seminars" data-ajax="false" class="bg-blue"><i class='blIcon fa fa-user'></i></a>
-				<a href="#doc_search" data-ajax="false" class="bg-gray"><i class='blIcon fa fa-play-circle-o'></i></a>
+				<a href="#docs" data-ajax="false" class="bg-gray"><i class='blIcon fa fa-play-circle-o'></i></a>
 				<a href="#doc_order" data-ajax="false" class="bg-purple"><i class='blIcon fa fa-long-arrow-down'></i></a>
 				<a href="#media" data-ajax="false" class="bg-lightgray"><i class='blIcon fa fa-table'></i></a>
 				<a href="#call" data-ajax="false" class="bg-green"><i class='blIcon fa fa-phone'></i></a>

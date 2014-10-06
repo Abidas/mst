@@ -2,45 +2,29 @@
 var i7e = {
 	init: function() {
 		u.init();
+		news.init();
 
-		$('#news a').on('tap', function() {
-			$('#news').hide();
-			$($(this).attr('href')).show();
-		});
-		//$('#main_menu').
-		/*
-
-		$('#seminars a').on('tap', function() {
-			$('#seminars').hide();
-			$($(this).attr('href')).show();
-		});
-		*/
-		ajx.getNews();
-		$('#news').show();
+    // 2do - клик на вкладку видео
 		$('#media #video').show();
     var actions = {
-      '#seminars': i7e.openSeminar,
+      '#seminars': seminar.open,
+      '#docs': docs.open,
       '#media': i7e.openMedia
     };
 		$('#main_menu a').on('tap', function(e) {
       var l = $(this).attr('href');
-			if (!u.token && l != '#news') {
-				event.preventDefault();
-				$('#need_auth').popup("open");
-				return;
+			if (u.token || l == '#news' || l == '#call') {
+        if (actions[l]) {
+          actions[l]();
+        }
+        i7e.changePage(l);
 			}
-      if (actions[l]) {
-        actions[l]();
+      else
+      {
+        event.preventDefault();
+        $('#need_auth').popup("open");
       }
-			i7e.changePage(l);
 		});
-/*
-		$('div.main div.ui-content a').on('tap', function() {
-			$(this).closest('div.ui-content').hide();
-			$($(this).attr('href')).show();
-		});
-
-		*/
 	},
 
 	// смена страницы
@@ -77,16 +61,6 @@ var i7e = {
     console.log(d);
   },
 
-  // открыть окно семинаров
-  openSeminar: function() {
-      ajx.getSeminars(i7e.showSeminar);
-  },
-  // вывести полученные с сервера семинары
-  showSeminar: function(d) {
-    console.log(d);
-  },
-
-
   // вывод сообщений
   msg: {
     current_f: '',
@@ -105,14 +79,126 @@ var i7e = {
       $('#msg').popup('close');
     }
   }
-}
+};
 $(i7e.init);
+
+// работас новостями
+var news = {
+  init: function() {
+    // открыть новость полностью
+    $('#news').on('tap', 'a', function() {
+      console.log($(this).attr('href'));
+      $('#news').hide();
+      $($(this).attr('href')).show();
+    });
+    ajx.getNews(news.show);
+    $('#news').show();
+  },
+  // вывести полученные с сервера документы
+  show: function(d) {
+    console.log(d);
+    $('#news ul').html('');
+
+    for (var k in d)
+    {
+      $('#news ul').append('<li><a href="#news_' + d[k]['id']
+          + '">' + (d[k]['img'] ? '<img src="./img/album-bb.jpg">' : '')
+          + '<h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'] + '</p></a></li>');
+    }
+  }
+
+};
+// работа с семинарами
+var seminar = {
+  // открыть окно семинаров
+  open: function() {
+    ajx.getSeminars(seminar.show);
+  },
+  // вывести полученные с сервера семинары
+  show: function(d) {
+    console.log(d);
+    $('#seminars ul').html('');
+    for (var k in d)
+    {
+      $('#seminars ul').append('<li><h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc']
+          + '</p><a class="light-btn" href="javascript:seminar.join(' + d[k]['id']
+          + ')" data-role="button">Записаться</a></li>');
+    }
+  },
+  //  запись на семинар
+  join: function(n) {
+//    console.log(n);
+    var p = {
+       'client': u.id,
+       'seminar': n
+    };
+    ajx.joinSeminars(p, seminar.joinCb);
+  },
+  // обработка ответа о записи на семинар
+  joinCb: function(d) {
+    console.log(d);
+  }
+};
+
+
+// работа с документами
+var docs = {
+  // открыть окно документоы
+  open: function() {
+    ajx.getDocs(docs.show);
+  },
+  // вывести полученные с сервера документы
+  show: function(d) {
+    console.log(d);
+    $('#docs ul').html('');
+
+    for (var k in d)
+    {
+      $('#docs ul').append('<li><button onclick="docs.order(' + d[k]['id']
+          + ')" class="grey-btn right-doc-btn">Заказать</button><h2>' + d[k]['title']
+          + '</h2><p>' + d[k]['desc']
+          + '</p></li>');
+    }
+  },
+
+  //  заказ документа из списка
+  order: function(n) {
+//    console.log(n);
+    var p = {
+       'client': u.id,
+       'fl': n
+    };
+    ajx.orderDoc(p, docs.orderCb);
+  },
+  // отправка формы заказа документов
+  orderForm: function()
+  {
+    var flds = {
+      'name': 'name',
+      'num': 'num',
+      'date': 'date',
+      'org': 'org'
+    };
+    var p = {};
+    for(var k in flds) {
+      p[k] = $('#doc_order').find('input[name="' + flds[k] + '"]').val();
+    }
+    ajx.orderFormDoc(p, docs.registerCb);
+  },
+  // обработка ответа об отправке формы
+  orderCb: function(d) {
+    console.log(d);
+    i7e.msg.show("Заказ документа", "Заказ осуществлен успешно");
+  }
+};
 
 // объект пользователя
 var u = {
 	token: '',
+	id: 0,
 	reg_form_id: '#register',
 	init: function() {
+    u.id = 4; // uin = 11111, pwd = 1
 	},
 
   // авторизация пользователя
@@ -136,7 +222,6 @@ var u = {
 
 	// регистрация временного пользования bил платеж
 	register: function() {
-		// проверка заполнения
     var flds = {
       'reg_flag': 'reg_flag',
       'email': 'email',
@@ -149,6 +234,7 @@ var u = {
     for(var k in flds) {
       p[k] = $('#register').find('input[name="' + flds[k] + '"]').val();
     }
+    // проверка заполнения
     if (!p['email'] || !p['password'] || !p['fio']) return;
     ajx.doRegister(p, u.registerCb);
 	},
@@ -158,7 +244,7 @@ var u = {
     i7e.msg.show('Поздравляем', 'Регистрация прошла успешно', function(){i7e.changePage('#news');});
     console.log(d);
   }
-}
+};
 
 var ajx = {
 	base: 'http://mstyle.view.indev-group.eu/',
@@ -175,15 +261,38 @@ var ajx = {
     }
     $.post(ajx.base + url, p, f, "json");
   },
+
+  // - новости -
   // запрос списка новостей
-	getNews: function() {
-		$.get(ajx.base + 'api/version/1/base/news_list/', {}, ajx.getAjxCb, "json");
+	getNews: function(f) {
+		$.get(ajx.base + 'api/version/1/base/news_list/', {}, f, "json");
 	},
 
+  // - семинары -
   // запрос списка семинаров
   getSeminars: function(f) {
-		$.get(ajx.base + 'api/version/1/base/seminar_list/', {}, f, "json");
+      ajx.makeAjaxGet('api/version/1/base/seminar_list/', {}, f);
 	},
+  // запись на семинар
+  joinSeminars: function(p, f) {
+    ajx.makeAjaxPost('api/version/1/base/seminar_order_create/', p, f);
+  },
+
+  // - доки -
+  // запрос списка документоы
+  getDocs: function(f) {
+    ajx.makeAjaxGet('api/version/1/base/simple_gallery_list/', {}, f);
+  },
+  // заказ доки
+  orderDoc: function(p, f) {
+    ajx.makeAjaxPost('api/version/1/base/file_order_create/', p, f);
+  },
+  // заказ доки из формы
+  orderFormDoc: function(p, f) {
+    ajx.makeAjaxPost('api/version/1/base/file_order_create/', p, f);
+  },
+
+
   // запрос списка медиа
   getMedia: function(f) {
 		$.get(ajx.base + 'api/version/1/base/media_files_list/', {'fl_type': 0}, f, "json");
@@ -191,10 +300,35 @@ var ajx = {
 
 	getAjxCb: function(d) {
 		console.log(d);
-	}
+	},
+  //  отправка get запроса c кукой на сервер
+  makeAjaxGet: function(url, p, f){
+    $.ajax({
+      type: "GET",
+      contents: p,
+      url: ajx.base + url,
+      cache: false,
+      crossDomain: true,
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: true
+      },
+      success: f
+    });
+  },
+  //  отправка post запроса c кукой на сервер
+  makeAjaxPost: function(url, p, f){
+    $.ajax({
+      type: "POST",
+      contents: p,
+      url: ajx.base + url,
+      cache: false,
+      crossDomain: true,
+      dataType: 'json',
+      xhrFields: {
+        withCredentials: true
+      },
+      success: f
+    });
+  }
 };
-
-function mycallback(data)
-{
-  console.log(data);
-}
