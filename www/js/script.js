@@ -165,7 +165,7 @@ var ajx = {
 
   // аутентификация пользователя
   doAuth: function(uu, p, f) {
-    $.post(ajx.base + 'api-auth/login/', {'username': uu, 'password': p}, f, "json");
+    $.post(ajx.base + 'api/version/1/accounts/login/', {'uin': uu, 'password': p}, f, "json");
   },
   // регистрация пользователя
   doRegister: function(p, f) {
@@ -182,7 +182,7 @@ var ajx = {
 
   // запрос списка семинаров
   getSeminars: function(f) {
-		$.get(ajx.base + 'api/v1/generics/credit_type/', {}, f, "json");
+		$.get(ajx.base + 'api/version/1/base/seminar_list/', {}, f, "json");
 	},
   // запрос списка медиа
   getMedia: function(f) {
