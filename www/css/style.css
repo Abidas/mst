@@ -320,3 +320,7 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 		.circle-icon.red > i{
 			background: #ff2200;
 			}
+
+#main_menu a {
+    width: 16.6%;
+}

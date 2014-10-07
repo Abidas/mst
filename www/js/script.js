@@ -1,11 +1,32 @@
 // интерфейс и работа с ним
 var i7e = {
+  history: [],
 	init: function() {
 		u.init();
 		news.init();
+		docs.init();
+
+    $(window).on("navigate", function (event, data) {
+      var direction = data.state.direction;
+      if (direction == 'back') {
+        if (i7e.history.length == 1) return;
+        var q = i7e.history.pop();
+        console.log(q);
+        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
+          $(q).popup("close");
+        } else {
+          q = i7e.history.pop();
+          i7e.history.push(q);
+          console.log(q);
+          i7e.changePage(q);
+        }
+      }
+    });
 
     // 2do - клик на вкладку видео
 		$('#media #video').show();
+
+    // навигация подвал
     var actions = {
       '#seminars': seminar.open,
       '#docs': docs.open,
@@ -22,6 +43,7 @@ var i7e = {
       else
       {
         event.preventDefault();
+        i7e.history.push('#need_auth');
         $('#need_auth').popup("open");
       }
 		});
@@ -29,26 +51,28 @@ var i7e = {
 
 	// смена страницы
 	changePage: function(p) {
+    i7e.history.push(p);
 		$('div.main div.ui-content').hide();
-		console.log(p);
 		$(p).show();
 	},
 
   // открываем страницу из попапа
   openRegister: function() {
     $('#auth_dialog').popup("close");
+    i7e.history.pop();
     $('#reg_flag').val('reg');
-    $('#register').find('input[name="org"]').show();
-    $('#register').find('input[name="tel"]').show();
+    $('#register').find('input[name="org"]').closest('div').show();
+    $('#register').find('input[name="tel"]').closest('div').show();
     i7e.changePage('#register');
   },
   // открыть платеж
   openPay: function() {
     $('#need_auth').popup("close");
+    i7e.history.pop();
     // за основу используется форма регистрации
     $('#reg_flag').val('payment');
-    $('#register').find('input[name="org"]').hide();
-    $('#register').find('input[name="tel"]').hide();
+    $('#register').find('input[name="org"]').closest('div').hide();
+    $('#register').find('input[name="tel"]').closest('div').hide();
     i7e.changePage('#register');
   },
 
@@ -69,14 +93,15 @@ var i7e = {
       $('#msg_title').text(t);
       $('#msg_content').text(d);
       $('#msg').popup('open');
+      i7e.history.push('#msg');
     },
     close: function() {
-      console.log(i7e.msg.current_f);
       if (i7e.msg.current_f) {
         i7e.msg.current_f();
         i7e.msg.current_f = '';
       }
       $('#msg').popup('close');
+      i7e.history.pop();
     }
   }
 };
@@ -92,11 +117,10 @@ var news = {
       $($(this).attr('href')).show();
     });
     ajx.getNews(news.show);
-    $('#news').show();
+    i7e.changePage('#news');
   },
   // вывести полученные с сервера документы
   show: function(d) {
-    console.log(d);
     $('#news ul').html('');
 
     for (var k in d)
@@ -143,19 +167,25 @@ var seminar = {
 
 // работа с документами
 var docs = {
+  init: function() {
+    $('#doc_button').on('tap', docs.orderForm);
+    $('#docs ul').delegate('button', 'tap', function(){
+      var id = $(this).attr('data-id');
+      docs.order(id);
+    });
+  },
   // открыть окно документоы
   open: function() {
     ajx.getDocs(docs.show);
   },
   // вывести полученные с сервера документы
   show: function(d) {
-    console.log(d);
     $('#docs ul').html('');
 
     for (var k in d)
     {
-      $('#docs ul').append('<li><button onclick="docs.order(' + d[k]['id']
-          + ')" class="grey-btn right-doc-btn">Заказать</button><h2>' + d[k]['title']
+      $('#docs ul').append('<li><button data-id="' + d[k]['id']
+          + '" class="grey-btn right-doc-btn">Заказать</button><h2>' + d[k]['title']
           + '</h2><p>' + d[k]['desc']
           + '</p></li>');
     }
@@ -180,9 +210,17 @@ var docs = {
       'org': 'org'
     };
     var p = {};
+    var n = 0;
     for(var k in flds) {
       p[k] = $('#doc_order').find('input[name="' + flds[k] + '"]').val();
+      if (!p[k]) n++;
     }
+    // количество незаполненных полей формы
+    if (n == 4) {
+      i7e.msg.show('Ошибка', 'Пожалуйста, заполните все поля корректно');
+      return;
+    }
+
     ajx.orderFormDoc(p, docs.registerCb);
   },
   // обработка ответа об отправке формы
@@ -198,6 +236,7 @@ var u = {
 	id: 0,
 	reg_form_id: '#register',
 	init: function() {
+    $('#reg_button').on('tap', u.register);
     u.id = 4; // uin = 11111, pwd = 1
 	},
 
@@ -235,7 +274,10 @@ var u = {
       p[k] = $('#register').find('input[name="' + flds[k] + '"]').val();
     }
     // проверка заполнения
-    if (!p['email'] || !p['password'] || !p['fio']) return;
+    if (!p['email'] || !p['password'] || !p['fio']) {
+      i7e.msg.show('Ошибка', 'Пожалуйста, заполните все обязательные поля');
+      return;
+    }
     ajx.doRegister(p, u.registerCb);
 	},
   // регистрация, обработка ответа сервера
@@ -305,13 +347,16 @@ var ajx = {
   makeAjaxGet: function(url, p, f){
     $.ajax({
       type: "GET",
-      contents: p,
+      data: p,
       url: ajx.base + url,
       cache: false,
       crossDomain: true,
       dataType: 'json',
       xhrFields: {
         withCredentials: true
+      },
+      error: function(a, txt, err) {
+        i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
       },
       success: f
     });
@@ -320,13 +365,16 @@ var ajx = {
   makeAjaxPost: function(url, p, f){
     $.ajax({
       type: "POST",
-      contents: p,
+      data: p,
       url: ajx.base + url,
       cache: false,
       crossDomain: true,
       dataType: 'json',
       xhrFields: {
         withCredentials: true
+      },
+      error: function(a, txt, err) {
+        i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
       },
       success: f
     });
