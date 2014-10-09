@@ -7,6 +7,9 @@
     <author email="support@phonegap.com" href="http://phonegap.com">
         ййй
     </author>
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.5.0" />
     <preference name="orientation" value="portrait" />

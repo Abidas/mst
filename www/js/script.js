@@ -381,21 +381,15 @@ var ajx = {
       xhrFields: {
         withCredentials: true
       },
-      beforeSend: function(a, txt, err) {
-        i7e.msg.show('before send: ' + txt + ' : ' + err, a.responseText);
-      },
       error: function(a, txt, err) {
         i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
       },
       success: f
     }).done(function() {
-          alert( "success" );
-        })
-        .fail(function() {
-          alert( "error" );
-        })
-        .always(function() {
-          alert( "complete" );
-        });
+        f
+    })
+    .fail(function(a, txt, err) {
+      i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
+    });
   }
 };
