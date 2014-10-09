@@ -6,22 +6,22 @@ var i7e = {
 		news.init();
 		docs.init();
 
-    $(window).on("navigate", function (event, data) {
-      var direction = data.state.direction;
-      if (direction == 'back') {
-        if (i7e.history.length == 1) return;
-        var q = i7e.history.pop();
-        console.log(q);
-        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
-          $(q).popup("close");
-        } else {
-          q = i7e.history.pop();
-          i7e.history.push(q);
-          console.log(q);
-          i7e.changePage(q);
-        }
-      }
-    });
+//    $(window).on("navigate", function (event, data) {
+//      var direction = data.state.direction;
+//      if (direction == 'back') {
+//        if (i7e.history.length == 1) return;
+//        var q = i7e.history.pop();
+//        console.log(q);
+//        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
+//          $(q).popup("close");
+//        } else {
+//          q = i7e.history.pop();
+//          i7e.history.push(q);
+//          console.log(q);
+//          i7e.changePage(q);
+//        }
+//      }
+//    });
 
     // 2do - клик на вкладку видео
 		$('#media #video').show();
@@ -44,7 +44,11 @@ var i7e = {
       {
         event.preventDefault();
         i7e.history.push('#need_auth');
-        $('#need_auth').popup("open");
+        var popup = setInterval(function(){
+          $('#need_auth').popup("open");
+          clearInterval(popup);
+        },1);
+
       }
 		});
 	},
