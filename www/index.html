@@ -23,18 +23,16 @@
 			<div data-role="header">
 				<h1>Авторизация</h1>
 			</div>
-			<div data-role="main">
-				<form action="#" method="post" id="auth_form">
-					<input type="text" name="uin" placeholder="UIN клиента">
-					<input type="password" name="pwd" placeholder="Пароль">
-					<a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
-					<div data-role="navbar">
-						<ul>
-							<li><a href="#" data-rel="back">Отмена</a></li>
-							<li><a href="javascript:u.doAuth()">Войти</a></li>
-						</ul>
-					</div>
-				</form>
+			<div data-role="main" id="auth_form">
+        <input type="text" name="uin" placeholder="UIN клиента">
+        <input type="password" name="pwd" placeholder="Пароль">
+        <a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#" data-rel="back">Отмена</a></li>
+            <li><a href="javascript:u.doAuth()">Войти</a></li>
+          </ul>
+        </div>
 			</div>
 		</div>
 
@@ -69,8 +67,7 @@
 
 
 		<div data-role="content" class="main">
-			<div id="register" class="ui-content light-theme">
-			<form action="#" method="post" id="register_form">
+			<div id="register" class="ui-content light-theme" id="register_form">
         <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
         <div data-role="fieldcontain">
           <label for="email"><i class='fa fa-circle color-red'></i></label>
@@ -94,7 +91,6 @@
         </div>
         <!--<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>-->
         <button id="#reg_button">Регистрация</button>
-		</form>
 			</div>
 
 			<div id="news" class="ui-content">
@@ -142,13 +138,11 @@
 			<div id="doc_order" class="ui-content light-theme">
 				<div class="inside">
 					<h1>Заказ документов на email</h1>
-					<form>
           <input type="text" name="name" value="" placeholder="Название документа">
           <input type="text" name="num" value="" placeholder="Номер документа">
           <input type="date" name="date" value="">
           <input type="text" name="org" value="" placeholder="Принявший орган">
           <button class="center-btn" id="doc_button">Отправить</button>
-		  </form>
 				</div>
 			</div>
 

@@ -58,8 +58,8 @@ var i7e = {
     i7e.history.push(p);
 		$('div.main div.ui-content').hide();
 		$(p).show();
-    $.mobile.silentScroll(0);
-    $(p).scrollTop(0);
+//    $.mobile.silentScroll(0);
+//    $(p).scrollTop(0);
 	},
 
   // открываем страницу из попапа
