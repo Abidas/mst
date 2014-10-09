@@ -436,3 +436,6 @@ video{
 		.audio-item .progress-bar{
 			margin:0 98px 0 12px;
 			}
+::-webkit-scrollbar{
+    width: 0 !important;
+}
