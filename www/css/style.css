@@ -89,6 +89,7 @@ padding: 1em;
 
 .main {
   display: block;
+  clear:both;
 }
 
 .ui-panel {

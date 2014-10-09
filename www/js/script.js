@@ -55,7 +55,6 @@ var i7e = {
 
 	// смена страницы
 	changePage: function(p) {
-    alert($(p).scrollTop());
     i7e.history.push(p);
 		$('div.main div.ui-content').hide();
 		$(p).show();
@@ -379,6 +378,9 @@ var ajx = {
       dataType: 'json',
       xhrFields: {
         withCredentials: true
+      },
+      beforeSend: function(a, txt, err) {
+        i7e.msg.show('before send: ' + txt + ' : ' + err, a.responseText);
       },
       error: function(a, txt, err) {
         i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
