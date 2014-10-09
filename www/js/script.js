@@ -59,6 +59,7 @@ var i7e = {
 		$('div.main div.ui-content').hide();
 		$(p).show();
     $.mobile.silentScroll(0);
+    $(p).scrollTop(0);
 	},
 
   // открываем страницу из попапа
@@ -247,6 +248,7 @@ var u = {
 
   // авторизация пользователя
   doAuth: function() {
+    alert(1);
     var uu = $('#auth_dialog').find('input[name="uin"]').val();
     var p = $('#auth_dialog').find('input[name="pwd"]').val();
     if (uu == 1 && p == 1) {
@@ -260,6 +262,7 @@ var u = {
   },
   // авторизация, ответ от сервера
   doAuthCb: function(d) {
+    alert(3);
     $('#auth_dialog').popup("close");
     u.token = 1;
   },
@@ -298,6 +301,7 @@ var ajx = {
 
   // аутентификация пользователя
   doAuth: function(uu, p, f) {
+    alert(2);
     $.post(ajx.base + 'api/version/1/accounts/login/', {'uin': uu, 'password': p}, f, "json");
   },
   // регистрация пользователя
