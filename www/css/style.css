@@ -437,6 +437,10 @@ video{
 		.audio-item .progress-bar{
 			margin:0 98px 0 12px;
 			}
+#one{
+    padding-top: 63px;
+    padding-bottom: 65px;
+}
 ::-webkit-scrollbar{
     width: 0 !important;
 }
