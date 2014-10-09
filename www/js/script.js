@@ -55,6 +55,7 @@ var i7e = {
 
 	// смена страницы
 	changePage: function(p) {
+    alert($(p).scrollTop());
     i7e.history.push(p);
 		$('div.main div.ui-content').hide();
 		$(p).show();
@@ -248,7 +249,6 @@ var u = {
 
   // авторизация пользователя
   doAuth: function() {
-    alert(1);
     var uu = $('#auth_dialog').find('input[name="uin"]').val();
     var p = $('#auth_dialog').find('input[name="pwd"]').val();
     if (uu == 1 && p == 1) {
@@ -262,7 +262,6 @@ var u = {
   },
   // авторизация, ответ от сервера
   doAuthCb: function(d) {
-    alert(3);
     $('#auth_dialog').popup("close");
     u.token = 1;
   },
@@ -301,8 +300,7 @@ var ajx = {
 
   // аутентификация пользователя
   doAuth: function(uu, p, f) {
-    alert(2);
-    $.post(ajx.base + 'api/version/1/accounts/login/', {'uin': uu, 'password': p}, f, "json");
+    ajx.makeAjaxPost('api/version/1/accounts/login/', {'uin': uu, 'password': p}, f);
   },
   // регистрация пользователя
   doRegister: function(p, f) {
