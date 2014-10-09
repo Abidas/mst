@@ -299,7 +299,9 @@ var ajx = {
 
   // аутентификация пользователя
   doAuth: function(uu, p, f) {
+    alert(1);
     ajx.makeAjaxPost('api/version/1/accounts/login/', {'uin': uu, 'password': p}, f);
+    alert(2);
   },
   // регистрация пользователя
   doRegister: function(p, f) {
@@ -386,6 +388,14 @@ var ajx = {
         i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
       },
       success: f
-    });
+    }).done(function() {
+          alert( "success" );
+        })
+        .fail(function() {
+          alert( "error" );
+        })
+        .always(function() {
+          alert( "complete" );
+        });
   }
 };
