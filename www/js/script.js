@@ -5,6 +5,7 @@ var i7e = {
 		u.init();
 		news.init();
 		docs.init();
+		va.init();
 
 //    $(window).on("navigate", function (event, data) {
 //      var direction = data.state.direction;
@@ -23,14 +24,11 @@ var i7e = {
 //      }
 //    });
 
-    // 2do - клик на вкладку видео
-		$('#media #video').show();
-
     // навигация подвал
     var actions = {
       '#seminars': seminar.open,
       '#docs': docs.open,
-      '#media': i7e.openMedia
+      '#media': va.open
     };
 		$('#main_menu a').on('tap', function(e) {
       var l = $(this).attr('href');
@@ -80,15 +78,6 @@ var i7e = {
     $('#register').find('input[name="org"]').closest('div').hide();
     $('#register').find('input[name="tel"]').closest('div').hide();
     i7e.changePage('#register');
-  },
-
-  // открыть окно семинаров
-  openMedia: function() {
-      ajx.getMedia(i7e.showMedia);
-  },
-  // вывести полученные с сервера семинары
-  showMedia: function(d) {
-    console.log(d);
   },
 
   // вывод сообщений
@@ -170,6 +159,57 @@ var seminar = {
   }
 };
 
+// работа с видео и аудио
+var va = {
+  youtube_channel_name: 'feevaev', // имя канала на ютубе с кторого получать список видео
+  init: function() {
+    // 2do - клик на вкладку видео
+    $('#media #video').show();
+  },
+  open: function() {
+    $('#video ul').html('<li>... загрузка ...</li>');
+    $('#audio ul').html('<li>... загрузка ...</li>');
+    ajx.getMedia(va.showVideo, {author:  va.youtube_channel_name}, va.showAudio, {fl_type: 0});
+  },
+  // вывести полученные с сервера данные по аудио
+  showAudio: function(d) {
+    console.log(d);
+    $('#video ul').html('');
+
+    if (!d.length) {
+      $('#audio ul').html('<li>... аудио записей не найдено (' + d + ') ...</li>');
+      return;
+    }
+
+    for (var k in d) {
+      $('#audio ul').append('<li class="audio-item">'
+          + '<span class="playaudio audio-control-btn"><i class="fa fa-play"></i></span>'
+          + '<span class="audio-name">' + d[k]['title']
+          + '</span>'
+          + '<div class="progress-bar"><span class="progress-bg"></span><span class="progress-current"></span>'
+          + '<span class="progress-marker"></span></div>'
+          + '<audio src="' + ajx.base + d[k]['file_url'].substr(1)
+          + '">Your browser does not support the <code>audio</code> element.</audio></li>');
+    }
+  },
+  // вывести полученные с сервера данные по видео
+  showVideo: function(d) {
+    console.log(d);
+    $('#video ul').html('');
+
+    if (!d['data'] || d['data']['totalItems'] < 1) {
+      $('#video ul').html('<li>... записей на канале не найдено (' + d + ') ...</li>');
+      return;
+    }
+    d = d['data']['items'];
+    for (var k in d) {
+      $('#video ul').append('<li><a href="' + d[k]['player']['mobile']
+          + '"><img src="' + d[k]['thumbnail']['sqDefault']
+          + '"><h2>' + d[k]['title']
+          + '</h2></a></li>');
+    }
+  }
+};
 
 // работа с документами
 var docs = {
@@ -340,10 +380,13 @@ var ajx = {
     ajx.makeAjaxPost('api/version/1/base/file_order_create/', p, f);
   },
 
-
+  // - медиа -
   // запрос списка медиа
-  getMedia: function(f) {
-		$.get(ajx.base + 'api/version/1/base/media_files_list/', {'fl_type': 0}, f, "json");
+  getMedia: function(fv, pv, fa, pa) {
+    // список видео
+    $.get('https://gdata.youtube.com/feeds/api/videos?v=2&orderby=updated&alt=jsonc', pv, fv);
+    //  список аудио
+    ajx.makeAjaxPost('api/version/1/base/media_files_list/', pa, fa);
 	},
 
 	getAjxCb: function(d) {
@@ -387,7 +430,7 @@ var ajx = {
           f();
         })
         .fail(function(a, txt, err) {
-          alert('SERVER ERROR: ' + txt + ' : ' + err + ' : ' + a.responseText);
+          //alert('SERVER ERROR: ' + txt + ' : ' + err + ' : ' + a.responseText);
         })
         .always(function() {
         });
