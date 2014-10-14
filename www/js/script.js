@@ -40,12 +40,12 @@ var i7e = {
 			}
       else
       {
-        event.preventDefault();
+        e.preventDefault();
         i7e.history.push('#need_auth');
         var popup = setInterval(function(){
           $('#need_auth').popup("open");
           clearInterval(popup);
-        },1);
+        },10);
 
       }
 		});
