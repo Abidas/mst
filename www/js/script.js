@@ -278,13 +278,27 @@ var docs = {
 
 // объект пользователя
 var u = {
-	token: '',
+	token: 0,
 	id: 0,
 	reg_form_id: '#register',
 	init: function() {
     $('#reg_button').on('tap', u.register);
     u.id = 4; // uin = 11111, pwd = 1
 	},
+
+  // вывод авторизационного окна
+  show: function() {
+    var wnm = u.token ? '#logout' : '#auth_dialog'
+    var popup = setInterval(function(){
+      $(wnm).popup("open");
+      clearInterval(popup);
+    },1);
+  },
+
+  logout: function() {
+    u.token = 0;
+    $('#logout').popup("close");
+  },
 
   // авторизация пользователя
   doAuth: function() {
@@ -303,6 +317,7 @@ var u = {
   doAuthCb: function(d) {
     $('#auth_dialog').popup("close");
     u.token = 1;
+    i7e.msg.show('Успех', 'Вы успешно авторизовались');
   },
 
 	// регистрация временного пользования bил платеж
@@ -347,13 +362,13 @@ var ajx = {
     if (p['reg_flag'] == 'reg') {
       url = 'api/version/1/accounts/registration/';
     }
-    $.post(ajx.base + url, p, f, "json");
+    ajx.makeAjaxPost(url, p, f);
   },
 
   // - новости -
   // запрос списка новостей
 	getNews: function(f) {
-		$.get(ajx.base + 'api/version/1/base/news_list/', {}, f, "json");
+    ajx.makeAjaxGet('api/version/1/base/news_list/', {}, f);
 	},
 
   // - семинары -
@@ -394,9 +409,11 @@ var ajx = {
 	},
   //  отправка get запроса c кукой на сервер
   makeAjaxGet: function(url, p, f){
+    p['rand'] = Math.random();
     $.ajax({
       type: "GET",
       data: p,
+      cache: false,
       url: ajx.base + url,
       cache: false,
       crossDomain: true,
@@ -412,9 +429,11 @@ var ajx = {
   },
   //  отправка post запроса c кукой на сервер
   makeAjaxPost: function(url, p, f){
+    p['rand'] = Math.random();
     $.ajax({
       type: "POST",
       data: p,
+      cache: false,
       url: ajx.base + url,
       cache: false,
       crossDomain: true,
