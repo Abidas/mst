@@ -31,6 +31,7 @@ var i7e = {
       '#media': va.open
     };
 		$('#main_menu a').on('tap', function(e) {
+      console.log(e);
       var l = $(this).attr('href');
 			if (u.token || l == '#news' || l == '#call') {
         if (actions[l]) {
@@ -45,8 +46,7 @@ var i7e = {
         var popup = setInterval(function(){
           $('#need_auth').popup("open");
           clearInterval(popup);
-        },10);
-
+        }, 10);
       }
 		});
 	},
@@ -102,31 +102,87 @@ var i7e = {
 };
 $(i7e.init);
 
-// работас новостями
+// работа с новостями
 var news = {
+  dat: [], // массив данных на сохранение на устройстве
+
   init: function() {
     // открыть новость полностью
-    $('#news').on('tap', 'a', function() {
-      console.log($(this).attr('href'));
-      $('#news').hide();
-      $($(this).attr('href')).show();
-    });
+//    $('#news').on('tap', 'a', function() {
+//      console.log($(this).attr('href'));
+//      $('#news').hide();
+//      $($(this).attr('href')).show();
+//    });
     ajx.getNews(news.show);
     i7e.changePage('#news');
   },
-  // вывести полученные с сервера документы
+
+  // вывести полученные с сервера новости
   show: function(d) {
     $('#news ul').html('');
 
+    if (d) {
+      d = d['response'];
+      d.shift(); // первый элемент - количество записей
+      news.dat = [];
+    } else {
+      d = news.dat;
+    }
+
+
+    var lngth = 150; // количество выводимых символов в анонсе новости
     for (var k in d)
     {
-      $('#news ul').append('<li><a href="#news_' + d[k]['id']
-          + '">' + (d[k]['img'] ? '<img src="./img/album-bb.jpg">' : '')
-          + '<h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'] + '</p></a></li>');
-    }
-  }
+      news.dat[d[k]['id']] = {
+         'id': d[k]['id'],
+         'text': d[k]['text'],
+         'date': d[k]['date']
+      };
+      // фоточка
+      var img = news._getImg(d[k]);
+      if (img) {
+        news.dat[d[k]['id']]['attachment'] = {photo: {src: d[k]['attachment']['photo']['src']}};
+      }
 
+      // заголовок - содержание
+      var qq = d[k]['text'].split('<br><br>'); // 0 - title, 1 - desc
+      if (qq.length == 1) {
+        var date = new Date(d[k]['date'] * 1000);
+        qq.unshift('Новость от ' + date.getDate() + '.'
+            + ((date.getMonth() > 8 ? '' : '0') + (date.getMonth() + 1)) + '.'
+            + date.getFullYear());
+      }
+      news.dat[d[k]['id']]['title'] = qq[0];
+      news.dat[d[k]['id']]['desc'] = qq[1];
+
+      // вывод
+      $('#news ul').append('<li><a href="javascript:news.open(' + d[k]['id']
+          + ')" data-ajax="false" data-rel="page" data-direction="reverse">'
+          + img
+          + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
+    }
+  },
+
+  // вывод одной новости
+  open: function(id) {
+    $('#news_single').find('h1')
+        .text(news.dat[id]['title'])
+        .append(news._getImg(news.dat[id]))
+        .append('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
+    i7e.changePage('#news_single');
+  },
+
+  // получить фоточку
+  _getImg: function(dd) {
+    var img = '';
+    if (dd['attachment']['photo']) {
+      img = '<img src="'+ dd['attachment']['photo']['src'] + '">';
+    }
+    return img;
+  }
 };
+
+
 // работа с семинарами
 var seminar = {
   // открыть окно семинаров
@@ -367,8 +423,10 @@ var ajx = {
 
   // - новости -
   // запрос списка новостей
+  group_id: -54133544, // ид группы в Vk идет с минусом
 	getNews: function(f) {
-    ajx.makeAjaxGet('api/version/1/base/news_list/', {}, f);
+    $.get('https://api.vk.com/method/wall.get', {owner_id: ajx.group_id}, f, 'jsonp');
+//    ajx.makeAjaxGet('api/version/1/base/news_list/', {}, f);
 	},
 
   // - семинары -
