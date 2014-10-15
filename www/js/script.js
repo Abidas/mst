@@ -7,22 +7,25 @@ var i7e = {
 		docs.init();
 		va.init();
 
-//    $(window).on("navigate", function (event, data) {
-//      var direction = data.state.direction;
-//      if (direction == 'back') {
+    $(window).on("navigate", function (event, data) {
+      var direction = data.state.direction;
+      if (direction == 'back') {
 //        if (i7e.history.length == 1) return;
-//        var q = i7e.history.pop();
-//        console.log(q);
-//        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
-//          $(q).popup("close");
-//        } else {
-//          q = i7e.history.pop();
-//          i7e.history.push(q);
-//          console.log(q);
-//          i7e.changePage(q);
-//        }
-//      }
-//    });
+        var q = i7e.history.pop();
+        if (q == '#news_single') i7e.changePage('#news');
+        /*
+        console.log(q);
+        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
+          $(q).popup("close");
+        } else {
+          q = i7e.history.pop();
+          i7e.history.push(q);
+          console.log(q);
+          i7e.changePage(q);
+        }
+        */
+      }
+    });
 
     // навигация подвал
     var actions = {
@@ -114,7 +117,7 @@ var news = {
 //      $($(this).attr('href')).show();
 //    });
     ajx.getNews(news.show);
-    i7e.changePage('#news');
+//    i7e.changePage('#news');
   },
 
   // вывести полученные с сервера новости
