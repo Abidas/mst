@@ -12,9 +12,10 @@ var i7e = {
       if (direction == 'back') {
 //        if (i7e.history.length == 1) return;
         var q = i7e.history.pop();
+        console.log(q);
         if (q == '#news_single') i7e.changePage('#news');
         /*
-        console.log(q);
+
         if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
           $(q).popup("close");
         } else {
@@ -117,7 +118,7 @@ var news = {
 //      $($(this).attr('href')).show();
 //    });
     ajx.getNews(news.show);
-//    i7e.changePage('#news');
+    i7e.changePage('#news');
   },
 
   // вывести полученные с сервера новости
