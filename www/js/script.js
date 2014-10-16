@@ -210,7 +210,7 @@ var news = {
       ddd['title'] = qq[0];
       ddd['desc'] = qq[1];
 
-      if (do_save) news.dat[k] = ddd;
+      if (do_save) news.dat[d[k]['id']] = ddd;
       // вывод
       $('#news ul').append('<li><a href="javascript:news.open(' + d[k]['id']
           + ')" data-ajax="false" data-rel="page" data-direction="reverse">'
@@ -228,8 +228,8 @@ var news = {
   open: function(id) {
     $('#news_single').find('h1')
         .text(news.dat[id]['title'])
-        .append(news._getImg(news.dat[id]))
-        .append('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
+        .after(news._getImg(news.dat[id]))
+        .after('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
     i7e.changePage('#news_single');
   },
 
