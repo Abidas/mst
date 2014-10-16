@@ -9,9 +9,10 @@ var i7e = {
 
     document.addEventListener("backbutton", function(e){
       alert($.mobile.activePage);
-      if($.mobile.activePage.is('#homepage')){
+      if($.mobile.activePage.is('#news')){
         e.preventDefault();
         navigator.app.exitApp();
+        alert('dont close');
       }
       else {
         navigator.app.backHistory()
@@ -23,6 +24,7 @@ var i7e = {
       console.log(data);
       var direction = data.state.direction;
       if (direction == 'back') {
+        alert('go back');
 //        if (i7e.history.length == 1) return;
         var q = i7e.history.pop();
         console.log(q);
