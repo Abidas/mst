@@ -529,7 +529,7 @@ var ajx = {
     // список видео
     $.get('https://gdata.youtube.com/feeds/api/videos?v=2&orderby=updated&alt=jsonc', pv, fv);
     //  список аудио
-    ajx.makeAjaxPost('api/version/1/base/media_files_list/', pa, fa);
+    ajx.makeAjaxGet('api/version/1/base/media_files_list/', pa, fa);
 	},
 
 	getAjxCb: function(d) {
