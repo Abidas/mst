@@ -8,8 +8,7 @@ var i7e = {
 		va.init();
     $('[data-role="content"]')
     $(document).on('popupafteropen', '[data-role="popup"]' ,function( event, ui ) {
-      console.log(2);
-      $(window).scroll(function() { console.log(1);return false; });
+      $(window).scroll(function() { return false; });
       $("body").on("touchmove", false);
     }).on('popupafterclose', '[data-role="popup"]' ,function( event, ui ) {
       $(window).unbind('scroll');
@@ -293,8 +292,6 @@ var va = {
   },
   // вывести полученные с сервера данные по аудио
   showAudio: function(d) {
-    console.log('--');
-    console.log(d);
     $('#audio ul').html('');
 
     if (!d.length) {
@@ -324,11 +321,15 @@ var va = {
     }
     d = d['data']['items'];
     for (var k in d) {
-      $('#video ul').append('<li><a href="' + d[k]['player']['mobile']
-          + '"><img src="' + d[k]['thumbnail']['sqDefault']
+      $('#video ul').append('<li><a href="javascript:va.openVideo(\'' + d[k]['id']
+          + '\')"><img src="' + d[k]['thumbnail']['sqDefault']
           + '"><h2>' + d[k]['title']
           + '</h2></a></li>');
     }
+  },
+  openVideo: function(url) {
+    $('#popupVideo iframe').prop('src', 'http://www.youtube.com/embed/' + url);
+    $('#popupVideo').popup('open');
   }
 };
 

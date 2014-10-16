@@ -230,6 +230,7 @@ padding: 1em;
 		width:60%;
 		color:#ffffff;
 		margin:2em auto;
+		background-color: #282828;
 		}
 	.ui-page-theme-b #register_form .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear{
 		width:32px;
