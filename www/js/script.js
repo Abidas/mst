@@ -111,16 +111,17 @@ $(i7e.init);
 
 // работа с новостями
 var news = {
-  dat: [], // массив данных на сохранение на устройстве
+  dat: {}, // массив данных на сохранение на устройстве
 
   init: function() {
-    // открыть новость полностью
+//    открыть новость полностью
 //    $('#news').on('tap', 'a', function() {
 //      console.log($(this).attr('href'));
 //      $('#news').hide();
 //      $($(this).attr('href')).show();
 //    });
     ajx.getNews(news.show);
+//    news.show();
     i7e.changePage('#news', 1);
   },
 
@@ -128,19 +129,28 @@ var news = {
   show: function(d) {
     $('#news ul').html('');
 
+    var do_save = 1;
     if (d) {
       d = d['response'];
       d.shift(); // первый элемент - количество записей
-      news.dat = [];
+      news.dat = {};
     } else {
-      d = news.dat;
-    }
+      if(typeof(Storage) !== "undefined") {
+        news.dat = JSON.parse(localStorage.getItem("news"));
+        do_save = 0;
+        if (news.dat) {
+          d = news.dat;
+        } else {
+          $('#news ul').html('Отсутствуют новости для вывода');
+        }
+      }
 
+    }
 
     var lngth = 150; // количество выводимых символов в анонсе новости
     for (var k in d)
     {
-      news.dat[d[k]['id']] = {
+      var ddd = {
          'id': d[k]['id'],
          'text': d[k]['text'],
          'date': d[k]['date']
@@ -148,7 +158,7 @@ var news = {
       // фоточка
       var img = news._getImg(d[k]);
       if (img) {
-        news.dat[d[k]['id']]['attachment'] = {photo: {src: d[k]['attachment']['photo']['src']}};
+        ddd['attachment'] = {photo: {src: d[k]['attachment']['photo']['src']}};
       }
 
       // заголовок - содержание
@@ -159,14 +169,20 @@ var news = {
             + ((date.getMonth() > 8 ? '' : '0') + (date.getMonth() + 1)) + '.'
             + date.getFullYear());
       }
-      news.dat[d[k]['id']]['title'] = qq[0];
-      news.dat[d[k]['id']]['desc'] = qq[1];
+      ddd['title'] = qq[0];
+      ddd['desc'] = qq[1];
 
+      if (do_save) news.dat[k] = ddd;
       // вывод
       $('#news ul').append('<li><a href="javascript:news.open(' + d[k]['id']
           + ')" data-ajax="false" data-rel="page" data-direction="reverse">'
           + img
           + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
+    }
+
+    // сохранение переданных новостей
+    if(typeof(Storage) !== "undefined" && do_save) {
+      localStorage.setItem("news", JSON.stringify(news.dat));
     }
   },
 
@@ -182,7 +198,7 @@ var news = {
   // получить фоточку
   _getImg: function(dd) {
     var img = '';
-    if (dd['attachment']['photo']) {
+    if (dd['attachment'] && dd['attachment']['photo']) {
       img = '<img src="'+ dd['attachment']['photo']['src'] + '">';
     }
     return img;
@@ -360,7 +376,9 @@ var u = {
 
   logout: function() {
     u.token = 0;
+    ajx.doLogout();
     $('#logout').popup("close");
+    u.token = 0;
   },
 
   // авторизация пользователя
@@ -426,6 +444,10 @@ var ajx = {
       url = 'api/version/1/accounts/registration/';
     }
     ajx.makeAjaxPost(url, p, f);
+  },
+  // выход пользователем
+  doLogout: function() {
+    ajx.makeAjaxGet('api/version/1/accounts/logout');
   },
 
   // - новости -
