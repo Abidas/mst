@@ -7,41 +7,46 @@ var i7e = {
 		docs.init();
 		va.init();
 
-    document.addEventListener("backbutton", function(e){
-      alert($.mobile.activePage);
-      if($.mobile.activePage.is('#news')){
-        e.preventDefault();
-        navigator.app.exitApp();
-        alert('dont close');
-      }
-      else {
-        navigator.app.backHistory()
-      }
-    }, false);
+    document.addEventListener("backbutton", i7e.goBack, false);
+//    document.addEventListener("deviceready", onDeviceReady, false);
+//    document.addEventListener("backbutton", function(e){
+//      alert($.mobile.activePage);
+//      if($.mobile.activePage.is('#news')){
+//        e.preventDefault();
+//        if (confirm("Закрыть приложение")) {
+//          navigator.app.exitApp();
+//        }
+//        alert('dont close');
+//      }
+//      else {
+//        alert('dont close');
+//        navigator.app.backHistory()
+//      }
+//    }, false);
 
-    $(window).on("navigate", function (event, data) {
-      console.log(event);
-      console.log(data);
-      var direction = data.state.direction;
-      if (direction == 'back') {
-        alert('go back');
-//        if (i7e.history.length == 1) return;
-        var q = i7e.history.pop();
-        console.log(q);
-        if (q == '#news_single') i7e.changePage('#news');
-        /*
-
-        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
-          $(q).popup("close");
-        } else {
-          q = i7e.history.pop();
-          i7e.history.push(q);
-          console.log(q);
-          i7e.changePage(q);
-        }
-        */
-      }
-    });
+//    $(window).on("navigate", function (event, data) {
+//      console.log(event);
+//      console.log(data);
+//      var direction = data.state.direction;
+//      if (direction == 'back') {
+//        alert('go back');
+////        if (i7e.history.length == 1) return;
+//        var q = i7e.history.pop();
+//        console.log(q);
+//        if (q == '#news_single') i7e.changePage('#news');
+//        /*
+//
+//        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
+//          $(q).popup("close");
+//        } else {
+//          q = i7e.history.pop();
+//          i7e.history.push(q);
+//          console.log(q);
+//          i7e.changePage(q);
+//        }
+//        */
+//      }
+//    });
 
     // навигация подвал
     var actions = {
@@ -73,7 +78,9 @@ var i7e = {
 	// смена страницы, если есть второй параметр - не делать смещение
    // смещение на высоту шапки (баг jquery). Нужно делать для первой открываемой страницы
 	changePage: function(p, n) {
-    i7e.history.push(p);
+    if (i7e.history[0] == p) return;
+    i7e.history.unshift(p);
+
 		$('div.main div.ui-content').hide();
 		$(p).show();
     if (!n) {
@@ -81,6 +88,19 @@ var i7e = {
       $.mobile.silentScroll(0);
     }
 	},
+  //  обработка нажатия бек
+  goBack: function(e) {
+    if($.mobile.activePage.is('#news')){
+        e.preventDefault();
+        if (confirm("Закрыть приложение")) {
+          navigator.app.exitApp();
+        }
+      }
+      else {
+        alert('go back');
+        navigator.app.backHistory()
+      }
+  },
 
   // открываем страницу из попапа
   openRegister: function() {
@@ -558,18 +578,18 @@ var ajx = {
   }
 };
 
-document.addEventListener("deviceready", onDeviceReady, false);
 
-function onDeviceReady(){
-  document.addEventListener("backbutton", function(e){
-    if($.mobile.activePage.is('#news')){
-      alert('exit');
-      e.preventDefault();
-      //navigator.app.exitApp();
-    }
-    else {
-      alert('back');
-      navigator.app.backHistory()
-    }
-  }, false);
-}
+//
+//function onDeviceReady(){
+//  document.addEventListener("backbutton", function(e){
+//    if($.mobile.activePage.is('#news')){
+//      alert('exit');
+//      e.preventDefault();
+//      //navigator.app.exitApp();
+//    }
+//    else {
+//      alert('back');
+//      navigator.app.backHistory()
+//    }
+//  }, false);
+//}
