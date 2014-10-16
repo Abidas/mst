@@ -99,8 +99,9 @@ var i7e = {
     else {
       alert(JSON.stringify(i7e.history));
       var q = i7e.history.unshift(); // текущая страница
+      alert(q + ' : ' + JSON.stringify(i7e.history));
       q = i7e.history.unshift(); // предыдущая, которую надо открыть
-      alert(q);
+      alert(q + ' : ' + JSON.stringify(i7e.history));
       i7e.changePage(q);
       //navigator.app.backHistory()
     }
