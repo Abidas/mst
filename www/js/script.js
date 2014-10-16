@@ -512,7 +512,7 @@ var ajx = {
   // - доки -
   // запрос списка документоы
   getDocs: function(f) {
-    ajx.makeAjaxGet('api/version/1/base/simple_gallery_list/', {}, f);
+    ajx.makeAjaxGet('api/version/1/base/media_gallery_list/', {}, f);
   },
   // заказ доки
   orderDoc: function(p, f) {
