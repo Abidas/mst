@@ -23,8 +23,10 @@ html .ui-page-theme-b .ui-footer .ui-btn{
 .ui-header.ui-bar-b{
 	border-bottom:0;
 	}
+html .ui-page-theme-b .ui-footer,
 .ui-footer{
 	height:64px;
+	padding:0;
 }
 .ui-footer .ui-navbar{
 	height:64px;
@@ -454,3 +456,6 @@ video{
 ::-webkit-scrollbar{
     width: 0 !important;
 }
+#main_menu{
+	padding:0 !important;
+	}
