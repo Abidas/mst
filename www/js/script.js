@@ -55,11 +55,14 @@ var i7e = {
 		});
 	},
 
-	// смена страницы
-	changePage: function(p) {
+	// смена страницы, если есть второй параметр - не делать смещение
+   // смещение на высоту шапки (баг jquery). Нужно делать для первой открываемой страницы
+	changePage: function(p, n) {
     i7e.history.push(p);
 		$('div.main div.ui-content').hide();
 		$(p).show();
+    if (!n) $(p).css('padding-top','62px');
+
 //    $.mobile.silentScroll(0);
 //    $(p).scrollTop(0);
 	},
@@ -118,7 +121,7 @@ var news = {
 //      $($(this).attr('href')).show();
 //    });
     ajx.getNews(news.show);
-    i7e.changePage('#news');
+    i7e.changePage('#news', 1);
   },
 
   // вывести полученные с сервера новости
