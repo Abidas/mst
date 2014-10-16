@@ -460,3 +460,8 @@ video{
 #main_menu{
 	padding:0 !important;
 	}
+
+#news img {
+    max-width:91px;
+    max-height:91px;
+}

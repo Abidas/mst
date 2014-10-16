@@ -214,11 +214,13 @@ var news = {
 
       if (do_save) news.dat[d[k]['id']] = ddd;
       // вывод
+      class_name = '';
       $('#news ul').append('<li><a href="javascript:news.open(' + d[k]['id']
           + ')" data-ajax="false" data-rel="page" data-direction="reverse">'
           + img
           + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
     }
+    $('#news ul').listview( "refresh" );
 
     // сохранение переданных новостей
     if(typeof(Storage) !== "undefined" && do_save) {
@@ -262,6 +264,7 @@ var seminar = {
           + '</p><a class="light-btn" href="javascript:seminar.join(' + d[k]['id']
           + ')" data-role="button">Записаться</a></li>');
     }
+    $('#seminars ul').listview( "refresh" );
   },
   //  запись на семинар
   join: function(n) {
@@ -284,6 +287,30 @@ var va = {
   init: function() {
     // 2do - клик на вкладку видео
     $('#media #video').show();
+
+    $( "#popupVideo iframe" )
+        .attr( "width", 0 )
+        .attr( "height", 0 );
+
+    $( "#popupVideo" ).on({
+      popupbeforeposition: function() {
+        console.log(1);
+        var size = scale( 497, 298, 15, 1 ),
+            w = size.width,
+            h = size.height;
+
+        $( "#popupVideo iframe" )
+            .attr( "width", w )
+            .attr( "height", h );
+      },
+      popupafterclose: function() {
+        console.log(2);
+        $( "#popupVideo iframe" )
+            .attr( "width", 0 )
+            .attr( "height", 0 )
+            .attr('src', '#');
+      }
+    });
   },
   open: function() {
     $('#video ul').html('<li>... загрузка ...</li>');
@@ -309,6 +336,7 @@ var va = {
           + '<audio src="' + ajx.base + d[k]['file_url'].substr(1)
           + '">Your browser does not support the <code>audio</code> element.</audio></li>');
     }
+    $('#audio ul').listview( "refresh" );
   },
   // вывести полученные с сервера данные по видео
   showVideo: function(d) {
@@ -326,6 +354,7 @@ var va = {
           + '"><h2>' + d[k]['title']
           + '</h2></a></li>');
     }
+    $('#video ul').listview( "refresh" );
   },
   openVideo: function(url) {
     $('#popupVideo iframe').prop('src', 'http://www.youtube.com/embed/' + url);
@@ -357,6 +386,7 @@ var docs = {
           + '</h2><p>' + d[k]['desc']
           + '</p></li>');
     }
+    $('#docs ul').listview( "refresh" );
   },
 
   //  заказ документа из списка
