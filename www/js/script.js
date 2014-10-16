@@ -90,16 +90,18 @@ var i7e = {
 	},
   //  обработка нажатия бек
   goBack: function(e) {
-    if($.mobile.activePage.is('#news')){
-        e.preventDefault();
-        if (confirm("Закрыть приложение")) {
-          navigator.app.exitApp();
-        }
+    e.preventDefault();
+    if(i7e.history.length == 1) {
+      if (confirm("Закрыть приложение")) {
+        navigator.app.exitApp();
       }
-      else {
-        alert('go back');
-        navigator.app.backHistory()
-      }
+    }
+    else {
+      var q = i7e.history.unshift(); // текущая страница
+      q = i7e.history.unshift(); // предыдущая, которую надо открыть
+      i7e.changePage(q);
+      //navigator.app.backHistory()
+    }
   },
 
   // открываем страницу из попапа
