@@ -556,3 +556,19 @@ var ajx = {
         });
   }
 };
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady(){
+  document.addEventListener("backbutton", function(e){
+    if($.mobile.activePage.is('#news')){
+      alert('exit');
+      e.preventDefault();
+      //navigator.app.exitApp();
+    }
+    else {
+      alert('back');
+      navigator.app.backHistory()
+    }
+  }, false);
+}
