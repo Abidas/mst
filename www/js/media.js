@@ -24,7 +24,7 @@ $(document).ready(function(){
 		$('.progress-marker').css('left',0);
 		});
 
-	$('.audio-control-btn').click(function(event){
+  $( "#audio" ).delegate( '.audio-control-btn', 'tap', function(event){
 		var audio = $(this).siblings('audio');
 		if($(this).hasClass('playaudio')){
 			audio.trigger('play');

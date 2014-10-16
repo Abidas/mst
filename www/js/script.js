@@ -293,8 +293,9 @@ var va = {
   },
   // вывести полученные с сервера данные по аудио
   showAudio: function(d) {
+    console.log('--');
     console.log(d);
-    $('#video ul').html('');
+    $('#audio ul').html('');
 
     if (!d.length) {
       $('#audio ul').html('<li>... аудио записей не найдено (' + d + ') ...</li>');
