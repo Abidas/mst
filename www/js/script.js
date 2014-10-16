@@ -97,6 +97,7 @@ var i7e = {
       }
     }
     else {
+      alert(JSON.stringify(i7e.history));
       var q = i7e.history.unshift(); // текущая страница
       q = i7e.history.unshift(); // предыдущая, которую надо открыть
       alert(q);
