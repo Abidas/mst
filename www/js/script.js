@@ -230,10 +230,10 @@ var news = {
 
   // вывод одной новости
   open: function(id) {
-    $('#news_single').find('h1')
-        .text(news.dat[id]['title'])
-        .after(news._getImg(news.dat[id]))
-        .after('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
+    console.log(1);
+    $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
+    $('#news_single div.inside').append(news._getImg(news.dat[id]));
+    $('#news_single div.inside').append('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
     i7e.changePage('#news_single');
   },
 
