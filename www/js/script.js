@@ -7,6 +7,12 @@ var i7e = {
 		docs.init();
 		va.init();
 
+    $(document).on('popupafteropen', '[data-role="popup"]' ,function( event, ui ) {
+      $('.ui-content').css('overflow','hidden');
+    }).on('popupafterclose', '[data-role="popup"]' ,function( event, ui ) {
+          $('.ui-content').css('overflow','auto');
+        });
+
     document.addEventListener("backbutton", i7e.goBack, false);
 //    document.addEventListener("deviceready", onDeviceReady, false);
 //    document.addEventListener("backbutton", function(e){
