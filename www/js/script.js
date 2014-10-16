@@ -90,18 +90,14 @@ var i7e = {
   //  обработка нажатия бек
   goBack: function(e) {
     e.preventDefault();
-    alert(i7e.history.length);
     if(i7e.history.length == 1) {
       if (confirm("Закрыть приложение")) {
         navigator.app.exitApp();
       }
     }
     else {
-      alert(JSON.stringify(i7e.history));
-      var q = i7e.history.unshift(); // текущая страница
-      alert(q + ' : ' + JSON.stringify(i7e.history));
-      q = i7e.history.unshift(); // предыдущая, которую надо открыть
-      alert(q + ' : ' + JSON.stringify(i7e.history));
+      var q = i7e.history.shift(); // текущая страница
+      q = i7e.history.shift(); // предыдущая, которую надо открыть
       i7e.changePage(q);
       //navigator.app.backHistory()
     }
