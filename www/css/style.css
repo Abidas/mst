@@ -252,6 +252,16 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 		float:right;
 		width:auto;
 		}
+	.ui-header .header-more-btn{
+		width:53px;
+		height:53px;
+		padding:0;
+		border:0;
+		display:block;
+		}
+		.header-more-btn img{
+			width:100%;
+			}
 .separated-list > li,
 .ui-page-theme-b .light-theme .ui-listview.separated-list .ui-body-inherit{
 	border-top:1px solid #c6c6c6;
