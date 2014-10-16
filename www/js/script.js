@@ -77,6 +77,7 @@ var i7e = {
 		$('div.main div.ui-content').hide();
 		$(p).show();
     if (!n) {
+      $(p).css('padding-top', '62px');
       $.mobile.silentScroll(0);
     }
 	},
