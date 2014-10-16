@@ -66,7 +66,6 @@ var i7e = {
       else
       {
         e.preventDefault();
-        i7e.history.push('#need_auth');
         var popup = setInterval(function(){
           $('#need_auth').popup("open");
           clearInterval(popup);
@@ -91,6 +90,7 @@ var i7e = {
   //  обработка нажатия бек
   goBack: function(e) {
     e.preventDefault();
+    alert(i7e.history.length);
     if(i7e.history.length == 1) {
       if (confirm("Закрыть приложение")) {
         navigator.app.exitApp();
@@ -99,6 +99,7 @@ var i7e = {
     else {
       var q = i7e.history.unshift(); // текущая страница
       q = i7e.history.unshift(); // предыдущая, которую надо открыть
+      alert(q);
       i7e.changePage(q);
       //navigator.app.backHistory()
     }
@@ -107,7 +108,6 @@ var i7e = {
   // открываем страницу из попапа
   openRegister: function() {
     $('#auth_dialog').popup("close");
-    i7e.history.pop();
     $('#reg_flag').val('reg');
     $('#register').find('input[name="org"]').closest('div').show();
     $('#register').find('input[name="tel"]').closest('div').show();
@@ -116,7 +116,6 @@ var i7e = {
   // открыть платеж
   openPay: function() {
     $('#need_auth').popup("close");
-    i7e.history.pop();
     // за основу используется форма регистрации
     $('#reg_flag').val('payment');
     $('#register').find('input[name="org"]').closest('div').hide();
@@ -132,7 +131,6 @@ var i7e = {
       $('#msg_title').text(t);
       $('#msg_content').text(d);
       $('#msg').popup('open');
-      i7e.history.push('#msg');
     },
     close: function() {
       if (i7e.msg.current_f) {
@@ -140,7 +138,6 @@ var i7e = {
         i7e.msg.current_f = '';
       }
       $('#msg').popup('close');
-      i7e.history.pop();
     }
   }
 };
