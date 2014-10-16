@@ -7,7 +7,20 @@ var i7e = {
 		docs.init();
 		va.init();
 
+    document.addEventListener("backbutton", function(e){
+      alert($.mobile.activePage);
+      if($.mobile.activePage.is('#homepage')){
+        e.preventDefault();
+        navigator.app.exitApp();
+      }
+      else {
+        navigator.app.backHistory()
+      }
+    }, false);
+
     $(window).on("navigate", function (event, data) {
+      console.log(event);
+      console.log(data);
       var direction = data.state.direction;
       if (direction == 'back') {
 //        if (i7e.history.length == 1) return;
@@ -61,10 +74,9 @@ var i7e = {
     i7e.history.push(p);
 		$('div.main div.ui-content').hide();
 		$(p).show();
-    if (!n) $(p).css('padding-top','62px');
-
-//    $.mobile.silentScroll(0);
-//    $(p).scrollTop(0);
+    if (!n) {
+      $.mobile.silentScroll(0);
+    }
 	},
 
   // открываем страницу из попапа
