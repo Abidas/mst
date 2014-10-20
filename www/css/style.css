@@ -1,3 +1,6 @@
+input {
+    outline: none;
+}
 .ui-mobile,
 .ui-mobile-viewport{
 	padding:0;
@@ -26,6 +29,7 @@ html .ui-page-theme-b .ui-footer .ui-btn{
 	}
 .ui-header.ui-bar-b{
 	border-bottom:0;
+    height: 61px;
 	}
 html .ui-page-theme-b .ui-footer,
 .ui-footer{
@@ -167,6 +171,7 @@ padding: 1em;
 			box-shadow:none;
 			}
 		#auth_form .inline-link{
+            text-align:center;
 			display:inline-block;
 			margin:0.5em 1em 1em 1em;
 			}

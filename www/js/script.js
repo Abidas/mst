@@ -1,6 +1,7 @@
 // интерфейс и работа с ним
 var i7e = {
   history: [],
+  is_block_nav: 0,
 	init: function() {
 		u.init();
 		news.init();
@@ -63,6 +64,7 @@ var i7e = {
       '#media': va.open
     };
 		$('#main_menu a').on('tap', function(e) {
+      if (i7e.is_block_nav) return false;
       var l = $(this).attr('href');
 			if (u.token || l == '#news' || l == '#call') {
         if (actions[l]) {
@@ -75,6 +77,7 @@ var i7e = {
         e.preventDefault();
         var popup = setInterval(function(){
           $('#need_auth').popup("open");
+//          $('#need_auth a.ui-link').removeClass('ui-btn-active');
           clearInterval(popup);
         }, 10);
       }
@@ -287,30 +290,30 @@ var va = {
   init: function() {
     // 2do - клик на вкладку видео
     $('#media #video').show();
-
-    $( "#popupVideo iframe" )
-        .attr( "width", 0 )
-        .attr( "height", 0 );
-
-    $( "#popupVideo" ).on({
-      popupbeforeposition: function() {
-        console.log(1);
-        var size = scale( 497, 298, 15, 1 ),
-            w = size.width,
-            h = size.height;
-
-        $( "#popupVideo iframe" )
-            .attr( "width", w )
-            .attr( "height", h );
-      },
-      popupafterclose: function() {
-        console.log(2);
-        $( "#popupVideo iframe" )
-            .attr( "width", 0 )
-            .attr( "height", 0 )
-            .attr('src', '#');
-      }
-    });
+//
+//    $( "#popupVideo iframe" )
+//        .attr( "width", 0 )
+//        .attr( "height", 0 );
+//
+//    $( "#popupVideo" ).on({
+//      popupbeforeposition: function() {
+//        console.log(1);
+//        var size = scale( 497, 298, 15, 1 ),
+//            w = size.width,
+//            h = size.height;
+//
+//        $( "#popupVideo iframe" )
+//            .attr( "width", w )
+//            .attr( "height", h );
+//      },
+//      popupafterclose: function() {
+//        console.log(2);
+//        $( "#popupVideo iframe" )
+//            .attr( "width", 0 )
+//            .attr( "height", 0 )
+//            .attr('src', '#');
+//      }
+//    });
   },
   open: function() {
     $('#video ul').html('<li>... загрузка ...</li>');
@@ -349,8 +352,8 @@ var va = {
     }
     d = d['data']['items'];
     for (var k in d) {
-      $('#video ul').append('<li><a href="javascript:va.openVideo(\'' + d[k]['id']
-          + '\')"><img src="' + d[k]['thumbnail']['sqDefault']
+      $('#video ul').append('<li><a rel="external" href="' + d[k]['player']['mobile']
+          + '"><img src="' + d[k]['thumbnail']['sqDefault']
           + '"><h2>' + d[k]['title']
           + '</h2></a></li>');
     }
@@ -436,6 +439,16 @@ var u = {
 	init: function() {
     $('#reg_button').on('tap', u.register);
     u.id = 4; // uin = 11111, pwd = 1
+    $('#auth_dialog').bind({
+      popupafterclose: function(event, ui) {
+        i7e.is_block_nav = 0;
+      }
+    });
+    $('#logout').bind({
+      popupafterclose: function(event, ui) {
+        i7e.is_block_nav = 0;
+      }
+    });
 	},
 
   // вывод авторизационного окна
@@ -443,12 +456,12 @@ var u = {
     var wnm = u.token ? '#logout' : '#auth_dialog'
     var popup = setInterval(function(){
       $(wnm).popup("open");
+      i7e.is_block_nav = 1;
       clearInterval(popup);
     },1);
   },
 
   logout: function() {
-    console.log(11);
     u.token = 0;
     $('#logout').popup("close");
     ajx.doLogout();
