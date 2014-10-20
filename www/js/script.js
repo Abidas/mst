@@ -448,10 +448,10 @@ var u = {
   },
 
   logout: function() {
+    console.log(11);
     u.token = 0;
-    ajx.doLogout();
     $('#logout').popup("close");
-    u.token = 0;
+    ajx.doLogout();
   },
 
   // авторизация пользователя
@@ -520,7 +520,7 @@ var ajx = {
   },
   // выход пользователем
   doLogout: function() {
-    ajx.makeAjaxGet('api/version/1/accounts/logout');
+    ajx.makeAjaxGet('api/version/1/accounts/logout', {});
   },
 
   // - новости -
@@ -584,7 +584,7 @@ var ajx = {
       error: function(a, txt, err) {
         i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
       },
-      success: f
+      success: f || ajx.getAjxCb
     });
   },
   //  отправка post запроса c кукой на сервер

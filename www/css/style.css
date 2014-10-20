@@ -1,3 +1,7 @@
+.ui-mobile,
+.ui-mobile-viewport{
+	padding:0;
+	}
 .ui-content{
 	background:#ffffff;
 	color:#000000;
@@ -284,19 +288,27 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 	}
 	html head + body .ui-tabs-nav .ui-btn.ui-btn-a{
 		color:#ffffff;
+		border:0;
 		border-bottom:3px solid #010101;
-		border-top:0;
 		background:#010101;
 		text-shadow:none;
+		padding: 0.7em 0;
 		}
 		html head + body .ui-tabs-nav .ui-btn.ui-btn-a.ui-btn-active{
 		color:#ffffff;
+		border:0;
 		border-bottom:3px solid #33B5E5;
-		border-top:0;
 		background:#020202;
 		text-shadow:none;
 		box-shadow:none;
 		}
+		html head + body .ui-tabs-nav .ui-btn.ui-btn-a span{
+			display:block;
+			padding: 0 1em;
+			}
+			html head + body .ui-tabs-nav .ui-block-a .ui-btn.ui-btn-a span{
+				border-right:1px solid #555555;
+				}
 #video,
 #audio{
 	padding:0;
@@ -311,17 +323,21 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 	padding:0;
 	text-align:center;
 	}
+	#call p{
+		margin:0.5em 1em;
+		line-height:1.1em;
+		}
 .blue-title{
 	display:block;
 	color:#ffffff;
 	background:#4065b4;
-	padding:1em 2em;
-	font-size:200%;
-	line-height:1.4em;
+	padding:.5em 1em;
+	font-size:160%;
+	line-height:1.2em;
 	}
 	.big-links-block{
-		font-size:150%;
-		line-height:1.4em;
+		font-size:120%;
+		line-height:1.2em;
 		}
 .circle-icon{
 	display:inline-block;
@@ -342,6 +358,14 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 		border-radius:50% 50% 50% 50%;
 		background: #33B5E5;
 		}
+		.circle-icon > img{
+			display:block;
+			height:42px;
+			width:42px;
+			padding:0;
+			margin:0;
+			border-radius:50% 50% 50% 50%;
+			}
 	.circle-icon.blue{
 		border:2px solid #4e759d;
 		}
