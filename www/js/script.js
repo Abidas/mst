@@ -16,6 +16,13 @@ var i7e = {
       $("body").unbind("touchmove");
     });
 
+    $('#msg').on({
+      popupbeforeposition: function() {
+        var maxHeight = $(window).height() - 30;
+        $('#msg').css('max-height', maxHeight + 'px');
+      }
+    })
+
     document.addEventListener("backbutton", i7e.goBack, false);
 //    document.addEventListener("deviceready", onDeviceReady, false);
 //    document.addEventListener("backbutton", function(e){
@@ -104,6 +111,7 @@ var i7e = {
     if(i7e.history.length == 1) {
       if (confirm("Закрыть приложение")) {
         navigator.app.exitApp();
+        app.exitApp();
       }
     }
     else {
@@ -139,6 +147,7 @@ var i7e = {
       if (f) i7e.msg.current_f = f;
       $('#msg_title').text(t);
       $('#msg_content').text(d);
+      $('#msg').css('overflow-y', 'scroll');
       $('#msg').popup('open');
     },
     close: function() {
@@ -464,6 +473,7 @@ var u = {
   logout: function() {
     u.token = 0;
     $('#logout').popup("close");
+    i7e.is_block_nav = 0;
     ajx.doLogout();
   },
 
@@ -483,6 +493,7 @@ var u = {
   // авторизация, ответ от сервера
   doAuthCb: function(d) {
     $('#auth_dialog').popup("close");
+    i7e.is_block_nav = 0;
     u.token = 1;
     i7e.msg.show('Успех', 'Вы успешно авторизовались');
   },
