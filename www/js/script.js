@@ -338,8 +338,8 @@ var va = {
     }
     d = d['data']['items'];
     for (var k in d) {
-      $('#video ul').append('<li><a href="' + d[k]['player']['default']
-          + '"><img src="' + d[k]['thumbnail']['sqDefault']
+      $('#video ul').append('<li><a href="javascript:window.open(\'' + d[k]['player']['default']
+          + '\',\'_system\',\'location=yes\');return false;"><img src="' + d[k]['thumbnail']['sqDefault']
           + '"><h2>' + d[k]['title']
           + '</h2></a></li>');
     }
