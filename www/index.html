@@ -68,14 +68,14 @@
 			<div data-role="header">
 				<h1 id="msg_title">Ошибка</h1>
 			</div>
-			<div data-role="main">
+			<div data-role="main" id="msg_contents">
 				<p id="msg_content">Пожалуйста, заполните все обязательные (<i class='fa fa-circle color-red'></i>) поля</p>
-				<div data-role="navbar">
-					<ul>
-						<li><a href="javascript:i7e.msg.close()">ОК</a></li>
-					</ul>
-				</div>
 			</div>
+      <div data-role="navbar">
+        <ul>
+          <li><a href="javascript:i7e.msg.close()">ОК</a></li>
+        </ul>
+      </div>
 		</div>
 
 
@@ -180,10 +180,10 @@
 						<a href="skype:arekus.1">arekus.1</a><br>
 						<a href="viber://qwe">viber</a><br><br>
 					</div>
-					<a rel="external" class="circle-icon blue" href="http://vk.com/"><img src="images/design/icon-vk.png" alt="vk"></a>
-					<a rel="external" class="circle-icon lightblue" href="http://twitter.com/"><img src="images/design/icon-twitter.png" alt="twitter"></a>
-					<a rel="external" class="circle-icon fblue" href="http://facebook.com/"><img src="images/design/icon-fb.png" alt="f"></a>
-					<a rel="external" class="circle-icon red" href="http://google.com/"><img src="images/design/icon-googleplus.png" alt="g+"></a>
+					<a rel="external" class="circle-icon blue" href="#" onclick="window.open('http://vk.com/');"><img src="images/design/icon-vk.png" alt="vk"></a>
+					<a rel="external" class="circle-icon lightblue" href="#" onclick="window.open('http://twitter.com/');"><img src="images/design/icon-twitter.png" alt="twitter"></a>
+					<a rel="external" class="circle-icon fblue" href="#" onclick="window.open('http://facebook.com/');"><img src="images/design/icon-fb.png" alt="f"></a>
+					<a rel="external" class="circle-icon red" href="#" onclick="window.open('http://google.com/');"><img src="images/design/icon-googleplus.png" alt="g+"></a>
 				</div>
 			</div>
 		</div> <!-- content -->

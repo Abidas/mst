@@ -18,8 +18,8 @@ var i7e = {
 
     $('#msg').on({
       popupbeforeposition: function() {
-        var maxHeight = $(window).height() - 30;
-        $('#msg').css('max-height', maxHeight + 'px');
+        var maxHeight = $(window).height() - 200;
+        $('#msg_contents').css('max-height', maxHeight + 'px');
       }
     })
 
@@ -147,7 +147,7 @@ var i7e = {
       if (f) i7e.msg.current_f = f;
       $('#msg_title').text(t);
       $('#msg_content').text(d);
-      $('#msg').css('overflow-y', 'scroll');
+      $('#msg_contents').css('overflow-y', 'scroll');
       $('#msg').popup('open');
     },
     close: function() {
@@ -299,30 +299,6 @@ var va = {
   init: function() {
     // 2do - клик на вкладку видео
     $('#media #video').show();
-//
-//    $( "#popupVideo iframe" )
-//        .attr( "width", 0 )
-//        .attr( "height", 0 );
-//
-//    $( "#popupVideo" ).on({
-//      popupbeforeposition: function() {
-//        console.log(1);
-//        var size = scale( 497, 298, 15, 1 ),
-//            w = size.width,
-//            h = size.height;
-//
-//        $( "#popupVideo iframe" )
-//            .attr( "width", w )
-//            .attr( "height", h );
-//      },
-//      popupafterclose: function() {
-//        console.log(2);
-//        $( "#popupVideo iframe" )
-//            .attr( "width", 0 )
-//            .attr( "height", 0 )
-//            .attr('src', '#');
-//      }
-//    });
   },
   open: function() {
     $('#video ul').html('<li>... загрузка ...</li>');
@@ -361,8 +337,8 @@ var va = {
     }
     d = d['data']['items'];
     for (var k in d) {
-      $('#video ul').append('<li><a rel="external" href="' + d[k]['player']['mobile']
-          + '"><img src="' + d[k]['thumbnail']['sqDefault']
+      $('#video ul').append('<li><a rel="external" onclick="window.open(\'' + d[k]['player']['mobile']
+          + '\',\'_system\',\'location=yes\') " href="#"><img src="' + d[k]['thumbnail']['sqDefault']
           + '"><h2>' + d[k]['title']
           + '</h2></a></li>');
     }
