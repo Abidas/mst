@@ -299,6 +299,7 @@ var va = {
   init: function() {
     // 2do - клик на вкладку видео
     $('#media #video').show();
+    $('#media #video').click();
   },
   open: function() {
     $('#video ul').html('<li>... загрузка ...</li>');
@@ -337,8 +338,8 @@ var va = {
     }
     d = d['data']['items'];
     for (var k in d) {
-      $('#video ul').append('<li><a href="javascript:window.location.assign(\'' + d[k]['player']['mobile']
-          + '\');return false;"><img src="' + d[k]['thumbnail']['sqDefault']
+      $('#video ul').append('<li><a href="' + d[k]['player']['default']
+          + '"><img src="' + d[k]['thumbnail']['sqDefault']
           + '"><h2>' + d[k]['title']
           + '</h2></a></li>');
     }
