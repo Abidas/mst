@@ -337,7 +337,7 @@ var va = {
     }
     d = d['data']['items'];
     for (var k in d) {
-      $('#video ul').append('<li><a rel="external" onclick="window.open(\'' + d[k]['player']['mobile']
+      $('#video ul').append('<li><a onclick="window.open(\'' + d[k]['player']['mobile']
           + '\',\'_system\',\'location=yes\') " href="#"><img src="' + d[k]['thumbnail']['sqDefault']
           + '"><h2>' + d[k]['title']
           + '</h2></a></li>');
