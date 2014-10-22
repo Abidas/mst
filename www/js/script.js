@@ -383,7 +383,7 @@ var docs = {
 //    console.log(n);
     var p = {
        'client': u.id,
-       'fl': n
+       'gallery': n
     };
     ajx.orderDoc(p, docs.orderCb);
   },
@@ -521,7 +521,7 @@ var ajx = {
   },
   // выход пользователем
   doLogout: function() {
-    ajx.makeAjaxGet('api/version/1/accounts/logout', {});
+    $.get(ajx.base + 'api/version/1/accounts/logout');
   },
 
   // - новости -
@@ -549,7 +549,7 @@ var ajx = {
   },
   // заказ доки
   orderDoc: function(p, f) {
-    ajx.makeAjaxPost('api/version/1/base/file_order_create/', p, f);
+    ajx.makeAjaxPost('api/version/1/base/gallery_order_create/', p, f);
   },
   // заказ доки из формы
   orderFormDoc: function(p, f) {

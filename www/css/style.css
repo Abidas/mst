@@ -5,6 +5,10 @@ input {
 .ui-mobile-viewport{
 	padding:0;
 	}
+.ui-mobile .ui-shadow-inset,
+.ui-mobile .ui-shadow{
+	box-shadow:none;
+	}
 .ui-content{
 	background:#ffffff;
 	color:#000000;
@@ -162,6 +166,9 @@ padding: 1em;
 			position:relative;
 			color:#333;
 		}
+		#register div.ui-input-text{
+			margin-left:2em;
+		}
 		#auth_form div.ui-input-text:after,
 		.light-theme div.ui-input-text:after{background-color: #33B5E5; position: absolute; bottom: -1px; left: -1px; height: 10px; width: 1px;}
 		#auth_form div.ui-input-text:before,
@@ -172,7 +179,7 @@ padding: 1em;
 			}
 		#auth_form .inline-link{
             text-align:center;
-			display:inline-block;
+			display:block;
 			margin:0.5em 1em 1em 1em;
 			}
 		#auth_form .ui-navbar li,
@@ -194,7 +201,8 @@ padding: 1em;
 			border-collapse:collapse;
 			}
 		#auth_form .ui-btn,
-		.ui-popup.warning-popup .ui-btn{
+		.ui-popup.warning-popup .ui-btn,
+		.ui-popup.warning-popup .ui-btn.ui-link{
 			border:0 none;
 			color:#333;
 			background:#ffffff;
@@ -216,7 +224,13 @@ padding: 1em;
 		text-align:center;
 		}
 	.color-red{
-		color:red;
+		color: red;
+		display: inline-block;
+		height: 16px;
+		width: 16px;
+		background: red;
+		border-radius: 50%;
+		margin: 0 auto;
 		}
 #register_form{
 	padding:1em;
@@ -245,6 +259,18 @@ padding: 1em;
 		width:32px;
 		margin:0;
 		top:0;
+		}
+	.ui-btn#reg_button,
+	#doc_order .ui-btn#doc_button{
+		background:#4bbde7;
+		box-shadow:0 0 0 5px rgba(75,189,231,0.5);
+		border-radius:4px;
+		border-bottom:1px solid #46b0d7;
+		}
+	.ui-btn#reg_button{
+		width:60%;
+		color:#000000;
+		margin:2em auto;
 		}
 html .ui-page-theme-b .main .ui-btn.light-btn,
 html .ui-page-theme-b .main .ui-btn.light-btn:hover{
@@ -494,3 +520,9 @@ video{
     max-width:91px;
     max-height:91px;
 }
+.ui-field-contain>label{
+	width:24px;
+	text-align:center;
+	margin:0.7em -6px 0 6px;
+	float:left;
+	}
