@@ -424,6 +424,13 @@ var u = {
 	reg_form_id: '#register',
 	init: function() {
     $('#reg_button').on('tap', u.register);
+    if(typeof(Storage) !== "undefined") {
+      var uuu = JSON.parse(localStorage.getItem("user_token"));
+      if (uuu) {
+        u.token = 1;
+      }
+    }
+
     u.id = 4; // uin = 11111, pwd = 1
     $('#auth_dialog').bind({
       popupafterclose: function(event, ui) {
@@ -449,6 +456,9 @@ var u = {
 
   logout: function() {
     u.token = 0;
+    if(typeof(Storage) !== "undefined") {
+      localStorage.setItem("user_token", 0);
+    }
     $('#logout').popup("close");
     i7e.is_block_nav = 0;
     ajx.doLogout();
@@ -472,6 +482,9 @@ var u = {
     $('#auth_dialog').popup("close");
     i7e.is_block_nav = 0;
     u.token = 1;
+    if(typeof(Storage) !== "undefined") {
+      localStorage.setItem("user_token", 1);
+    }
     i7e.msg.show('Успех', 'Вы успешно авторизовались');
   },
 
