@@ -148,7 +148,7 @@ var i7e = {
       $('#msg_title').text(t);
       $('#msg_content').text(d);
       $('#msg_contents').css('overflow-y', 'scroll');
-      $('#msg').popup('open');
+      setTimeout("$('#msg').popup('open')", 500);
     },
     close: function() {
       if (i7e.msg.current_f) {
@@ -408,7 +408,7 @@ var docs = {
       return;
     }
 
-    ajx.orderFormDoc(p, docs.registerCb);
+    ajx.orderFormDoc(p, docs.orderCb);
   },
   // обработка ответа об отправке формы
   orderCb: function(d) {
@@ -511,9 +511,9 @@ var u = {
 	},
   // регистрация, обработка ответа сервера
   registerCb: function(d) {
-    u.token = 1;
+//    u.token = 1;
     i7e.msg.show('Поздравляем', 'Регистрация прошла успешно', function(){i7e.changePage('#news');});
-    console.log(d);
+//    console.log(d);
   }
 };
 
@@ -596,10 +596,27 @@ var ajx = {
         withCredentials: true
       },
       error: function(a, txt, err) {
-        i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
+        ajx.drawError(a.responseText, txt, err);
       },
       success: f || ajx.getAjxCb
     });
+  },
+  drawError: function(response, txt, err) {
+	  var msg = response;
+	  try {
+		var q = JSON.parse(response);
+		msg = '';
+		for (var k in q){
+			if (k == 'password') {
+				$('#auth_dialog').popup("close");
+				i7e.msg.show('Ошибка авторизации', 'Данные введены некорректно!');
+				return;
+			}
+			msg += q[k] + '<br>';
+		}
+	  } catch (e) {
+	  }
+	  i7e.msg.show('Ошибка: ' + txt + ' : ' + err, msg);
   },
   //  отправка post запроса c кукой на сервер
   makeAjaxPost: function(url, p, f){
@@ -616,7 +633,7 @@ var ajx = {
         withCredentials: true
       },
       error: function(a, txt, err) {
-        i7e.msg.show('SERVER ERROR: ' + txt + ' : ' + err, a.responseText);
+        ajx.drawError(a.responseText, txt, err);
       },
       success: f
     }).done(function() {
