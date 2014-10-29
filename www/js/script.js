@@ -221,7 +221,7 @@ var news = {
       // вывод
       class_name = '';
       $('#news ul').append('<li class="ui-li-has-thumb"><a href="javascript:news.open(' + d[k]['id']
-          + ');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse">'
+          + ');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
           + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
     }
