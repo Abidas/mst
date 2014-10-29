@@ -228,7 +228,7 @@ var news = {
       // вывод
       class_name = '';
       $('#news ul').append('<li><a href="javascript:news.open(' + d[k]['id']
-          + ')" data-ajax="false" data-rel="page" data-direction="reverse">'
+          + ')" data-direction="reverse">'
           + img
           + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
     }
