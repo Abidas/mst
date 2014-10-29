@@ -166,14 +166,7 @@ var news = {
   dat: {}, // массив данных на сохранение на устройстве
 
   init: function() {
-//    открыть новость полностью
-//    $('#news').on('tap', 'a', function() {
-//      console.log($(this).attr('href'));
-//      $('#news').hide();
-//      $($(this).attr('href')).show();
-//    });
     ajx.getNews(news.show);
-//    news.show();
     i7e.changePage('#news', 1);
   },
 
@@ -229,7 +222,7 @@ var news = {
       class_name = '';
       $('#news ul').append('<li><a href="javascript:news.open(' + d[k]['id']
           + ');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse">'
-          + img
+          + (img ? news._outImg(img) : '')
           + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
@@ -249,6 +242,15 @@ var news = {
     i7e.changePage('#news_single');
   },
 
+//  оформить html блок для картинки
+  _outImg: function(img) {
+    // получить ссылку для картинки
+    var q = img.replace('<img src="', '');
+    q = q.replace('">', '');
+    var qq = '<div class="center-cropped" style="background-image: url(\'' + q + '\');">';
+    qq += img + '</div>';
+    return qq;
+  },
   // получить фоточку
   _getImg: function(dd) {
     var img = '';
