@@ -146,9 +146,9 @@ var i7e = {
     show: function(t, d, f) {
       if (f) i7e.msg.current_f = f;
       $('#msg_title').text(t);
-      $('#msg_content').text(d);
+      $('#msg_content').html(d);
       $('#msg_contents').css('overflow-y', 'scroll');
-      setTimeout("$('#msg').popup('open')", 500);
+      setTimeout("$('#msg').popup('open')", 100);
     },
     close: function() {
       if (i7e.msg.current_f) {
@@ -274,7 +274,7 @@ var seminar = {
     {
       $('#seminars ul').append('<li><h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc']
           + '</p><a class="light-btn" href="javascript:seminar.join(' + d[k]['id']
-          + ')" data-role="button">Записаться</a></li>');
+          + ')" data-role="button" id="sem' + d[k]['id'] + '">Записаться</a></li>');
     }
     $('#seminars ul').listview( "refresh" );
   },
@@ -285,11 +285,12 @@ var seminar = {
        'client': u.id,
        'seminar': n
     };
+    $('#sem'+n).prop('href', 'javascript:void(0)').text('Вы записаны');
     ajx.joinSeminars(p, seminar.joinCb);
   },
   // обработка ответа о записи на семинар
   joinCb: function(d) {
-    console.log(d);
+    i7e.msg.show('Успешно', 'Вы были успешно записаны на семинар.');
   }
 };
 
@@ -407,7 +408,8 @@ var docs = {
       i7e.msg.show('Ошибка', 'Пожалуйста, заполните все поля корректно');
       return;
     }
-
+    p['fl'] = 0;
+    p['client'] = u.token;
     ajx.orderFormDoc(p, docs.orderCb);
   },
   // обработка ответа об отправке формы
@@ -479,11 +481,13 @@ var u = {
   },
   // авторизация, ответ от сервера
   doAuthCb: function(d) {
+    if (!d) return;
+    console.log(d);
     $('#auth_dialog').popup("close");
     i7e.is_block_nav = 0;
-    u.token = 1;
+    u.token = d['id'] ? d['id'] : 1;
     if(typeof(Storage) !== "undefined") {
-      localStorage.setItem("user_token", 1);
+      localStorage.setItem("user_token", u.token);
     }
     i7e.msg.show('Успех', 'Вы успешно авторизовались');
   },
@@ -507,13 +511,21 @@ var u = {
       i7e.msg.show('Ошибка', 'Пожалуйста, заполните все обязательные поля');
       return;
     }
+    try {
+      p['imei'] = device.uuid;
+    } catch(e) {
+      p['imei'] = Math.round(Math.random() * 10000) + '';
+    }
+    if (p['imei'].length < 15) {
+      p['imei'] += '0'.repeat( 15 - p['imei'].length );
+    } else if (p['imei'].length > 15) {
+      p['imei'] = p['imei'].substr(0, 15);
+    }
     ajx.doRegister(p, u.registerCb);
 	},
   // регистрация, обработка ответа сервера
   registerCb: function(d) {
-//    u.token = 1;
     i7e.msg.show('Поздравляем', 'Регистрация прошла успешно', function(){i7e.changePage('#news');});
-//    console.log(d);
   }
 };
 
@@ -604,19 +616,19 @@ var ajx = {
   drawError: function(response, txt, err) {
 	  var msg = response;
 	  try {
-		var q = JSON.parse(response);
-		msg = '';
-		for (var k in q){
-			if (k == 'password') {
-				$('#auth_dialog').popup("close");
-				i7e.msg.show('Ошибка авторизации', 'Данные введены некорректно!');
-				return;
-			}
-			msg += q[k] + '<br>';
-		}
+      var q = JSON.parse(response);
+      msg = '';
+      for (var k in q){
+        if (k == 'password') {
+          $('#auth_dialog').popup("close");
+          i7e.msg.show('Ошибка авторизации', 'Данные введены некорректно!');
+          return;
+        }
+        msg += k + ' : ' + q[k] + '<br>';
+      }
 	  } catch (e) {
 	  }
-	  i7e.msg.show('Ошибка: ' + txt + ' : ' + err, msg);
+	  i7e.msg.show('Ошибка', msg);
   },
   //  отправка post запроса c кукой на сервер
   makeAjaxPost: function(url, p, f){
@@ -647,7 +659,10 @@ var ajx = {
   }
 };
 
-
+String.prototype.repeat = function( num )
+{
+  return new Array( num + 1 ).join( this );
+}
 //
 //function onDeviceReady(){
 //  document.addEventListener("backbutton", function(e){

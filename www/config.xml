@@ -11,6 +11,7 @@
     <gap:platform name="android" />
 
     <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="org.apache.cordova.device" />
 
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.6.3" />
