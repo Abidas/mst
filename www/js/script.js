@@ -220,7 +220,7 @@ var news = {
       if (do_save) news.dat[d[k]['id']] = ddd;
       // вывод
       class_name = '';
-      $('#news ul').append('<li><a href="javascript:news.open(' + d[k]['id']
+      $('#news ul').append('<li class="ui-li-has-thumb"><a href="javascript:news.open(' + d[k]['id']
           + ');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse">'
           + (img ? news._outImg(img) : '')
           + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
