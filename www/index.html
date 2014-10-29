@@ -30,7 +30,7 @@
         <a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
         <div data-role="navbar">
           <ul>
-            <li><a href="javascript:i7e.is_block_nav = 0;" data-rel="back">Отмена</a></li>
+            <li><a href="javascript:i7e.is_block_nav = 0;$('#auth_dialog').popup('close');">Отмена</a></li>
             <li><a href="javascript:u.doAuth()">Войти</a></li>
           </ul>
         </div>
@@ -44,7 +44,7 @@
 			<div data-role="main">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-rel="back">ОК</a></li>
+						<li><a href="javascript:$('#logout').popup('close');">ОК</a></li>
 						<li><a href="javascript:u.logout()">Выход</a></li>
 					</ul>
 				</div>
@@ -59,8 +59,8 @@
 				<p>Данный вид материалов доступен только клиентам компании "М-СТАЙЛ", либо после получения полного доступа.</p>
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-rel="back">ОК</a></li>
-						<li><a href="#" data-rel="back" href1="javascript:i7e.openPay()">Отмена</a></li>
+						<li><a href="javascript:$('#need_auth').popup('close');">ОК</a></li>
+						<li><a href="javascript:$('#need_auth').popup('close');" href1="javascript:i7e.openPay()">Отмена</a></li>
 					</ul>
 				</div>
 			</div>
