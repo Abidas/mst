@@ -511,16 +511,21 @@ var u = {
       i7e.msg.show('Ошибка', 'Пожалуйста, заполните все обязательные поля');
       return;
     }
-    try {
-      p['imei'] = device.uuid;
-    } catch(e) {
-      p['imei'] = Math.round(Math.random() * 10000) + '';
-    }
-    if (p['imei'].length < 15) {
-      p['imei'] += '0'.repeat( 15 - p['imei'].length );
-    } else if (p['imei'].length > 15) {
-      p['imei'] = p['imei'].substr(0, 15);
-    }
+    p['imei'] = Math.round(Math.random() * 100000000) + '';
+    p['imei'] = p['imei'].repeat( 15 );
+    p['imei'] = p['imei'].substr(0, 15);
+      /*
+      try {
+        p['imei'] = device.uuid;
+      } catch(e) {
+        p['imei'] = Math.round(Math.random() * 10000) + '';
+      }
+      if (p['imei'].length < 15) {
+        p['imei'] += '0'.repeat( 15 - p['imei'].length );
+      } else if (p['imei'].length > 15) {
+        p['imei'] = p['imei'].substr(0, 15);
+      }
+      */
     ajx.doRegister(p, u.registerCb);
 	},
   // регистрация, обработка ответа сервера
