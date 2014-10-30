@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+    <title>m-style</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" href="./css/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.css" />
+    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" />
+    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<script src="./js/jquery.min.js"></script>
+		<script src="./js/jquery.mobile.min.js"></script>
+		<script src="./js/script.js"></script>
+		<script src="./js/media.js"></script>
+  </head>
+	<body>
+
+	<div data-role="page" id="one" data-quicklinks="true" data-theme='b'>
+		<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b' class1="header">
+			<h1><img src="./images/design/logo.png" alt="m-style"></h1>
+			<a class="ui-btn-right header-more-btn" data-position-to="window" href="javascript:u.show()"><img src="./images/design/btn-more.png" alt="..."></a>
+		</div>
+
+		<div id="auth_dialog" data-role="popup" data-dismissible="false" data-theme="a">
+			<div data-role="header">
+				<h1>Авторизация</h1>
+			</div>
+			<div data-role="main">
+				<form action="#" method="post" id="auth_form">
+					<input type="text" name="uin" placeholder="UIN клиента">
+					<input type="password" name="pwd" placeholder="Пароль">
+					<a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#" data-rel="back">Отмена</a></li>
+							<li><a href="javascript:u.doAuth()">Войти</a></li>
+						</ul>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div id="need_auth" data-role="popup" data-dismissible="false" data-theme="a" class="warning-popup">
+			<div data-role="header">
+				<h1>Внимание</h1>
+			</div>
+			<div data-role="main">
+				<p>Данный вид материалов доступен только клиентам компании "М-СТАЙЛ", либо после получения полного доступа.</p>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" data-rel="back">ОК</a></li>
+						<li><a href="javascript:i7e.openPay()">Оплатить</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="msg" data-role="popup" data-dismissible="false" class="warning-popup">
+			<div data-role="header">
+				<h1 id="msg_title">Ошибка</h1>
+			</div>
+			<div data-role="main">
+				<p id="msg_content">Пожалуйста, заполните все обязательные (<i class='fa fa-circle color-red'></i>) поля</p>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="javascript:i7e.msg.close()">ОК</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div data-role="content" class="main">
+			<div id="register" class="ui-content light-theme">
+			<form action="#" method="post" id="register_form">
+        <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
+        <div data-role="fieldcontain">
+          <label for="email"><i class='fa fa-circle color-red'></i></label>
+          <input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="pwd"><i class='fa fa-circle color-red'></i></label>
+          <input type="password" name="pwd" id="pwd" value="" data-clear-btn="true" placeholder="Пароль">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="fio"><i class='fa fa-circle color-red'></i></label>
+          <input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="org"></label>
+          <input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Наименование организации">
+        </div>
+        <div data-role="fieldcontain">
+          <label for="tel"></label>
+          <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Контактный телефон">
+        </div>
+        <!--<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>-->
+        <button id="#reg_button">Регистрация</button>
+		</form>
+			</div>
+
+			<div id="news_st" class="ui-content">
+				<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
+					<li><a href="#need_auth" data-rel="popup" data-position-to="window" data-transition="pop" >
+						<img src="./img/album-bb.jpg">
+						<h2>Нужна авторизация</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#news_1">
+						<img src="./img/album-bb.jpg">
+						<h2>Текст новости</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#seminars">
+						<img src="./img/album-bb.jpg">
+						<h2>Список семинаров</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#doc_order">
+						<img src="./img/album-bb.jpg">
+						<h2>Заказ документов на email</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#doc_search">
+						<img src="./img/album-bb.jpg">
+						<h2>Подборка документов</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#media">
+						<img src="./img/album-bb.jpg">
+						<h2>MEDIA</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#videoitem">
+						<img src="./img/album-bb.jpg">
+						<h2>Video</h2>
+						<p>Текст</p>
+					</a></li>
+					<li><a href="#call">
+						<img src="./img/album-bb.jpg">
+						<h2>Контакты</h2>
+						<p>Текст</p>
+					</a></li>
+				</ul>
+			</div>
+
+			<div id="news_1" class="ui-content">
+				<div class="inside">
+					<h1>Комплексный отраслевой стандарт в XXI веке</h1>
+					<img src="./img/album-bb.jpg">
+					<p>Согласно предыдущему, рекламная поддержка инновационна. Примерная структура маркетингового исследования инновационна. Пресс-клиппинг основан на опыте повседневного применения. Медиабизнес основан на тщательном анализе данных. Формат события детерминирует рыночный принцип восприятия.</p>
+					<p>Создание приверженного покупателя концентрирует потребительский анализ зарубежного опыта. Контекстная реклама трансформирует институциональный бизнес-план. Исходя из структуры пирамиды Маслоу, опросная анкета разнородно синхронизирует конструктивный BTL. Программа лояльности, анализируя результаты рекламной кампании, оправдывает ролевой пак-шот.</p>
+					<p>Целевая аудитория очевидна не для всех. Ценовая стратегия продуцирует типичный анализ рыночных цен, учитывая современные тенденции. Сегментация рынка определяет комплексный анализ ситуации. Поэтому искусство медиапланирования регулярно охватывает нестандартный подход. Спонсорство, суммируя приведенные примеры, как всегда непредсказуемо.</p>
+					<p>Текст</p>
+					<p>CTR по-прежнему устойчив к изменениям спроса. Организация практического взаимодействия детерминирует повседневный медийный канал, невзирая на действия конкурентов. Привлечение аудитории развивает стратегический план размещения. Жизненный цикл продукции спорадически уравновешивает коллективный презентационный материал. В соответствии с законом Ципфа, экспертиза выполненного проекта индуцирует опрос, учитывая современные тенденции.</p>
+					<p>Бизнес-план, как принято считать, охватывает диктат потребителя. Личность топ менеджера, безусловно, решительно раскручивает диктат потребителя. Торговая марка экономит побочный PR-эффект.</p>
+					<p>Изменение глобальной стратегии упорядочивает продуктовый ассортимент. Тактика выстраивания отношений с коммерсчекими агентами без оглядки на авторитеты порождена временем. Привлечение аудитории не критично. Емкость рынка, безусловно, экономит конвергентный медиавес. Осведомленность о бренде, согласно Ф.Котлеру, однородно отталкивает инвестиционный продукт. Мониторинг активности, как принято считать, искажает рейтинг.</p>
+				</div>
+			</div>
+
+			<div id="seminars" class="ui-content light-theme">
+				<div class="inside">
+					<h1>Семинары Компании "М-Стайл"</h1>
+					<ul data-role="listview">
+						<li>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+							<a class="light-btn" href="#doc_search" data-role="button">Записаться</a>
+						</li>
+						<li>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+							<button class="light-btn">Записаться</button>
+						</li>
+						<li>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+							<button class="light-btn">Записаться</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="docs" class="ui-content light-theme">
+				<div class="inside">
+					<h1>Подборка документов</h1>
+					<ul data-role="listview" class="separated-list">
+						<li>
+							<button class="grey-btn right-doc-btn">Заказать</button>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+						</li>
+						<li>
+							<button class="grey-btn right-doc-btn">Заказать</button>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+						</li>
+						<li>
+							<button class="grey-btn right-doc-btn">Заказать</button>
+							<h2>Заголовок</h2>
+							<p>Текст</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="doc_order" class="ui-content light-theme">
+				<div class="inside">
+					<h1>Заказ документов на email</h1>
+					<form>
+          <input type="text" name="name" value="" placeholder="Название документа">
+          <input type="text" name="num" value="" placeholder="Номер документа">
+          <input type="date" name="date" value="">
+          <input type="text" name="org" value="" placeholder="Принявший орган">
+          <button class="center-btn" id="doc_button">Отправить</button>
+		  </form>
+				</div>
+			</div>
+
+
+			<div id="media" class="ui-content">
+				<div data-role="tabs">
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#video" data-theme="a" data-ajax="false"><span>Видео</span></a></li>
+							<li><a href="#audio" data-theme="a" data-ajax="false"><span>Аудио</span></a></li>
+						</ul>
+					</div>
+					<div id="video" class="ui-content1">
+						<ul data-role="listview" data-inset="false" data-icon="false">
+							<li>
+								<a href="#videoitem" data-rel="page">
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+								</a>
+							</li>
+							<li>
+								<a href="#auth_dialog">
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+								</a>
+							</li>
+							<li>
+								<a href="#videoitem">
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+								</a>
+							</li>
+							<li>
+								<a href="#videoitem">
+								<img src="./img/album-bb.jpg">
+								<h2>Название</h2>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div id="audio" class="ui-content1">
+						<ul data-role="listview" class="list-separated-blue" data-inset="false" data-icon="false">
+							<li class="audio-item">
+								<span class="playaudio audio-control-btn"><i class='fa fa-play'></i></span>
+								<span class="audio-name">трек 1</span>
+								<div class="progress-bar">
+									<span class="progress-bg"></span>
+									<span class="progress-current"></span>
+									<span class="progress-marker"></span>
+								</div>
+								<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg" id="track1">
+								  Your browser does not support the <code>audio</code> element.
+								</audio>
+							</li>
+							<li class="audio-item">
+								<span class="playaudio audio-control-btn"><i class='fa fa-play'></i></span>
+								<span class="audio-name">трек 2</span>
+								<div class="progress-bar">
+									<span class="progress-bg"></span>
+									<span class="progress-current"></span>
+									<span class="progress-marker"></span>
+								</div>
+								<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg">
+								  Your browser does not support the <code>audio</code> element.
+								</audio>
+							</li>
+							<li class="audio-item">
+								<span class="playaudio audio-control-btn"><i class='fa fa-play'></i></span>
+								<span class="audio-name">трек 3</span>
+								<div class="progress-bar">
+									<span class="progress-bg"></span>
+									<span class="progress-current"></span>
+									<span class="progress-marker"></span>
+								</div>
+								<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg">
+								  Your browser does not support the <code>audio</code> element.
+								</audio>
+							</li>
+							<li class="audio-item">
+								<span class="playaudio audio-control-btn"><i class='fa fa-play'></i></span>
+								<span class="audio-name">трек 4</span>
+								<div class="progress-bar">
+									<span class="progress-bg"></span>
+									<span class="progress-current"></span>
+									<span class="progress-marker"></span>
+								</div>
+								<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg">
+								  Your browser does not support the <code>audio</code> element.
+								</audio>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="videoitem" class="ui-content light-theme">
+				<div class="inside">
+					<h3>Название</h3>
+					<video id='videoclip'
+					  preload='none'
+					  poster="http://media.w3.org/2010/05/sintel/poster.png">
+					  <source id='mp4'
+						src="http://media.w3.org/2010/05/sintel/trailer.mp4"
+						type='video/mp4'>
+					  <source id='webm'
+						src="http://media.w3.org/2010/05/sintel/trailer.webm"
+						type='video/webm'>
+					  <source id='ogv'
+						src="http://media.w3.org/2010/05/sintel/trailer.ogv"
+						type='video/ogg'>
+					  <p>Your user agent does not support the HTML5 Video element.</p>
+					</video>
+				</div>
+				<div class='videocontrols'>
+					<span class="playvideo video-control-btn"><i class='fa fa-play'></i></span>
+					<div class="progress-bar">
+						<span class="progress-bg"></span>
+						<span class="progress-current"></span>
+						<span class="progress-marker"></span>
+					</div>
+				</div>
+			</div>
+			<div id="call" class="ui-content light-theme">
+				<div class="inside">
+					<strong class="blue-title">Горячая линия<br> Консультант плюс</strong>
+					<p>Горячая линия компании "М-стайл" работает с 09-30 до 18-00 часов по будним дням.</p>
+					<div class="big-links-block">
+						<a href="javascript:window.open('http://www.m-style.spb.su', '_system');">Внешняя ссылка</a><br>
+						<a href="tel:89253437571">8-925-343-7571</a><br>
+						<a href="skype:arekus.1">arekus.1</a><br>
+						<a href="viber://qwe">viber</a><br><br>
+					</div>
+					<a href="http://vk.com/" class="circle-icon blue"><img src="./images/design/icon-vk.png" alt="vk"></a>
+					<a class="circle-icon lightblue" href="http://twitter.com/"><img src="./images/design/icon-twitter.png" alt="twitter"></a>
+					<a class="circle-icon fblue" href="http://facebook.com/"><img src="./images/design/icon-fb.png" alt="f"></a>
+					<a class="circle-icon red" href="http://google.com/"><img src="./images/design/icon-googleplus.png" alt="g+"></a>
+				</div>
+			</div>
+		</div> <!-- content -->
+		<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-tap-toggle="false" data-theme='b'>
+			<div data-role="navbar" id="main_menu">
+				<a href="#news" data-ajax="false" class="bg-orange"></a>
+				<a href="#seminars" data-ajax="false" class="bg-blue"></a>
+				<a href="#docs" data-ajax="false" class="bg-gray"></a>
+				<a href="#doc_order" data-ajax="false" class="bg-purple"></a>
+				<a href="#media" data-ajax="false" class="bg-lightgray"></a>
+				<a href="#call" data-ajax="false" class="bg-green"></a>
+			</div>
+		</div> 
+	</div> <!-- page -->
+	</body>
+</html>
