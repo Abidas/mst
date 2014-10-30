@@ -447,11 +447,19 @@ video{
 	.video-control-btn{
 		display:block;
 		width:32px;
+		height:32px;
 		float:left;
 		font-size:32px;
 		color:#33B5E5;
 		cursor:pointer;
+		padding: 4px 0;
 		}
+		.video-control-btn .fa{
+			display:block;
+			width:32px;
+			height:32px;
+			margin:0 0 0 -4px;
+			}
 	.progress-bar{
 		display:block;
 		margin:0 0 0 48px;
@@ -490,6 +498,7 @@ video{
 	.audio-control-btn{
 		display:block;
 		width:32px;
+		height:32px;
 		float:left;
 		font-size:32px;
 		padding:10px;
@@ -507,9 +516,19 @@ video{
 		.audio-control-btn.pauseaudio{
 			text-indent:1px;
 			}
-		.ui-listview .audio-control-btn i{
+		.ui-listview .audio-control-btn i,
+		.ui-listview .fa{
 			margin:0;
+			display:block;
+			height:32px;
+			width:32px;
 			}
+			.fa.fa-play{
+				background:url(../images/design/playpause.png) -10px -94px no-repeat;
+				}
+			.fa.fa-pause{
+				background:url(../images/design/playpause.png) -10px -10px no-repeat;
+				}
 		.audio-item .progress-bar{
 			margin:0 98px 0 12px;
 			}
