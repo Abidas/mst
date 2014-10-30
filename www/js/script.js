@@ -411,7 +411,7 @@ var docs = {
       return;
     }
     p['fl'] = 0;
-    p['client'] = u.token;
+    p['client'] = u.id;
     ajx.orderFormDoc(p, docs.orderCb);
   },
   // обработка ответа об отправке формы
@@ -431,11 +431,11 @@ var u = {
     if(typeof(Storage) !== "undefined") {
       var uuu = JSON.parse(localStorage.getItem("user_token"));
       if (uuu) {
-        u.token = 1;
+        u.token = uuu;
       }
     }
 
-    u.id = 4; // uin = 11111, pwd = 1
+    u.id = u.token; // uin = 11111, pwd = 1
     $('#auth_dialog').bind({
       popupafterclose: function(event, ui) {
         i7e.is_block_nav = 0;
@@ -459,7 +459,7 @@ var u = {
   },
 
   logout: function() {
-    u.token = 0;
+    u.token = u.id = 0;
     if(typeof(Storage) !== "undefined") {
       localStorage.setItem("user_token", 0);
     }
@@ -487,7 +487,7 @@ var u = {
     console.log(d);
     $('#auth_dialog').popup("close");
     i7e.is_block_nav = 0;
-    u.token = d['id'] ? d['id'] : 1;
+    u.token = u.id = d['id'] ? d['id'] : 1;
     if(typeof(Storage) !== "undefined") {
       localStorage.setItem("user_token", u.token);
     }
