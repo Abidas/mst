@@ -1,3 +1,6 @@
+body{
+	font-family:Arial,Helvetica,sans-serif;
+	}
 input {
     outline: none;
 }
@@ -46,6 +49,7 @@ html .ui-page-theme-b .ui-footer,
 .ui-footer{
 	height:64px;
 	padding:0;
+	bottom:0;
 }
 .ui-footer .ui-navbar{
 	height:64px;
@@ -244,6 +248,7 @@ padding: 1em;
 	}
 	#register_form .ui-field-contain{
 		border:0;
+		padding:0.3em 0;
 		}
 	#register_form .ui-field-contain > label{
 		width:1em;
@@ -259,7 +264,7 @@ padding: 1em;
 	.ui-page-theme-b .light-theme .ui-btn.center-btn{
 		width:60%;
 		color:#ffffff;
-		margin:2em auto;
+		margin:1em auto 0 auto;
 		background-color: #282828;
 		}
 	.ui-page-theme-b #register_form .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear{
@@ -273,7 +278,13 @@ padding: 1em;
 		box-shadow:0 0 0 5px rgba(75,189,231,0.5);
 		border-radius:4px;
 		border-bottom:1px solid #46b0d7;
+		padding: 0.4em;
 		}
+		#doc_order .ui-btn#doc_button:hover,
+		#doc_order .ui-btn#doc_button:active{
+			background:#0891c3;
+			box-shadow:0 0 0 5px rgba(55,169,211,0.5);
+			}
 	.ui-btn#reg_button{
 		width:60%;
 		color:#000000;
@@ -378,6 +389,10 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 		line-height:2em;
         margin-bottom: 10px;
 		}
+		.big-links-block a{
+			display:block;
+			line-height: 120%;
+			}
 .circle-icon{
 	display:inline-block;
 	height:42px;
