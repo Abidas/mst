@@ -13,12 +13,12 @@
     <script src="phonegap.js"></script>
   </head>
 	<body>
+	<div class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner" data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b" class1="header">
+		<h1 aria-level="1" role="heading" class="ui-title"><img src="./images/design/logo.png" alt="m-style"></h1>
+		<a role="button" data-role="button" class="ui-btn-right header-more-btn ui-link ui-btn ui-shadow ui-corner-all" data-position-to="window" href="javascript:u.show()"><img src="./images/design/btn-more.png" alt="..."></a>
+	</div>
 
 	<div data-role="page" id="one" data-quicklinks="true" data-theme='b'>
-		<div data-role="header" data-position="fixed" data-tap-toggle="false" data-theme='b' class1="header">
-			<h1><img src="./images/design/logo.png" alt="m-style"></h1>
-      <a class="ui-btn-right header-more-btn" data-position-to="window" href="javascript:u.show()"><img src="./images/design/btn-more.png" alt="..."></a>
-		</div>
 
 		<div id="auth_dialog" data-role="popup" data-transition="pop" data-overlay-theme="a" data-dismissible="false" data-theme="a">
 			<div data-role="header">
@@ -190,17 +190,17 @@
 			</div>
 		</div> <!-- content -->
 
-		<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-tap-toggle="false" data-theme='b'>
-			<div data-role="navbar" id="main_menu">
-				<a href="#news" data-ajax="false" class="bg-orange"></a>
-				<a href="#seminars" data-ajax="false" class="bg-blue"></a>
-				<a href="#media" data-ajax="false" class="bg-gray"></a>
-				<a href="#doc_order" data-ajax="false" class="bg-purple"></a>
-				<a href="#docs" data-ajax="false" class="bg-lightgray"></a>
-				<a href="#call" data-ajax="false" class="bg-green"></a>
-			</div>
-		</div> 
 	</div> <!-- page -->
+	<div class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="b">
+		<div role="navigation" class="ui-navbar" data-role="navbar" id="main_menu">
+			<a href="#news" data-ajax="false" class="bg-orange ui-link ui-btn"></a>
+			<a href="#seminars" data-ajax="false" class="bg-blue ui-link ui-btn"></a>
+			<a href="#media" data-ajax="false" class="bg-gray ui-link ui-btn"></a>
+			<a href="#doc_order" data-ajax="false" class="bg-purple ui-link ui-btn"></a>
+			<a href="#docs" data-ajax="false" class="bg-lightgray ui-link ui-btn"></a>
+			<a href="#call" data-ajax="false" class="bg-green ui-link ui-btn"></a>
+		</div>
+	</div> 
 	</body>  .
   <script src="./js/jquery.min.js"></script>
   <script src="./js/jquery.mobile.min.js"></script>
