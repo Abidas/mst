@@ -140,6 +140,27 @@ var i7e = {
     i7e.changePage('#register');
   },
 
+  //  вывод загрузочного изображения
+  loader: {
+    show: function() {
+      $.mobile.loading( 'show', {
+//        text: msgText,
+//        textVisible: textVisible,
+//        theme: theme,
+//        textonly: textonly,
+//        html: html
+      });
+    },
+    hide: function() {
+      $.mobile.loading( 'hide', {
+//        text: msgText,
+//        textVisible: textVisible,
+//        theme: theme,
+//        textonly: textonly,
+//        html: html
+      });
+    }
+  },
   // вывод сообщений
   msg: {
     current_f: '',
@@ -148,7 +169,7 @@ var i7e = {
       $('#msg_title').text(t);
       $('#msg_content').html(d);
       $('#msg_contents').css('overflow-y', 'scroll');
-      setTimeout("$('#msg').popup('open')", 100);
+      setTimeout("$('#msg').popup('open')", 400);
     },
     close: function() {
       if (i7e.msg.current_f) {
@@ -395,7 +416,7 @@ var docs = {
   {
     var flds = {
       'name': 'name',
-      'num': 'num',
+      'number': 'num',
       'date': 'date',
       'org': 'org'
     };
@@ -585,7 +606,7 @@ var ajx = {
   },
   // заказ доки из формы
   orderFormDoc: function(p, f) {
-    ajx.makeAjaxPost('api/version/1/base/file_order_create/', p, f);
+    ajx.makeAjaxPost('api/version/1/base/email_file_order_create/', p, f);
   },
 
   // - медиа -
@@ -608,6 +629,8 @@ var ajx = {
       data: p,
       cache: false,
       url: ajx.base + url,
+      beforeSend: i7e.loader.show,
+      complete: i7e.loader.hide,
       cache: false,
       crossDomain: true,
       dataType: 'json',
@@ -626,7 +649,7 @@ var ajx = {
       var q = JSON.parse(response);
       msg = '';
       for (var k in q){
-        if (k == 'password') {
+        if (k == 'password' ||k == 'uin') {
           $('#auth_dialog').popup("close");
           i7e.msg.show('Ошибка авторизации', 'Данные введены некорректно!');
           return;
@@ -645,6 +668,8 @@ var ajx = {
       data: p,
       cache: false,
       url: ajx.base + url,
+      beforeSend: i7e.loader.show,
+      complete: i7e.loader.hide,
       cache: false,
       crossDomain: true,
       dataType: 'json',

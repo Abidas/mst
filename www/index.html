@@ -20,7 +20,7 @@
       <a class="ui-btn-right header-more-btn" data-position-to="window" href="javascript:u.show()"><img src="./images/design/btn-more.png" alt="..."></a>
 		</div>
 
-		<div id="auth_dialog" data-role="popup" data-overlay-theme="a" data-dismissible="false" data-theme="a">
+		<div id="auth_dialog" data-role="popup" data-transition="pop" data-overlay-theme="a" data-dismissible="false" data-theme="a">
 			<div data-role="header">
 				<h1>Авторизация</h1>
 			</div>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 
-		<div id="logout" data-role="popup" data-dismissible="false" data-theme="a" class="warning-popup">
+		<div id="logout" data-role="popup" data-transition="pop" data-dismissible="false" data-theme="a" class="warning-popup">
 			<div data-role="header">
 				<h1>Вы авторизованы</h1>
 			</div>
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 
-		<div id="need_auth" data-role="popup" data-dismissible="false" data-theme="a" class="warning-popup">
+		<div id="need_auth" data-role="popup" data-transition="pop" data-dismissible="false" data-theme="a" class="warning-popup">
 			<div data-role="header">
 				<h1>Внимание</h1>
 			</div>
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 
-		<div id="msg" data-role="popup" data-dismissible="false" class="warning-popup">
+		<div id="msg" data-role="popup" data-transition="pop" data-dismissible="false" class="warning-popup">
 			<div data-role="header">
 				<h1 id="msg_title">Ошибка</h1>
 			</div>
@@ -146,7 +146,7 @@
 					<h1>Заказ документов на email</h1>
           <input type="text" name="name" value="" placeholder="Название документа">
           <input type="text" name="num" value="" placeholder="Номер документа">
-          <input type="date" name="date" value="">
+          <input type="date" name="date" value="" placeholder="Дата">
           <input type="text" name="org" value="" placeholder="Принявший орган">
           <button class="center-btn" id="doc_button">Отправить</button>
 				</div>
