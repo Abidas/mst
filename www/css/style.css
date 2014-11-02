@@ -1,5 +1,7 @@
 body{
 	font-family:Arial,Helvetica,sans-serif;
+	background:#ffffff;
+	-webkit-overflow-scrolling: touch;
 	}
 input {
     outline: none;
@@ -7,6 +9,7 @@ input {
 .ui-mobile,
 .ui-mobile-viewport{
 	padding:0;
+	background:#ffffff;
 	}
 .ui-mobile .ui-shadow-inset,
 .ui-mobile .ui-shadow{
@@ -15,6 +18,10 @@ input {
 .ui-content{
 	background:#ffffff;
 	color:#000000;
+	}
+.ui-mobile [data-role="page"]{
+	bottom:62px;
+	z-index:1;
 	}
 .ui-overlay-b .ui-page-theme-b{
 	background:#ffffff;
