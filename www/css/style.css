@@ -43,7 +43,8 @@ html .ui-page-theme-b .ui-footer .ui-btn{
 	}
 .ui-header.ui-bar-b{
 	border-bottom:0;
-    height: 61px;
+	border-top:1px solid #000;
+    height: 60px;
 	}
 	.ui-header.ui-fixed-hidden{
 		padding:0;
