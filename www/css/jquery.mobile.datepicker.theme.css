@@ -66,8 +66,10 @@ html body .ui-datepicker .ui-state-active {
 
 #ui-datepicker-div{
 	top:65px !important;
+	left:50% !important;
 	background:#fff;
 	z-index:100000 !important;
+	margin-left: -129px !important;
 }
 .ui-icon-circle-triangle-w,
 .ui-icon-circle-triangle-e{
