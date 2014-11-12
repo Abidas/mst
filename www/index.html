@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" />
     <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" />
 		<link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/jquery.ui.datepicker.mobile.css" />
+	<link rel="stylesheet" href="./css/jquery.mobile.datepicker.theme.css" />
 
     <script src="phonegap.js"></script>
   </head>
 	<body>
-	<div class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner" data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b" class1="header">
+	<div class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner" data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
 		<h1 aria-level="1" role="heading" class="ui-title"><img src="./images/design/logo.png" alt="m-style"></h1>
 		<a role="button" data-role="button" class="ui-btn-right header-more-btn ui-link ui-btn ui-shadow ui-corner-all" data-position-to="window" href="javascript:u.show()"><img src="./images/design/btn-more.png" alt="..."></a>
 	</div>
@@ -141,12 +143,12 @@
 				</div>
 			</div>
 
-			<div id="doc_order" class="ui-content light-theme">
+			<div id="doc_order" class="ui-content light-theme jqm-content">
 				<div class="inside">
 					<h1>Заказ документов на email</h1>
           <input type="text" name="name" value="" placeholder="Название документа">
           <input type="text" name="num" value="" placeholder="Номер документа">
-          <input type="date" name="date" value="" placeholder="Дата">
+          <input type="text" name="date" value="" placeholder="Дата" data-role="date" data-inline="false">
           <input type="text" name="org" value="" placeholder="Принявший орган">
           <button class="center-btn" id="doc_button">Отправить</button>
 				</div>
@@ -209,6 +211,8 @@
   <script src="./js/jquery.mobile.min.js"></script>
   <script src="./js/script.js"></script>
   <script src="./js/media.js"></script>
+  <script src="./js/jQuery.ui.datepicker.js"></script>
+  <script src="./js/jquery.ui.datepicker.mobile.js"></script>
   <script>
     $(document).bind("mobileinit", function(){
       $.mobile.defaultPageTransition="none";
