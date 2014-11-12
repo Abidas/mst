@@ -453,6 +453,24 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 		.circle-icon.red > i{
 			background: #e85356;
 			}
+	.circle-icon.viber{
+		border:2px solid #7b519d;
+		}
+		.circle-icon.viber > i{
+			background: #7b519d;
+			}
+	.circle-icon.skype{
+		border:2px solid #00bfee;
+		}
+		.circle-icon.skype > i{
+			background: #00bfee;
+			}
+	.circle-icon.none{
+		border:0;
+		height:44px;
+		width:44px;
+		}
+	
 
 #main_menu a {
     width: 16.6%;
