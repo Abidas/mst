@@ -21,7 +21,7 @@ var i7e = {
         var maxHeight = $(window).height() - 200;
         $('#msg_contents').css('max-height', maxHeight + 'px');
       }
-    })
+    });
 
     document.addEventListener("backbutton", i7e.goBack, false);
 //    document.addEventListener("deviceready", onDeviceReady, false);
@@ -640,7 +640,13 @@ var ajx = {
       error: function(a, txt, err) {
         ajx.drawError(a.responseText, txt, err);
       },
-      success: f || ajx.getAjxCb
+      success: function(d) {
+        if (f) {
+          f(d);
+        } else {
+          ajx.getAjxCb(d);
+        }
+      }
     });
   },
   drawError: function(response, txt, err) {
@@ -649,7 +655,7 @@ var ajx = {
       var q = JSON.parse(response);
       msg = '';
       for (var k in q){
-        if (k == 'password' ||k == 'uin') {
+        if (k == 'password' || k == 'uin') {
           $('#auth_dialog').popup("close");
           i7e.msg.show('Ошибка авторизации', 'Данные введены некорректно!');
           return;

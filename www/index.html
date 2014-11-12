@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" />
     <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" />
 		<link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/jquery.ui.datepicker.mobile.css" />
 
     <script src="phonegap.js"></script>
   </head>
@@ -141,12 +142,12 @@
 				</div>
 			</div>
 
-			<div id="doc_order" class="ui-content light-theme">
+			<div id="doc_order" class="ui-content light-theme jqm-content">
 				<div class="inside">
 					<h1>Заказ документов на email</h1>
           <input type="text" name="name" value="" placeholder="Название документа">
           <input type="text" name="num" value="" placeholder="Номер документа">
-          <input type="date" name="date" value="" placeholder="Дата" onfocus="(this.type='date')" onblur="(this.type='text')">
+          <input type="text" name="date" value="" placeholder="Дата" data-role="date" data-inline="false">
           <input type="text" name="org" value="" placeholder="Принявший орган">
           <button class="center-btn" id="doc_button">Отправить</button>
 				</div>
@@ -206,6 +207,8 @@
   <script src="./js/jquery.mobile.min.js"></script>
   <script src="./js/script.js"></script>
   <script src="./js/media.js"></script>
+  <script src="./js/jQuery.ui.datepicker.js"></script>
+  <script src="./js/jquery.ui.datepicker.mobile.js"></script>
   <script>
     $(document).bind("mobileinit", function(){
       $.mobile.defaultPageTransition="none";
