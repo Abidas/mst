@@ -3,6 +3,7 @@ var i7e = {
   history: [],
   is_block_nav: 0,
 	init: function() {
+    $.datepicker.formatDate('dd/mm/yyyy');
 		u.init();
 		news.init();
 		docs.init();
@@ -421,14 +422,12 @@ var docs = {
       'org': 'org'
     };
     var p = {};
-    var n = 0;
     for(var k in flds) {
       p[k] = $('#doc_order').find('input[name="' + flds[k] + '"]').val();
-      if (!p[k]) n++;
     }
     // количество незаполненных полей формы
-    if (n == 4) {
-      i7e.msg.show('Ошибка', 'Пожалуйста, заполните все поля корректно');
+    if (!p['name']) {
+      i7e.msg.show('Ошибка', 'Пожалуйста, заполните обязательное поле');
       return;
     }
     p['fl'] = 0;

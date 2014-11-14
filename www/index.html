@@ -146,10 +146,22 @@
 			<div id="doc_order" class="ui-content light-theme jqm-content">
 				<div class="inside">
 					<h1>Заказ документов на email</h1>
-          <input type="text" name="name" value="" placeholder="Название документа">
+          <div data-role="fieldcontain">
+          <label for="name"><i class='fa fa-circle color-red'></i></label>
+          <input type="text" name="name" id="name" value="" placeholder="Название документа">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
           <input type="text" name="num" value="" placeholder="Номер документа">
-          <input type="text" name="date" value="" placeholder="Дата" data-role="date" data-inline="false">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
+          <input type="text" name="date" id="dt"  value="" placeholder="Дата" data-role="date" data-inline="false">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
           <input type="text" name="org" value="" placeholder="Принявший орган">
+          </div>
           <button class="center-btn" id="doc_button">Отправить</button>
 				</div>
 			</div>
@@ -182,10 +194,8 @@
 						<a href="javascript:window.open('http://www.m-style.spb.su', '_system','location=yes');">Веб-сайт</a>
 						<a href="tel:+79219238591">+7 921 923 8591</a>
 					</div>
-					<a class="circle-icon skype" href="javascript:window.open('skype:m-style_consultantplus?chat', '_system','location=yes');"><img src="./images/design/icon-skype.png" alt="skype"></a>
+					<a style="margin-left:13px;" class="circle-icon skype" href="javascript:window.open('skype:m-style_consultantplus?chat', '_system','location=yes');"><img src="./images/design/icon-skype.png" alt="skype"></a>
 					<a class="circle-icon viber" href="viber://+79219238591"><img src="./images/design/icon-viber.png" alt="viber"></a>
-					<a class="circle-icon none" href="javascript:window.open('skype:m-style_consultantplus?chat', '_system','location=yes');"><img src="./images/design/skype.png" alt="skype"></a>
-					<a class="circle-icon none" href="viber://+79219238591"><img src="./images/design/viber.png" alt="viber"></a>
 					<br/>
 					<a class="circle-icon blue" href="#" onclick="window.open('http://vk.com/','_system','location=yes');"><img src="./images/design/icon-vk.png" alt="vk"></a>
 					<a class="circle-icon lightblue" href="#" onclick="window.open('http://twitter.com/','_system','location=yes');"><img src="./images/design/icon-twitter.png" alt="twitter"></a>
