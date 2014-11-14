@@ -186,7 +186,8 @@ padding: 1em;
 			position:relative;
 			color:#333;
 		}
-		#register div.ui-input-text{
+		#register div.ui-input-text,
+		#doc_order div.ui-input-text{
 			margin-left:2em;
 		}
 		#auth_form div.ui-input-text:after,
@@ -290,6 +291,7 @@ padding: 1em;
 		border-radius:4px;
 		border-bottom:1px solid #46b0d7;
 		padding: 0.4em;
+		margin: 1em auto;
 		}
 		#doc_order .ui-btn#doc_button:hover,
 		#doc_order .ui-btn#doc_button:active{
