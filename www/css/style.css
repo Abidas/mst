@@ -580,6 +580,7 @@ video{
     padding-top: 61px;
     padding-bottom: 65px;
 	min-height: 300px;
+	border-top:1px solid #000;
 }
 ::-webkit-scrollbar{
     width: 0 !important;
