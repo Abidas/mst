@@ -587,6 +587,23 @@ var u = {
 var ajx = {
 	base: 'http://mstyle.view.indev-group.eu/',
 
+  checkConnection: function()
+  {
+    if( !navigator.network )
+    {
+      // set the parent windows navigator network object to the child window
+      navigator.network = window.top.navigator.network;
+    }
+
+    // return the type of connection found
+    var q = ( (navigator.network.connection.type === "none" || navigator.network.connection.type === null ||
+        navigator.network.connection.type === "unknown" ) ? false : true );
+    if (!q) {
+      i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз');
+    }
+    return q;
+  },
+
   // аутентификация пользователя
   doAuth: function(uu, p, f) {
     ajx.makeAjaxPost('api/version/1/accounts/login/', {'uin': uu, 'password': p}, f);
@@ -608,7 +625,8 @@ var ajx = {
   // запрос списка новостей
   group_id: -54133544, // ид группы в Vk идет с минусом
 	getNews: function(f) {
-    $.get('https://api.vk.com/method/wall.get', {owner_id: ajx.group_id}, f, 'jsonp');
+    if (ajx.checkConnection())
+      $.get('https://api.vk.com/method/wall.get', {owner_id: ajx.group_id}, f, 'jsonp');
 //    ajx.makeAjaxGet('api/version/1/base/news_list/', {}, f);
 	},
 
@@ -682,9 +700,15 @@ var ajx = {
       var q = JSON.parse(response);
       msg = '';
       for (var k in q){
+        // ошибка с логином-паролем
         if (k == 'password' || k == 'uin') {
           $('#auth_dialog').popup("close");
           i7e.msg.show('Ошибка авторизации', 'Извините, но вы не зарегистрированы или ввели неверную пару email - UIN');
+          return;
+        }
+        // нет прав
+        if (k == 'detail' && q[k].indexOf('do not have') > 0) {
+          i7e.msg.show('Ошибка', 'У Вас нет прав для просмотра данного раздела');
           return;
         }
         msg += k + ' : ' + q[k] + '<br>';
