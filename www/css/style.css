@@ -46,9 +46,11 @@ html .ui-page-theme-b .ui-footer .ui-btn{
 	border-top:1px solid #000;
     height: 60px;
 	overflow: hidden;
+	z-index:2;
 	}
 	.ui-header.ui-fixed-hidden{
 		padding:0;
+		z-index:2;
 		}
 		.ui-header-fixed.ui-fixed-hidden .ui-btn-right{
 			margin:1px 0 0 0;
@@ -59,6 +61,7 @@ html .ui-page-theme-b .ui-footer,
 	height:64px;
 	padding:0;
 	bottom:0;
+	z-index:1;
 }
 .ui-footer .ui-navbar{
 	height:64px;
@@ -627,3 +630,7 @@ input[type="date"]:before {
 input[type="date"]:focus:before, input[type="date"]:valid:before {
     content: "";
 }
+.seminar-price{
+	font-weight:bold;
+	color:#5273bb;
+	}
