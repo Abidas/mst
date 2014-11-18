@@ -309,13 +309,18 @@ var seminar = {
   },
   // вывести полученные с сервера семинары
   show: function(d) {
-    console.log(d);
+    var booked = i7e.storage.load('booked_seminars');
     $('#seminars ul').html('');
     for (var k in d)
     {
-      $('#seminars ul').append('<li><h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc']
-          + '</p><a class="light-btn" href="javascript:seminar.join(' + d[k]['id']
-          + ')" data-role="button" id="sem' + d[k]['id'] + '">Записаться</a></li>');
+      var sss = '<li><h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'];
+      if (in_array(d[k]['id'], booked)) {
+        sss += '</p><a class="light-btn" href="javascript:void(0)" data-role="button">Вы записаны</a></li>';
+      } else {
+        sss += '</p><a class="light-btn" href="javascript:seminar.join(' + d[k]['id']
+            + ')" data-role="button" id="sem' + d[k]['id'] + '">Записаться</a></li>';
+      }
+      $('#seminars ul').append(sss);
     }
     $('#seminars ul').listview( "refresh" );
   },
@@ -326,7 +331,20 @@ var seminar = {
        'client': u.id,
        'seminar': n
     };
+
+    // сохраняем локально запись о семинаре
+    var booked = i7e.storage.load('booked_seminars');
+    if (!booked) {
+      booked = [n];
+    } else {
+      booked.push(n);
+    }
+    i7e.storage.save('booked_seminars', booked);
+
+    // правим интерфейс
     $('#sem'+n).prop('href', 'javascript:void(0)').text('Вы записаны');
+
+    // отправляем
     ajx.joinSeminars(p, seminar.joinCb);
   },
   // обработка ответа о записи на семинар
@@ -710,17 +728,19 @@ String.prototype.repeat = function( num )
 {
   return new Array( num + 1 ).join( this );
 }
-//
-//function onDeviceReady(){
-//  document.addEventListener("backbutton", function(e){
-//    if($.mobile.activePage.is('#news')){
-//      alert('exit');
-//      e.preventDefault();
-//      //navigator.app.exitApp();
-//    }
-//    else {
-//      alert('back');
-//      navigator.app.backHistory()
-//    }
-//  }, false);
-//}
+
+function in_array(needle, haystack, strict) {	// Checks if a value exists in an array
+  //
+  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+
+  var found = false, key, strict = !!strict;
+
+  for (key in haystack) {
+    if ((strict && haystack[key] === needle) || (!strict && haystack[key] == needle)) {
+      found = true;
+      break;
+    }
+  }
+
+  return found;
+}
