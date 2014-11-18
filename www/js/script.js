@@ -91,6 +91,7 @@ var i7e = {
       }
       return false;
 		});
+    ajx.checkConnection();
 	},
 
 	// смена страницы, если есть второй параметр - не делать смещение
@@ -207,7 +208,15 @@ var news = {
   dat: {}, // массив данных на сохранение на устройстве
 
   init: function() {
-    ajx.getNews(news.show);
+    if (ajx.checkConnection(1))  {
+      ajx.getNews(news.show);
+    } else {
+      var q = i7e.storage.load("news");
+      if (q) {
+        news.show(q);
+      }
+    }
+
     i7e.changePage('#news', 1);
   },
 
@@ -587,20 +596,10 @@ var u = {
 var ajx = {
 	base: 'http://mstyle.view.indev-group.eu/',
 
-  checkConnection: function()
+  checkConnection: function(dont_show)
   {
-//    if( !navigator.network )
-//    {
-//      // set the parent windows navigator network object to the child window
-//      navigator.network = window.top.navigator.network;
-//    }
-//
-//    // return the type of connection found
-//    var q = ( (navigator.network.connection.type === "none" || navigator.network.connection.type === null ||
-//        navigator.network.connection.type === "unknown" ) ? false : true );
-
     var q = navigator.onLine;
-    if (!q) {
+    if (!q && !dont_show) {
       i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз');
     }
     return q;
@@ -627,7 +626,6 @@ var ajx = {
   // запрос списка новостей
   group_id: -54133544, // ид группы в Vk идет с минусом
 	getNews: function(f) {
-    if (ajx.checkConnection())
       $.get('https://api.vk.com/method/wall.get', {owner_id: ajx.group_id}, f, 'jsonp');
 //    ajx.makeAjaxGet('api/version/1/base/news_list/', {}, f);
 	},
@@ -659,6 +657,7 @@ var ajx = {
   // - медиа -
   // запрос списка медиа
   getMedia: function(fv, pv, fa, pa) {
+    if (!ajx.checkConnection()) return;
     // список видео
     $.get('https://gdata.youtube.com/feeds/api/videos?v=2&orderby=updated&alt=jsonc', pv, fv);
     //  список аудио
@@ -670,6 +669,7 @@ var ajx = {
 	},
   //  отправка get запроса c кукой на сервер
   makeAjaxGet: function(url, p, f){
+    if (!ajx.checkConnection()) return;
     p['rand'] = Math.random();
     $.ajax({
       type: "GET",
@@ -721,6 +721,7 @@ var ajx = {
   },
   //  отправка post запроса c кукой на сервер
   makeAjaxPost: function(url, p, f){
+    if (!ajx.checkConnection()) return;
     p['rand'] = Math.random();
     $.ajax({
       type: "POST",
