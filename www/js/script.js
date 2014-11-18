@@ -656,7 +656,7 @@ var ajx = {
       for (var k in q){
         if (k == 'password' || k == 'uin') {
           $('#auth_dialog').popup("close");
-          i7e.msg.show('Ошибка авторизации', 'Данные введены некорректно!');
+          i7e.msg.show('Ошибка авторизации', 'Извините, но вы не зарегистрированы или ввели неверную пару email - UIN');
           return;
         }
         msg += k + ' : ' + q[k] + '<br>';
