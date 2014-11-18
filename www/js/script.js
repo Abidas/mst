@@ -141,6 +141,25 @@ var i7e = {
     i7e.changePage('#register');
   },
 
+
+  // хранилище
+  storage: {
+    // сохранить
+    save: function(key, val) {
+      if(typeof(Storage) !== "undefined") {
+        localStorage.setItem(key, JSON.stringify(val));
+      }
+    },
+    // загрузить
+    load: function(key) {
+      var uuu = '';
+      if(typeof(Storage) !== "undefined") {
+        uuu = JSON.parse(localStorage.getItem(key));
+      }
+      return uuu;
+    }
+  },
+
   //  вывод загрузочного изображения
   loader: {
     show: function() {
@@ -202,16 +221,13 @@ var news = {
       d.shift(); // первый элемент - количество записей
       news.dat = {};
     } else {
-      if(typeof(Storage) !== "undefined") {
-        news.dat = JSON.parse(localStorage.getItem("news"));
-        do_save = 0;
-        if (news.dat) {
-          d = news.dat;
-        } else {
-          $('#news ul').html('Отсутствуют новости для вывода');
-        }
+      news.dat = i7e.storage.load("news");
+      do_save = 0;
+      if (news.dat) {
+        d = news.dat;
+      } else {
+        $('#news ul').html('Отсутствуют новости для вывода');
       }
-
     }
 
     var lngth = 150; // количество выводимых символов в анонсе новости
@@ -250,8 +266,9 @@ var news = {
     $('#news ul').listview( "refresh" );
 
     // сохранение переданных новостей
-    if(typeof(Storage) !== "undefined" && do_save) {
-      localStorage.setItem("news", JSON.stringify(news.dat));
+
+    if(do_save) {
+      i7e.storage.save("news", news.dat);
     }
   },
 
@@ -448,13 +465,11 @@ var u = {
 	reg_form_id: '#register',
 	init: function() {
     $('#reg_button').on('tap', u.register);
-    if(typeof(Storage) !== "undefined") {
-      var uuu = JSON.parse(localStorage.getItem("user_token"));
-      if (uuu) {
-        u.token = uuu;
-      }
-    }
 
+    var uuu = i7e.storage.load('user_token');
+    if (uuu) {
+      u.token = uuu;
+    }
     u.id = u.token; // uin = 11111, pwd = 1
     $('#auth_dialog').bind({
       popupafterclose: function(event, ui) {
@@ -480,9 +495,7 @@ var u = {
 
   logout: function() {
     u.token = u.id = 0;
-    if(typeof(Storage) !== "undefined") {
-      localStorage.setItem("user_token", 0);
-    }
+    i7e.storage.save("user_token", 0);
     $('#logout').popup("close");
     i7e.is_block_nav = 0;
     ajx.doLogout();
@@ -504,13 +517,10 @@ var u = {
   // авторизация, ответ от сервера
   doAuthCb: function(d) {
     if (!d) return;
-    console.log(d);
     $('#auth_dialog').popup("close");
     i7e.is_block_nav = 0;
     u.token = u.id = d['id'] ? d['id'] : 1;
-    if(typeof(Storage) !== "undefined") {
-      localStorage.setItem("user_token", u.token);
-    }
+    i7e.storage.save("user_token", u.token);
     i7e.msg.show('Успех', 'Вы успешно авторизовались');
   },
 
