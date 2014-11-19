@@ -512,13 +512,15 @@ var docs = {
       i7e.msg.show('Ошибка', 'Пожалуйста, заполните обязательное поле');
       return;
     }
+    for(var k in flds) {
+      $('#doc_order').find('input[name="' + flds[k] + '"]').val('');
+    }
     p['fl'] = 0;
     p['client'] = u.id;
     ajx.orderFormDoc(p, docs.orderCb);
   },
   // обработка ответа об отправке формы
   orderCb: function(d) {
-    console.log(d);
     i7e.msg.show("Заказ документа", "Заказ осуществлен успешно");
   }
 };
