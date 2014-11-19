@@ -206,52 +206,33 @@ $(i7e.init);
 // работа с новостями
 var news = {
   dat: {}, // массив данных на сохранение на устройстве
-
+  loaders_num: 0, // семафор. сколько загрузчиков должно отработать перед выводом новости.
   init: function() {
     if (ajx.checkConnection(1))  {
-      ajx.getNews(news.show);
+      news.loaders_num = 2; // количество источников
+      ajx.getNews(news.loadVk);
+      ajx.getLocalNews(news.loadLocal);
     } else {
-      var q = i7e.storage.load("news");
-      if (q) {
-        news.show(q);
+      news.dat = i7e.storage.load("news");
+      if (news.dat) {
+        news.show();
       }
     }
 
     i7e.changePage('#news', 1);
   },
 
-  // вывести полученные с сервера новости
-  show: function(d) {
-    $('#news ul').html('');
+  // загрузка новостей с вк
+  loadVk: function(d) {
+    d = d['response'];
+    d.shift(); // первый элемент - количество записей
 
-    var do_save = 1;
-    if (d) {
-      d = d['response'];
-      d.shift(); // первый элемент - количество записей
-      news.dat = {};
-    } else {
-      news.dat = i7e.storage.load("news");
-      do_save = 0;
-      if (news.dat) {
-        d = news.dat;
-      } else {
-        $('#news ul').html('Отсутствуют новости для вывода');
-      }
-    }
-
-    var lngth = 150; // количество выводимых символов в анонсе новости
-    for (var k in d)
-    {
+    for (var k in d) {
       var ddd = {
-         'id': d[k]['id'],
-         'text': d[k]['text'],
-         'date': d[k]['date']
+        'id': 'vk' + d[k]['id'],
+        'text': d[k]['text'],
+        'date': d[k]['date']
       };
-      // фоточка
-      var img = news._getImg(d[k]);
-      if (img) {
-        ddd['attachment'] = {photo: {src: d[k]['attachment']['photo']['src']}};
-      }
 
       // заголовок - содержание
       var qq = d[k]['text'].split('<br><br>'); // 0 - title, 1 - desc
@@ -264,26 +245,82 @@ var news = {
       ddd['title'] = qq[0];
       ddd['desc'] = qq[1];
 
-      if (do_save) news.dat[d[k]['id']] = ddd;
+      // фоточка
+      var img = news._getImg(d[k]);
+      if (img) {
+        ddd['attachment'] = {photo: {src: d[k]['attachment']['photo']['src']}};
+      }
+
+      news.dat[ddd['id']] = ddd;
+    }
+    news.loadFinisher();
+  },
+
+  // загрузка локальных новостей
+  loadLocal: function(d) {
+    if (!d) return;
+    for (var k in d) {
+      var dt = new Date(d[k]['created']);
+      dt.setHours(dt.getHours() - 4); // смещение на 4 часа
+      news.dat[d[k]['id']] = {
+        'id' : 'loc' + d[k]['id'],
+        'title' : d[k]['title'],
+        'desc' : d[k]['desc'],
+        'date' : Math.round(dt.getTime() / 1000)
+      };
+    }
+    news.loadFinisher();
+  },
+
+  // окончание загрузки одного из потоков
+  loadFinisher: function() {
+    news.loaders_num--;
+    if (!news.loaders_num) {
+      // сортировка новостей в нужном порядке
+      var sortable = [];
+      for (var k in news.dat) {
+        sortable.push(news.dat[k]);
+      }
+      sortable.sort(function(a, b) {
+        return a['date'] - b['date'];
+      });
+      news.dat = {};
+      for (var k in sortable) {
+        news.dat[sortable[k]['id']] = sortable[k];
+      }
+      i7e.storage.save("news", news.dat);
+
+      news.show();
+    }
+  },
+
+  // вывести полученные с сервера новости
+  show: function() {
+    $('#news ul').html('');
+
+    if (news.dat) {
+      d = news.dat;
+    } else {
+      $('#news ul').html('Отсутствуют новости для вывода');
+      return;
+    }
+
+    var lngth = 150; // количество выводимых символов в анонсе новости
+    for (var k in d)
+    {
       // вывод
       class_name = '';
-      $('#news ul').append('<li class="ui-li-has-thumb"><a href="javascript:news.open(' + d[k]['id']
-          + ');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
+      var img = news._getImg(d[k]);
+      $('#news ul').append('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
+          + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
-          + '<h2>' + qq[0] + '</h2><p>' + qq[1].substr(0, lngth) + '</p></a></li>');
+          + '<h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'].substr(0, lngth) + '</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
-
-    // сохранение переданных новостей
-
-    if(do_save) {
-      i7e.storage.save("news", news.dat);
-    }
   },
 
   // вывод одной новости
   open: function(id) {
-    console.log(1);
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
     $('#news_single div.inside').append('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
@@ -623,12 +660,16 @@ var ajx = {
   },
 
   // - новости -
-  // запрос списка новостей
+  // запрос списка новостей c вк
   group_id: -54133544, // ид группы в Vk идет с минусом
 	getNews: function(f) {
       $.get('https://api.vk.com/method/wall.get', {owner_id: ajx.group_id}, f, 'jsonp');
-//    ajx.makeAjaxGet('api/version/1/base/news_list/', {}, f);
 	},
+
+  // запрос локального списка новостей
+  getLocalNews: function(f) {
+    ajx.makeAjaxGet('api/version/1/base/news_list/', {}, f);
+  },
 
   // - семинары -
   // запрос списка семинаров
