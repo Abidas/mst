@@ -359,7 +359,8 @@ var seminar = {
     $('#seminars ul').html('');
     for (var k in d)
     {
-      var sss = '<li><h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'];
+      var sss = '<li><h2>' + d[k]['title'] + '</h2><p class="seminar-price">';
+      sss +=  (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'];
       if (in_array(d[k]['id'], booked)) {
         sss += '</p><a class="light-btn" href="javascript:void(0)" data-role="button">Вы записаны</a></li>';
       } else {
