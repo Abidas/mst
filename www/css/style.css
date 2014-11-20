@@ -127,6 +127,7 @@ padding: 1em;
 .main {
   display: block;
   clear:both;
+  height: 100%;
 }
 
 .ui-panel {
@@ -261,34 +262,40 @@ padding: 1em;
 	padding:1em;
 	}
 	#register .ui-field-contain,
-	#register_form .ui-field-contain{
+	#register_form .ui-field-contain,
+	.login-theme .ui-field-contain{
 		border:0;
 		padding:0.3em 0;
 		}
-	#register_form .ui-field-contain > label{
+	#register_form .ui-field-contain > label,
+	.login-theme .ui-field-contain > label{
 		width:1em;
 		float:left;
 		margin:.7em 6px 0 0;
 		}
-	#register_form  div.ui-input-text{
+	#register_form  div.ui-input-text,
+	.login-theme  div.ui-input-text{
 		margin-left:2em;
 		float:none;
 		width:auto;
 		}
 	.ui-page-theme-b #register_form .ui-btn,
-	.ui-page-theme-b .light-theme .ui-btn.center-btn{
+	.ui-page-theme-b .light-theme .ui-btn.center-btn,
+	.ui-page-theme-b .login-theme .ui-btn{
 		width:60%;
 		color:#ffffff;
 		margin:1em auto 0 auto;
 		background-color: #282828;
 		}
-	.ui-page-theme-b #register_form .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear{
+	.ui-page-theme-b #register_form .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear,
+	.ui-page-theme-b .login-theme .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear{
 		width:32px;
 		margin:0;
 		top:0;
 		}
 	.ui-btn#reg_button,
-	#doc_order .ui-btn#doc_button{
+	#doc_order .ui-btn#doc_button,
+	.login-theme .ui-btn{
 		background:#4bbde7;
 		box-shadow:0 0 0 5px rgba(75,189,231,0.5);
 		border-radius:4px;
@@ -301,11 +308,20 @@ padding: 1em;
 			background:#0891c3;
 			box-shadow:0 0 0 5px rgba(55,169,211,0.5);
 			}
-	.ui-btn#reg_button{
+	.ui-btn#reg_button,
+	.login-theme .ui-btn{
 		width:60%;
 		color:#000000;
-		margin:1em auto 0 auto;
+		margin:1em auto;
 		}
+	.ui-page-theme-b .login-theme .ui-btn{
+		background:#4bbde7;
+		box-shadow:none;
+		}
+		html .ui-page-theme-b .login-theme .ui-btn:hover,
+		html .ui-page-theme-b .login-theme .ui-btn:active{
+			background:#4badc7;
+			}
 html .ui-page-theme-b .main .ui-btn.light-btn,
 html .ui-page-theme-b .main .ui-btn.light-btn:hover{
 	text-align:center;
@@ -314,7 +330,7 @@ html .ui-page-theme-b .main .ui-btn.light-btn:hover{
 	border-bottom:1px solid #c6c6c6;
 	background:transparent;
 	}
-	html .ui-page-theme-b .main .ui-btn.grey-btn,
+html .ui-page-theme-b .main .ui-btn.grey-btn,
 html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 	text-align:center;
 	background:#c6c6c6;
@@ -374,6 +390,19 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 			html head + body .ui-tabs-nav .ui-block-a .ui-btn.ui-btn-a span{
 				border-right:1px solid #555555;
 				}
+	html head + body .light-tab .ui-tabs-nav .ui-btn.ui-btn-a{
+		color:#333;
+		border-bottom:3px solid #d9d9d9;
+		background:#ffffff;
+		}
+		html head + body .light-tab .ui-tabs-nav .ui-btn.ui-btn-a.ui-btn-active{
+		color:#33B5E5;
+		border-bottom:3px solid #33B5E5;
+		background:#ffffff;
+		}
+		html head + body .light-tab .ui-tabs-nav .ui-block-a .ui-btn.ui-btn-a span{
+			border-right:1px solid #d9d9d9;
+			}
 #video,
 #audio{
 	padding:0;
