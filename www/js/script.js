@@ -465,6 +465,7 @@ var docs = {
     $('#docs ul').delegate('button', 'tap', function(){
       var id = $(this).attr('data-id');
       docs.order(id);
+      $(this).text('Заказан');
     });
   },
   // открыть окно документоы
@@ -571,6 +572,7 @@ var u = {
     $('#logout').popup("close");
     i7e.is_block_nav = 0;
     ajx.doLogout();
+    i7e.changePage('#news');
   },
 
   // авторизация пользователя
@@ -580,7 +582,6 @@ var u = {
       'uin': $('#auth_tab_form').find('input[name="uid"]').val(),
       'fio': $('#auth_tab_form').find('input[name="fio"]').val()
     };
-    console.log(p);
     if (p['uin'] == 1 && p['email'] == 1) {
       u.doAuthCb(1);
       return;
