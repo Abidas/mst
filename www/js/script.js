@@ -531,7 +531,7 @@ var u = {
 	id: 0,
 	reg_form_id: '#register',
 	init: function() {
-    $('#reg_button').on('tap', u.register);
+//    $('#reg_button').on('tap', u.register);
 
     var uuu = i7e.storage.load('user_token');
     if (uuu) {
@@ -552,12 +552,17 @@ var u = {
 
   // вывод авторизационного окна
   show: function() {
-    var wnm = u.token ? '#logout' : '#auth_dialog'
-    var popup = setInterval(function(){
-      $(wnm).popup("open");
-      i7e.is_block_nav = 1;
-      clearInterval(popup);
-    },1);
+    if (u.token) {
+      var popup = setInterval(function(){
+        $('#logout').popup("open");
+        i7e.is_block_nav = 1;
+        clearInterval(popup);
+      },1);
+    }
+    else
+    {
+      i7e.changePage('#register_tabs');
+    }
   },
 
   logout: function() {
@@ -570,16 +575,21 @@ var u = {
 
   // авторизация пользователя
   doAuth: function() {
-    var uu = $('#auth_dialog').find('input[name="uin"]').val();
-    var p = $('#auth_dialog').find('input[name="pwd"]').val();
-    if (uu == 1 && p == 1) {
+    var p = {
+      'email': $('#auth_tab_form').find('input[name="email"]').val(),
+      'uin': $('#auth_tab_form').find('input[name="uid"]').val(),
+      'fio': $('#auth_tab_form').find('input[name="fio"]').val()
+    };
+    console.log(p);
+    if (p['uin'] == 1 && p['email'] == 1) {
       u.doAuthCb(1);
       return;
     }
-    if (!uu || !p) {
+    if (!p['uin'] || !p['email']) {
+      i7e.msg.show('Ошибка', 'Пожалуйста, заполните все обязательные поля');
       return;
     }
-    ajx.doAuth(uu, p, u.doAuthCb);
+    ajx.doAuth(p, u.doAuthCb);
   },
   // авторизация, ответ от сервера
   doAuthCb: function(d) {
@@ -596,35 +606,25 @@ var u = {
     var flds = {
       'reg_flag': 'reg_flag',
       'email': 'email',
-      'password': 'pwd',
       'fio': 'fio',
       'org': 'org',
       'phone': 'tel'
     };
     var p = {};
     for(var k in flds) {
-      p[k] = $('#register').find('input[name="' + flds[k] + '"]').val();
+      p[k] = $('#register_form').find('input[name="' + flds[k] + '"]').val();
     }
     // проверка заполнения
-    if (!p['email'] || !p['password'] || !p['fio']) {
+    console.log(p);
+    if (!p['email'] || !p['phone'] || !p['fio']) {
       i7e.msg.show('Ошибка', 'Пожалуйста, заполните все обязательные поля');
       return;
     }
     p['imei'] = Math.round(Math.random() * 100000000) + '';
     p['imei'] = p['imei'].repeat( 15 );
-    p['imei'] = p['imei'].substr(0, 15);
-      /*
-      try {
-        p['imei'] = device.uuid;
-      } catch(e) {
-        p['imei'] = Math.round(Math.random() * 10000) + '';
-      }
-      if (p['imei'].length < 15) {
-        p['imei'] += '0'.repeat( 15 - p['imei'].length );
-      } else if (p['imei'].length > 15) {
-        p['imei'] = p['imei'].substr(0, 15);
-      }
-      */
+    p['imie'] = p['imei'].substr(0, 15);
+    p['uuid '] = p['imei'];
+
     ajx.doRegister(p, u.registerCb);
 	},
   // регистрация, обработка ответа сервера
@@ -646,8 +646,8 @@ var ajx = {
   },
 
   // аутентификация пользователя
-  doAuth: function(uu, p, f) {
-    ajx.makeAjaxPost('api/version/1/accounts/login/', {'uin': uu, 'password': p}, f);
+  doAuth: function(p, f) {
+    ajx.makeAjaxPost('api/version/1/accounts/login/', p, f);
   },
   // регистрация пользователя
   doRegister: function(p, f) {

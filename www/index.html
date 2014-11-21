@@ -22,22 +22,22 @@
 
 	<div data-role="page" id="one" data-quicklinks="true" data-theme='b'>
 
-		<div id="auth_dialog" data-role="popup" data-transition="pop" data-overlay-theme="a" data-dismissible="false" data-theme="a">
-			<div data-role="header">
-				<h1>Авторизация</h1>
-			</div>
-			<div data-role="main" id="auth_form">
-        <input type="text" name="uin" placeholder="UIN клиента">
-        <input type="password" name="pwd" placeholder="Пароль">
-        <a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>
-        <div data-role="navbar">
-          <ul>
-            <li><a href="javascript:i7e.is_block_nav = 0;$('#auth_dialog').popup('close');">Отмена</a></li>
-            <li><a href="javascript:u.doAuth()">Войти</a></li>
-          </ul>
-        </div>
-			</div>
-		</div>
+		<!--<div id="auth_dialog" data-role="popup" data-transition="pop" data-overlay-theme="a" data-dismissible="false" data-theme="a">-->
+			<!--<div data-role="header">-->
+				<!--<h1>Авторизация</h1>-->
+			<!--</div>-->
+			<!--<div data-role="main" id="auth_form">-->
+        <!--<input type="text" name="uin" placeholder="UIN клиента">-->
+        <!--<input type="password" name="pwd" placeholder="Пароль">-->
+        <!--<a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>-->
+        <!--<div data-role="navbar">-->
+          <!--<ul>-->
+            <!--<li><a href="javascript:i7e.is_block_nav = 0;$('#auth_dialog').popup('close');">Отмена</a></li>-->
+            <!--<li><a href="javascript:u.doAuth()">Войти</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
 
 		<div id="logout" data-role="popup" data-transition="pop" data-dismissible="false" data-theme="a" class="warning-popup">
 			<div data-role="header">
@@ -84,31 +84,31 @@
 
 
 		<div data-role="content" class="main">
-			<div id="register" class="ui-content light-theme" id="register_form">
-        <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
-        <div data-role="fieldcontain">
-          <label for="email"><i class='fa fa-circle color-red'></i></label>
-          <input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
-        </div>
-        <div data-role="fieldcontain">
-          <label for="pwd"><i class='fa fa-circle color-red'></i></label>
-          <input type="password" name="pwd" id="pwd" value="" data-clear-btn="true" placeholder="Пароль">
-        </div>
-        <div data-role="fieldcontain">
-          <label for="fio"><i class='fa fa-circle color-red'></i></label>
-          <input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">
-        </div>
-        <div data-role="fieldcontain">
-          <label for="org"></label>
-          <input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Наименование организации">
-        </div>
-        <div data-role="fieldcontain">
-          <label for="tel"></label>
-          <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Контактный телефон">
-        </div>
-        <!--<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>-->
-        <button id="reg_button">Регистрация</button>
-			</div>
+			<!--<div id="register" class="ui-content light-theme" id="register_form">-->
+        <!--<input type="hidden" id="reg_flag" name="reg_flag" value="reg">-->
+        <!--<div data-role="fieldcontain">-->
+          <!--<label for="r_email"><i class='fa fa-circle color-red'></i></label>-->
+          <!--<input type="email" name="email" id="r_email" value="" data-clear-btn="true" placeholder="E-mail">-->
+        <!--</div>-->
+        <!--<div data-role="fieldcontain">-->
+          <!--<label for="r_pwd"><i class='fa fa-circle color-red'></i></label>-->
+          <!--<input type="password" name="pwd" id="r_pwd" value="" data-clear-btn="true" placeholder="Пароль">-->
+        <!--</div>-->
+        <!--<div data-role="fieldcontain">-->
+          <!--<label for="r_fio"><i class='fa fa-circle color-red'></i></label>-->
+          <!--<input type="text" name="fio" id="r_fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">-->
+        <!--</div>-->
+        <!--<div data-role="fieldcontain">-->
+          <!--<label for="r_org"></label>-->
+          <!--<input type="text" name="org" id="r_org" value="" data-clear-btn="true" placeholder="Наименование организации">-->
+        <!--</div>-->
+        <!--<div data-role="fieldcontain">-->
+          <!--<label for="r_tel"></label>-->
+          <!--<input type="tel" name="tel" id="r_tel" value="" data-clear-btn="true" placeholder="Контактный телефон">-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>&ndash;&gt;-->
+        <!--<button id="reg_button">Регистрация</button>-->
+			<!--</div>-->
 
 			<div id="news" class="ui-content">
 				<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
@@ -166,6 +166,57 @@
 				</div>
 			</div>
 
+      <div id="register_tabs" class="ui-content">
+        <div data-role="tabs">
+          <div data-role="navbar" class="light-tab">
+            <ul>
+              <li><a href="#auth_tab" data-theme="a" data-ajax="false"><span>Авторизация</span></a></li>
+              <li><a href="#register_tab" data-theme="a" data-ajax="false"><span>Регистрация</span></a></li>
+            </ul>
+          </div>
+          <div id="auth_tab" class="ui-content1">
+            <form action="#" method="post" id="auth_tab_form" class="login-theme light-theme" onsubmit="u.doAuth();return false;">
+              <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
+              <div data-role="fieldcontain">
+                <label for="r_email"><i class='fa fa-circle color-red'></i></label>
+                <input type="email" name="email" id="r_email" value="" data-clear-btn="true" placeholder="E-mail">
+              </div>
+              <div data-role="fieldcontain">
+                <label for="r_uid"><i class='fa fa-circle color-red'></i></label>
+                <input type="text" name="uid" id="r_uid" value="" data-clear-btn="true" placeholder="UID">
+              </div>
+              <div data-role="fieldcontain">
+                <label for="r_fio"></label>
+                <input type="text" name="fio" id="r_fio" value="" data-clear-btn="true" placeholder="ФИО">
+              </div>
+              <button id="#auth_button">Войти</button>
+            </form>
+          </div>
+          <div id="register_tab" class="ui-content1">
+              <p>Доступ предоставляется на 2 месяца с момента регистрации.</p>
+            <form action="#" method="post" id="register_form" class="login-theme light-theme" onsubmit="u.register();return false;">
+            <input type="hidden" id="reg_tab_flag" name="reg_flag" value="reg">
+              <div data-role="fieldcontain">
+                <label for="email"><i class='fa fa-circle color-red'></i></label>
+                <input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
+              </div>
+              <div data-role="fieldcontain">
+                <label for="fio"><i class='fa fa-circle color-red'></i></label>
+                <input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО">
+              </div>
+              <div data-role="fieldcontain">
+                <label for="tel"><i class='fa fa-circle color-red'></i></label>
+                <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Телефон">
+              </div>
+              <div data-role="fieldcontain">
+                <label for="org"></label>
+                <input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Организации">
+              </div>
+              <button id="#reg_button">Регистрация</button>
+            </form>
+          </div>
+        </div>
+      </div>
 
 			<div id="media" class="ui-content">
 				<div data-role="tabs">
