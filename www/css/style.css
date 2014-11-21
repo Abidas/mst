@@ -2,6 +2,7 @@ body{
 	font-family:Arial,Helvetica,sans-serif;
 	background:#ffffff;
 	-webkit-overflow-scrolling: touch;
+	border-top:1px solid #000;
 	}
 input {
     outline: none;
@@ -10,6 +11,7 @@ input {
 .ui-mobile-viewport{
 	padding:0;
 	background:#ffffff;
+	border-top:1px solid #000;
 	}
 .ui-mobile .ui-shadow-inset,
 .ui-mobile .ui-shadow{
