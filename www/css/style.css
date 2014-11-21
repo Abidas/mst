@@ -127,7 +127,6 @@ padding: 1em;
 .main {
   display: block;
   clear:both;
-  height: 100%;
 }
 
 .ui-panel {
@@ -188,6 +187,7 @@ padding: 1em;
 			margin-right:1em;
 			border-bottom: 1px solid #33B5E5;
 			position:relative;
+			z-index:1;
 			color:#333;
 		}
 		#register div.ui-input-text,
