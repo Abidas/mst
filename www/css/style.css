@@ -611,10 +611,10 @@ video{
 			margin:0 98px 0 12px;
 			}
 #one{
-    padding-top: 60px;
+    padding-top: 55px;
     padding-bottom: 65px;
 	min-height: 300px;
-	border-top:1px solid #000;
+	border-top:6px solid #000;
 }
 ::-webkit-scrollbar{
     width: 0 !important;
