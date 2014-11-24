@@ -158,8 +158,9 @@
             <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
           <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
 				<div id="dt" class="hasDatepicker text-input" onclick="document.activeElement.blur();$(this).blur()" data-inline="false" data-role="date" placeholder="Дата" >
-					<span class="placeholder">Дата</span>
-					<input type="hidden" name="date" value=""/>
+					<span class="placeholder" id="date-placeholder">Дата</span>
+					<input type="hidden" name="date" value="" id="datehidden"/>
+					<div></div>
 				</div>
 			</div>
 		  </div>
@@ -283,5 +284,13 @@
     $(document).bind("mobileinit", function(){
       $.mobile.defaultPageTransition="none";
     });
+	$("#datehidden").datepicker({
+		onSelect: function(dateText, inst) {
+			$('#date-placeholder').text(dateText).removeClass('placeholder');
+		}
+	});
+	$("#dt").click(function() {
+		$("#datehidden").datepicker("show");
+	});
   </script>
 </html>
