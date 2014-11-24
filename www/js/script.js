@@ -361,7 +361,7 @@ var seminar = {
     {
       var sss = '<li><h2>' + d[k]['title'] + '</h2><p class="seminar-price">';
       sss +=  (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'];
-      if (in_array(d[k]['id'], booked)) {
+      if (in_array(d[k]['id'], booked) || d[k]['is_applied']) {
         sss += '</p><a class="light-btn" href="javascript:void(0)" data-role="button">Вы записаны</a></li>';
       } else {
         sss += '</p><a class="light-btn" href="javascript:seminar.join(' + d[k]['id']
@@ -595,11 +595,12 @@ var u = {
   // авторизация, ответ от сервера
   doAuthCb: function(d) {
     if (!d) return;
-    $('#auth_dialog').popup("close");
+//    $('#auth_dialog').popup("close");
     i7e.is_block_nav = 0;
     u.token = u.id = d['id'] ? d['id'] : 1;
     i7e.storage.save("user_token", u.token);
     i7e.msg.show('Успех', 'Вы успешно авторизовались');
+    i7e.changePage('news');
   },
 
 	// регистрация временного пользования bил платеж
