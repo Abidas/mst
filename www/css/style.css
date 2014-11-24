@@ -665,3 +665,6 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 	font-weight:bold;
 	color:#5273bb;
 	}
+.placeholder{
+	color:#cecece;
+	}
