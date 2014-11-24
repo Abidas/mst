@@ -4,7 +4,9 @@ var i7e = {
   is_block_nav: 0,
 	init: function() {
     $.datepicker.formatDate('dd/mm/yyyy');
-    $.datepicker.beforeShow(function(a, b){ $(a).blur(); });
+    $.datepicker.setDefaults({
+      beforeShow: function(a, b){ $(a).blur(); }
+    });
 		u.init();
 		news.init();
 		docs.init();
