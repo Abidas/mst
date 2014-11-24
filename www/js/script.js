@@ -600,7 +600,7 @@ var u = {
     u.token = u.id = d['id'] ? d['id'] : 1;
     i7e.storage.save("user_token", u.token);
     i7e.msg.show('Успех', 'Вы успешно авторизовались');
-    i7e.changePage('news');
+    i7e.changePage('#news');
   },
 
 	// регистрация временного пользования bил платеж

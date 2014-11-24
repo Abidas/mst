@@ -156,7 +156,7 @@
           </div>
           <div data-role="fieldcontain">
             <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
-          <input type="text" name="date" id="dt"  value="" placeholder="Дата" data-role="date" data-inline="false" onclick="$(this).blur()">
+          <input type="text" name="date" id="dt"  value="" placeholder="Дата" data-role="date" data-inline="false" onclick="document.activeElement.blur();$(this).blur()">
           </div>
           <div data-role="fieldcontain">
             <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
