@@ -2,6 +2,7 @@ body{
 	font-family:Arial,Helvetica,sans-serif;
 	background:#ffffff;
 	-webkit-overflow-scrolling: touch;
+	border-top:1px solid #000;
 	}
 input {
     outline: none;
@@ -10,6 +11,7 @@ input {
 .ui-mobile-viewport{
 	padding:0;
 	background:#ffffff;
+	border-top:1px solid #000;
 	}
 .ui-mobile .ui-shadow-inset,
 .ui-mobile .ui-shadow{
@@ -127,7 +129,6 @@ padding: 1em;
 .main {
   display: block;
   clear:both;
-  height: 100%;
 }
 
 .ui-panel {
@@ -188,6 +189,7 @@ padding: 1em;
 			margin-right:1em;
 			border-bottom: 1px solid #33B5E5;
 			position:relative;
+			z-index:1;
 			color:#333;
 		}
 		#register div.ui-input-text,
@@ -611,10 +613,10 @@ video{
 			margin:0 98px 0 12px;
 			}
 #one{
-    padding-top: 60px;
+    padding-top: 55px;
     padding-bottom: 65px;
 	min-height: 300px;
-	border-top:1px solid #000;
+	border-top:6px solid #000;
 }
 ::-webkit-scrollbar{
     width: 0 !important;
