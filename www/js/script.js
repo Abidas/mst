@@ -645,7 +645,7 @@ var ajx = {
   {
     var q = navigator.onLine;
     if (!q && !dont_show) {
-      i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз.');
+      i7e.msg.show('Ошибка', 'Проверьте');
     }
     return q;
   },
