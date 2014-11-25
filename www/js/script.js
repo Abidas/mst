@@ -644,8 +644,9 @@ var ajx = {
   checkConnection: function(dont_show)
   {
     var q = navigator.onLine;
-    if (1) { //!q && !dont_show) {
-      i7e.msg.show('Ошибка', 'Проверьте', function(){console.log(1);});
+    if (!q && !dont_show) {
+      i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
+          function(){console.log(1);});
     }
     return q;
   },
