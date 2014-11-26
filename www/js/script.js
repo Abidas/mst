@@ -766,12 +766,12 @@ var ajx = {
 	  var msg = response;
 	  try {
       var q = JSON.parse(response);
-      msg = '';
+      msg = 'Извините, но вы не зарегистрированы или ввели неверную пару email/UIN';
       for (var k in q){
         // ошибка с логином-паролем
         if (k == 'password' || k == 'uin') {
           $('#auth_dialog').popup("close");
-          i7e.msg.show('Ошибка авторизации', 'Извините, но вы не зарегистрированы или ввели неверную пару email - UIN');
+          i7e.msg.show('Ошибка авторизации', 'Извините, но вы не зарегистрированы или ввели неверную пару email/UIN');
           return;
         }
         // нет прав
