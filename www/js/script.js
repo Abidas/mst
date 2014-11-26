@@ -189,10 +189,11 @@ var i7e = {
   // вывод сообщений
   msg: {
     current_f: '',
-    show: function(t, d, f) {
+    show: function(t, dd, f) {
       if (f) i7e.msg.current_f = f;
+      alert('--' + dd);
       $('#msg_title').text(t);
-      $('#msg_content').html(d);
+      $('#msg_content').html(dd);
       $('#msg_contents').css('overflow-y', 'scroll');
       setTimeout("$('#msg').popup('open')", 400);
     },
