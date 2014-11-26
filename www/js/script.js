@@ -661,12 +661,10 @@ var ajx = {
 
   checkConnection: function(dont_show)
   {
-    var q = navigator.onLine;
-    alert(JSON.stringify(q));
+    var q = Offline.check == 'up';
     if (!q && !dont_show) {
       i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
           function(){console.log(1);});
-      return false;
     }
     return q;
   },
