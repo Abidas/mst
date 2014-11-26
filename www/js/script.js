@@ -3,7 +3,7 @@ var i7e = {
   history: [],
   is_block_nav: 0,
 	init: function() {
-    Offline.options = {checks: {image: {url: 'http://yastatic.net/morda-logo/i/logo.svg'}, active: 'image'}};
+//    Offline.options = {checks: {image: {url: 'http://yastatic.net/morda-logo/i/logo.svg'}, active: 'image'}};
     $.datepicker.formatDate('dd/mm/yyyy');
     $.datepicker.setDefaults({
       beforeShow: function(a, b){ $(a).blur(); }
