@@ -652,7 +652,7 @@ var u = {
     u.token = u.id = d['id'] ? d['id'] : 1;
     i7e.storage.save("user_token", u.token);
 
-    i7e.msg.show('Поздравляем', 'Регистрация прошла успешно', function(){i7e.changePage('#news');});
+    i7e.msg.show('Поздравляем', 'Добро пожаловать' + (d['fio'] ? ' ' + d['fio'] : '') + '! Ваши регистрационные данные высланы на указанный Вами e-mail', function(){i7e.changePage('#news');});
   }
 };
 
