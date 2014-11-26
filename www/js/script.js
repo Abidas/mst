@@ -661,7 +661,9 @@ var ajx = {
 
   checkConnection: function(dont_show)
   {
-    var q = Offline.check == 'up';
+    var q = Offline.state == 'up';
+    alert(Offline.state);
+    alert(JSON.stringify(Offline.check()));
     if (!q && !dont_show) {
       i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
           function(){console.log(1);});
