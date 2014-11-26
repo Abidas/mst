@@ -3,6 +3,7 @@ var i7e = {
   history: [],
   is_block_nav: 0,
 	init: function() {
+    Offline.options = {checks: {image: {url: 'http://yastatic.net/morda-logo/i/logo.svg'}, active: 'image'}};
     $.datepicker.formatDate('dd/mm/yyyy');
     $.datepicker.setDefaults({
       beforeShow: function(a, b){ $(a).blur(); }
@@ -662,8 +663,6 @@ var ajx = {
   checkConnection: function(dont_show)
   {
     var q = Offline.state == 'up';
-    alert(Offline.state);
-    alert(JSON.stringify(Offline.check()));
     if (!q && !dont_show) {
       i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
           function(){console.log(1);});
