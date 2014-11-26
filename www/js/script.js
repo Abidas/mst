@@ -212,16 +212,14 @@ var news = {
   loaders_num: 0, // семафор. сколько загрузчиков должно отработать перед выводом новости.
   init: function() {
     if (ajx.checkConnection(1))  {
-      alert(1);
       news.loaders_num = 2; // количество источников
       ajx.getNews(news.loadVk);
       ajx.getLocalNews(news.loadLocal);
     } else {
-      alert(2);
+      console.log(2);
       news.dat = i7e.storage.load("news");
-      console.log(news.dat);
       if (news.dat) {
-        alert(3);
+        console.log(3);
         news.show();
       }
     }
