@@ -634,6 +634,22 @@ var u = {
 	},
   // регистрация, обработка ответа сервера
   registerCb: function(d) {
+    console.log(d);
+
+    var flds = {
+      'reg_flag': 'reg_flag',
+      'email': 'email',
+      'fio': 'fio',
+      'org': 'org',
+      'phone': 'tel'
+    };
+    for(var k in flds) {
+      $('#register_form').find('input[name="' + flds[k] + '"]').val('');
+    }
+
+    u.token = u.id = d['id'] ? d['id'] : 1;
+    i7e.storage.save("user_token", u.token);
+
     i7e.msg.show('Поздравляем', 'Регистрация прошла успешно', function(){i7e.changePage('#news');});
   }
 };
@@ -644,7 +660,7 @@ var ajx = {
   checkConnection: function(dont_show)
   {
     var q = navigator.onLine;
-    if (!q && !dont_show) {
+    if (1) { //!q && !dont_show) {
       i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
           function(){console.log(1);});
     }
