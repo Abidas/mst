@@ -663,6 +663,7 @@ var ajx = {
 
   checkConnection: function(dont_show)
   {
+    Offline.check();
     var q = Offline.state == 'up';
     alert(Offline.state);
     if (!q) {
