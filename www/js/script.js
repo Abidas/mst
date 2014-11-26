@@ -3,7 +3,6 @@ var i7e = {
   history: [],
   is_block_nav: 0,
 	init: function() {
-//    Offline.options = {checks: {image: {url: 'http://yastatic.net/morda-logo/i/logo.svg'}, active: 'image'}};
     $.datepicker.formatDate('dd/mm/yyyy');
     $.datepicker.setDefaults({
       beforeShow: function(a, b){ $(a).blur(); }
@@ -95,7 +94,7 @@ var i7e = {
       }
       return false;
 		});
-    ajx.checkConnection();
+//    ajx.checkConnection();
 	},
 
 	// смена страницы, если есть второй параметр - не делать смещение
@@ -191,7 +190,9 @@ var i7e = {
     current_f: '',
     show: function(t, dd, f) {
       if (f) i7e.msg.current_f = f;
-      alert('--' + dd);
+      if (t == 'Ошибка' && !dd) {
+        dd = 'Проверьте соединение с Интернетом и попробуйте еще раз.';
+      }
       $('#msg_title').text(t);
       $('#msg_content').html(dd);
       $('#msg_contents').css('overflow-y', 'scroll');
@@ -218,10 +219,8 @@ var news = {
       ajx.getNews(news.loadVk);
       ajx.getLocalNews(news.loadLocal);
     } else {
-      console.log(2);
       news.dat = i7e.storage.load("news");
       if (news.dat) {
-        console.log(3);
         news.show();
       }
     }
@@ -663,13 +662,11 @@ var ajx = {
 
   checkConnection: function(dont_show)
   {
+    return 1;
     Offline.check();
     var q = Offline.state == 'up';
-    alert(Offline.state);
     if (!q) {
-      alert(JSON.stringify(dont_show));
       if (dont_show) return q;
-      alert(11);
       i7e.msg.show('Ошибка соединения', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
           function(){console.log(1);});
     }
