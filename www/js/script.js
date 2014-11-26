@@ -212,12 +212,16 @@ var news = {
   loaders_num: 0, // семафор. сколько загрузчиков должно отработать перед выводом новости.
   init: function() {
     if (ajx.checkConnection(1))  {
+      alert(1);
       news.loaders_num = 2; // количество источников
       ajx.getNews(news.loadVk);
       ajx.getLocalNews(news.loadLocal);
     } else {
+      alert(2);
       news.dat = i7e.storage.load("news");
+      console.log(news.dat);
       if (news.dat) {
+        alert(3);
         news.show();
       }
     }
@@ -663,6 +667,7 @@ var ajx = {
     if (1) { //!q && !dont_show) {
       i7e.msg.show('Ошибка', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
           function(){console.log(1);});
+      return false;
     }
     return q;
   },
