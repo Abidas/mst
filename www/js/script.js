@@ -637,7 +637,7 @@ var u = {
 	},
   // регистрация, обработка ответа сервера
   registerCb: function(d) {
-    console.log(d);
+//    console.log(d);
 
     var flds = {
       'reg_flag': 'reg_flag',
@@ -811,15 +811,29 @@ var ajx = {
       error: function(a, txt, err) {
         ajx.drawError(a.responseText, txt, err);
       },
-      success: f
-    }).done(function() {
-          f();
-        })
-        .fail(function(a, txt, err) {
-          //alert('SERVER ERROR: ' + txt + ' : ' + err + ' : ' + a.responseText);
-        })
-        .always(function() {
-        });
+      success: function(d) {
+        if (f) {
+          f(d);
+        } else {
+          ajx.getAjxCb(d);
+        }
+      }
+    });
+//    .done(function() {
+//          i7e.loader.hide();
+//          function(d) {
+//            if (f) {
+//              f(d);
+//            } else {
+//              ajx.getAjxCb(d);
+//            }
+//          }
+//        })
+//        .fail(function(a, txt, err) {
+//          //alert('SERVER ERROR: ' + txt + ' : ' + err + ' : ' + a.responseText);
+//        })
+//        .always(function() {
+//        });
   }
 };
 
