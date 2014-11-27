@@ -214,7 +214,7 @@ var news = {
   dat: {}, // массив данных на сохранение на устройстве
   loaders_num: 0, // семафор. сколько загрузчиков должно отработать перед выводом новости.
   init: function() {
-    if (ajx.checkConnection(1))  {
+    if (navigator.onLine)  {
       news.loaders_num = 2; // количество источников
       ajx.getNews(news.loadVk);
       ajx.getLocalNews(news.loadLocal);
