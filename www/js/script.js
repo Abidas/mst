@@ -87,7 +87,8 @@ var i7e = {
       {
         e.preventDefault();
         var popup = setInterval(function(){
-          $('#need_auth').popup("open");
+          $('#need_auth').popup("open", {x:"100", y: "100"});
+          $('#need_auth-popup').css('top', '70px');
 //          $('#need_auth a.ui-link').removeClass('ui-btn-active');
           clearInterval(popup);
         }, 10);
