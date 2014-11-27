@@ -415,9 +415,11 @@ var va = {
     $('#media #video').click();
   },
   open: function() {
-    $('#video ul').html('<li>... загрузка ...</li>');
-    $('#audio ul').html('<li>... загрузка ...</li>');
-    ajx.getMedia(va.showVideo, {author:  va.youtube_channel_name}, va.showAudio, {fl_type: 0});
+    ajx.getSeminars(function(){
+      $('#video ul').html('<li>... загрузка ...</li>');
+      $('#audio ul').html('<li>... загрузка ...</li>');
+      ajx.getMedia(va.showVideo, {author:  va.youtube_channel_name}, va.showAudio, {fl_type: 0});
+    });
   },
   // вывести полученные с сервера данные по аудио
   showAudio: function(d) {
@@ -442,7 +444,6 @@ var va = {
   },
   // вывести полученные с сервера данные по видео
   showVideo: function(d) {
-    console.log(d);
     $('#video ul').html('');
 
     if (!d['data'] || d['data']['totalItems'] < 1) {
