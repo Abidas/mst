@@ -326,7 +326,7 @@ var news = {
       // вывод
       class_name = '';
       var img = news._getImg(d[k]);
-      $('#news ul').append('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
+      $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
           + '<h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'].substr(0, lngth) + '</p></a></li>');
