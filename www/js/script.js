@@ -782,7 +782,8 @@ var ajx = {
 	  var msg = response;
 	  try {
       var q = JSON.parse(response);
-      msg = 'Извините, но вы не зарегистрированы или ввели неверную пару email/UIN';
+      msg = '';
+
       for (var k in q){
         // ошибка с логином-паролем
         if (k == 'password' || k == 'uin') {
@@ -795,8 +796,9 @@ var ajx = {
           i7e.msg.show('Ошибка', 'У Вас нет прав для просмотра данного раздела');
           return;
         }
-        msg += k + ' : ' + q[k] + '<br>';
+        msg += q[k] + '<br>'; // k + ' : ' +
       }
+      if (!msg) msg = 'Извините, но вы не зарегистрированы или ввели неверную пару email/UIN';
 	  } catch (e) {
 	  }
 	  i7e.msg.show('Ошибка', msg);
