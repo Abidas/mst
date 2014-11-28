@@ -87,8 +87,8 @@ var i7e = {
       {
         e.preventDefault();
         var popup = setInterval(function(){
-          $('#need_auth').popup("open", {x:"100", y: "100"});
-          $('#need_auth-popup').css('top', '70px');
+          $('#need_auth').popup("open");
+          //$('#need_auth-popup').css('top', '70px');
 //          $('#need_auth a.ui-link').removeClass('ui-btn-active');
           clearInterval(popup);
         }, 10);
@@ -193,6 +193,14 @@ var i7e = {
       if (f) i7e.msg.current_f = f;
       if (t == 'Ошибка' && !dd) {
         dd = 'Проверьте соединение с Интернетом и попробуйте еще раз.';
+
+        if (i7e.history[0] =='#news') {
+          news.dat = i7e.storage.load("news");
+          if (news.dat) {
+            news.show();
+          }
+          return;
+        }
       }
       $('#msg_title').text(t);
       $('#msg_content').html(dd);
