@@ -13,6 +13,10 @@
 	<link rel="stylesheet" href="./css/jquery.mobile.datepicker.theme.css" />
 
     <script src="phonegap.js"></script>
+    <script>
+      var fn = navigator.userAgent.match(/Android/i) == "Android" ? 'android' : 'ios';
+      document.write('<link rel="stylesheet" href="./css/' + fn + '.css" />');
+    </script>
   </head>
 	<body>
 	<div class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner" data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
