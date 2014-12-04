@@ -5,19 +5,20 @@
     <title>m-style</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<link rel="stylesheet" href="./css/jquery.mobile-1.4.4.min.css" />
-	<link rel="stylesheet" href="./css/jquery.ui.datepicker.mobile.css" />
+
+    <link rel="stylesheet" href="./css/jquery.ui.datepicker.mobile.css" />
 	<link rel="stylesheet" href="./css/jquery.mobile.datepicker.theme.css" />
-	
-    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.css" />
-    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" />
-    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" />
-	<link rel="stylesheet" href="./css/style.css" />
 
     <script src="phonegap.js"></script>
     <script>
-      var fn = navigator.userAgent.match(/Android/i) == "Android" ? 'android' : 'ios';
-      document.write('<link rel="stylesheet" href="./css/' + fn + '.css" />');
-    </script>
+		var fn = navigator.userAgent.match(/Android/i) == "Android" ? 'android' : 'ios';
+		if(fn == "ios"){
+			document.write('<link rel="stylesheet" href="./css/jquery.mobile.flatui.css" /> <link rel="stylesheet" href="./css/style-ios.css" />');
+			}
+		else{
+			document.write('<link rel="stylesheet" href="./css/jquerymobile.nativedroid.css" /> <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" /> <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" /> <link rel="stylesheet" href="./css/style.css" />');
+			}
+	</script>
   </head>
 	<body>
 	<div class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner" data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
