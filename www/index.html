@@ -1,301 +1,331 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8" />
-    <title>m-style</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<link rel="stylesheet" href="./css/jquery.mobile-1.4.4.min.css" />
-	<link rel="stylesheet" href="./css/jquery.ui.datepicker.mobile.css" />
-	<link rel="stylesheet" href="./css/jquery.mobile.datepicker.theme.css" />
-	
-    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.css" />
-    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" />
-    <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" />
-	<link rel="stylesheet" href="./css/style.css" />
+<head>
+  <meta charset="utf-8"/>
+  <title>m-style</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <link rel="stylesheet" href="./css/jquery.mobile-1.4.4.min.css"/>
+  <link rel="stylesheet" href="./css/jquery.ui.datepicker.mobile.css"/>
+  <link rel="stylesheet" href="./css/jquery.mobile.datepicker.theme.css"/>
 
-    <script src="phonegap.js"></script>
-    <script>
-      var fn = navigator.userAgent.match(/Android/i) == "Android" ? 'android' : 'ios';
-      document.write('<link rel="stylesheet" href="./css/' + fn + '.css" />');
-    </script>
-  </head>
-	<body>
-	<div class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner" data-role="header" data-position="fixed" data-tap-toggle="false" data-theme="b">
-		<h1 aria-level="1" role="heading" class="ui-title"><img src="./images/design/logo.png" alt="m-style"></h1>
-		<a role="button" data-role="button" class="ui-btn-right header-more-btn ui-link ui-btn ui-shadow ui-corner-all" data-position-to="window" href="javascript:u.show()"><img src="./images/design/btn-more.png" alt="..."></a>
-	</div>
+  <script src="phonegap.js"></script>
+  <script>
+    if (navigator.userAgent.match(/Android/i) == "Android") {
+      document.write('<link rel="stylesheet" href="./css/jquerymobile.nativedroid.css" />    \
+        <link rel="stylesheet" href="./css/jquerymobile.nativedroid.dark.css" />             \
+        <link rel="stylesheet" href="./css/jquerymobile.nativedroid.color.blue.css" />       \
+        <link rel="stylesheet" href="./css/style.css" />');
+    } else {
+      document.write('<link rel="stylesheet" href="./css/jquery.mobile.flatui.css" />        \
+        <link rel="stylesheet" href="./css/style-ios.css" />');
+    }
+  </script>
+</head>
+<body>
+<div class="ui-header ui-bar-b ui-header-fixed slidedown" role="banner" data-role="header" data-position="fixed"
+     data-tap-toggle="false" data-theme="b">
+  <h1 aria-level="1" role="heading" class="ui-title"><img src="./images/design/logo.png" alt="m-style"></h1>
+  <a role="button" data-role="button" class="ui-btn-right header-more-btn ui-link ui-btn ui-shadow ui-corner-all"
+     data-position-to="window" href="javascript:u.show()"><img src="./images/design/btn-more.png" alt="..."></a>
+</div>
 
-	<div data-role="page" id="one" data-quicklinks="true" data-theme='b'>
+<div data-role="page" id="one" data-quicklinks="true" data-theme='b'>
 
-		<!--<div id="auth_dialog" data-role="popup" data-transition="pop" data-overlay-theme="a" data-dismissible="false" data-theme="a">-->
-			<!--<div data-role="header">-->
-				<!--<h1>Авторизация</h1>-->
-			<!--</div>-->
-			<!--<div data-role="main" id="auth_form">-->
-        <!--<input type="text" name="uin" placeholder="UIN клиента">-->
-        <!--<input type="password" name="pwd" placeholder="Пароль">-->
-        <!--<a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>-->
-        <!--<div data-role="navbar">-->
-          <!--<ul>-->
-            <!--<li><a href="javascript:i7e.is_block_nav = 0;$('#auth_dialog').popup('close');">Отмена</a></li>-->
-            <!--<li><a href="javascript:u.doAuth()">Войти</a></li>-->
-          <!--</ul>-->
-        <!--</div>-->
-			<!--</div>-->
-		<!--</div>-->
+<!--<div id="auth_dialog" data-role="popup" data-transition="pop" data-overlay-theme="a" data-dismissible="false" data-theme="a">-->
+<!--<div data-role="header">-->
+<!--<h1>Авторизация</h1>-->
+<!--</div>-->
+<!--<div data-role="main" id="auth_form">-->
+<!--<input type="text" name="uin" placeholder="UIN клиента">-->
+<!--<input type="password" name="pwd" placeholder="Пароль">-->
+<!--<a class="inline-link" data-rel="page" href="javascript:i7e.openRegister()" data-ajax="false">Регистрация временного доступа</a>-->
+<!--<div data-role="navbar">-->
+<!--<ul>-->
+<!--<li><a href="javascript:i7e.is_block_nav = 0;$('#auth_dialog').popup('close');">Отмена</a></li>-->
+<!--<li><a href="javascript:u.doAuth()">Войти</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
-		<div id="logout" data-role="popup" data-transition="pop" data-dismissible="false" data-theme="a" class="warning-popup">
-			<div data-role="header">
-				<h1>Вы авторизованы</h1>
-			</div>
-			<div data-role="main">
-				<div data-role="navbar">
-					<ul>
-						<li><a href="javascript:$('#logout').popup('close');">ОК</a></li>
-						<li><a href="javascript:u.logout()">Выход</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+<div id="logout" data-role="popup" data-transition="pop" data-dismissible="false" data-theme="a" class="warning-popup">
+  <div data-role="header">
+    <h1>Вы авторизованы</h1>
+  </div>
+  <div data-role="main">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="javascript:$('#logout').popup('close');">ОК</a></li>
+        <li><a href="javascript:u.logout()">Выход</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-		<div id="need_auth" data-role="popup" data-transition="pop" data-dismissible="false" data-theme="a" class="warning-popup">
-			<div data-role="header">
-				<h1>Внимание</h1>
-			</div>
-			<div data-role="main">
-				<p>Данный вид материалов доступен только клиентам компании "М-СТАЙЛ", либо после получения полного доступа.</p>
-				<div data-role="navbar">
-					<ul>
-						<li><a href="javascript:$('#need_auth').popup('close');">ОК</a></li>
-						<li><a href="javascript:$('#need_auth').popup('close');" href1="javascript:i7e.openPay()">Отмена</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+<div id="need_auth" data-role="popup" data-transition="pop" data-dismissible="false" data-theme="a"
+     class="warning-popup">
+  <div data-role="header">
+    <h1>Внимание</h1>
+  </div>
+  <div data-role="main">
+    <p>Данный вид материалов доступен только клиентам компании "М-СТАЙЛ", либо после получения полного доступа.</p>
 
-		<div id="msg" data-role="popup" data-transition="pop" data-dismissible="false" class="warning-popup">
-			<div data-role="header">
-				<h1 id="msg_title">Ошибка</h1>
-			</div>
-			<div data-role="main" id="msg_contents">
-				<p id="msg_content">Пожалуйста, заполните все обязательные (<i class='fa fa-circle color-red'></i>) поля</p>
-			</div>
-      <div data-role="navbar">
-        <ul>
-          <li><a href="javascript:i7e.msg.close()">ОК</a></li>
-        </ul>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="javascript:$('#need_auth').popup('close');">ОК</a></li>
+        <li><a href="javascript:$('#need_auth').popup('close');" href1="javascript:i7e.openPay()">Отмена</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="msg" data-role="popup" data-transition="pop" data-dismissible="false" class="warning-popup">
+  <div data-role="header">
+    <h1 id="msg_title">Ошибка</h1>
+  </div>
+  <div data-role="main" id="msg_contents">
+    <p id="msg_content">Пожалуйста, заполните все обязательные (<i class='fa fa-circle color-red'></i>) поля</p>
+  </div>
+  <div data-role="navbar">
+    <ul>
+      <li><a href="javascript:i7e.msg.close()">ОК</a></li>
+    </ul>
+  </div>
+</div>
+
+
+<div data-role="content" class="main">
+  <!--<div id="register" class="ui-content light-theme" id="register_form">-->
+  <!--<input type="hidden" id="reg_flag" name="reg_flag" value="reg">-->
+  <!--<div data-role="fieldcontain">-->
+  <!--<label for="r_email"><i class='fa fa-circle color-red'></i></label>-->
+  <!--<input type="email" name="email" id="r_email" value="" data-clear-btn="true" placeholder="E-mail">-->
+  <!--</div>-->
+  <!--<div data-role="fieldcontain">-->
+  <!--<label for="r_pwd"><i class='fa fa-circle color-red'></i></label>-->
+  <!--<input type="password" name="pwd" id="r_pwd" value="" data-clear-btn="true" placeholder="Пароль">-->
+  <!--</div>-->
+  <!--<div data-role="fieldcontain">-->
+  <!--<label for="r_fio"><i class='fa fa-circle color-red'></i></label>-->
+  <!--<input type="text" name="fio" id="r_fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">-->
+  <!--</div>-->
+  <!--<div data-role="fieldcontain">-->
+  <!--<label for="r_org"></label>-->
+  <!--<input type="text" name="org" id="r_org" value="" data-clear-btn="true" placeholder="Наименование организации">-->
+  <!--</div>-->
+  <!--<div data-role="fieldcontain">-->
+  <!--<label for="r_tel"></label>-->
+  <!--<input type="tel" name="tel" id="r_tel" value="" data-clear-btn="true" placeholder="Контактный телефон">-->
+  <!--</div>-->
+  <!--&lt;!&ndash;<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>&ndash;&gt;
+  -->
+  <!--<button id="reg_button">Регистрация</button>-->
+  <!--</div>-->
+
+  <div id="news" class="ui-content">
+    <ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
+      <li>... загрузка ...</li>
+    </ul>
+  </div>
+
+  <div id="news_single" class="ui-content">
+    <div class="inside">
+    </div>
+  </div>
+
+  <div id="seminars" class="ui-content light-theme">
+    <div class="inside">
+      <h1>Семинары Компании "М-Стайл"</h1>
+      <ul data-role="listview">
+        <li>
+          <h2>... загрузка ...</h2>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="docs" class="ui-content light-theme">
+    <div class="inside">
+      <h1>Подборка документов</h1>
+      <ul data-role="listview" class="separated-list">
+        <li>
+          <h2>... загрузка ...</h2>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="doc_order" class="ui-content light-theme jqm-content">
+    <div class="inside">
+      <h1>Заказ документов на email</h1>
+
+      <div data-role="fieldcontain">
+        <label for="name"><i class='fa fa-circle color-red'></i></label>
+        <input type="text" name="name" id="name" value="" placeholder="Название документа">
       </div>
-		</div>
+      <div data-role="fieldcontain">
+        <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
+        <input type="text" name="num" value="" placeholder="Номер документа">
+      </div>
+      <div data-role="fieldcontain">
+        <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
 
+        <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+          <div id="dt" class="hasDatepicker text-input" data-inline="false" data-role="date" placeholder="Дата">
+            <span class="placeholder" id="date-placeholder">Дата</span>
+            <input type="hidden" name="date" value="" id="datehidden"/>
 
-		<div data-role="content" class="main">
-			<!--<div id="register" class="ui-content light-theme" id="register_form">-->
-        <!--<input type="hidden" id="reg_flag" name="reg_flag" value="reg">-->
-        <!--<div data-role="fieldcontain">-->
-          <!--<label for="r_email"><i class='fa fa-circle color-red'></i></label>-->
-          <!--<input type="email" name="email" id="r_email" value="" data-clear-btn="true" placeholder="E-mail">-->
-        <!--</div>-->
-        <!--<div data-role="fieldcontain">-->
-          <!--<label for="r_pwd"><i class='fa fa-circle color-red'></i></label>-->
-          <!--<input type="password" name="pwd" id="r_pwd" value="" data-clear-btn="true" placeholder="Пароль">-->
-        <!--</div>-->
-        <!--<div data-role="fieldcontain">-->
-          <!--<label for="r_fio"><i class='fa fa-circle color-red'></i></label>-->
-          <!--<input type="text" name="fio" id="r_fio" value="" data-clear-btn="true" placeholder="ФИО пользователя">-->
-        <!--</div>-->
-        <!--<div data-role="fieldcontain">-->
-          <!--<label for="r_org"></label>-->
-          <!--<input type="text" name="org" id="r_org" value="" data-clear-btn="true" placeholder="Наименование организации">-->
-        <!--</div>-->
-        <!--<div data-role="fieldcontain">-->
-          <!--<label for="r_tel"></label>-->
-          <!--<input type="tel" name="tel" id="r_tel" value="" data-clear-btn="true" placeholder="Контактный телефон">-->
-        <!--</div>-->
-        <!--&lt;!&ndash;<a href="#msg" data-rel="popup" data-position-to="window" data-transition="pop" data-role="button">Сообщение</a>&ndash;&gt;-->
-        <!--<button id="reg_button">Регистрация</button>-->
-			<!--</div>-->
-
-			<div id="news" class="ui-content">
-				<ul data-role="listview" data-inset="false" data-icon="false" data-divider-theme="b">
-					<li>... загрузка ...</li>
-				</ul>
-			</div>
-
-			<div id="news_single" class="ui-content">
-				<div class="inside">
-				</div>
-			</div>
-
-			<div id="seminars" class="ui-content light-theme">
-				<div class="inside">
-					<h1>Семинары Компании "М-Стайл"</h1>
-					<ul data-role="listview">
-						<li>
-							<h2>... загрузка ...</h2>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div id="docs" class="ui-content light-theme">
-				<div class="inside">
-					<h1>Подборка документов</h1>
-					<ul data-role="listview" class="separated-list">
-						<li>
-              <h2>... загрузка ...</h2>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div id="doc_order" class="ui-content light-theme jqm-content">
-				<div class="inside">
-					<h1>Заказ документов на email</h1>
-          <div data-role="fieldcontain">
-          <label for="name"><i class='fa fa-circle color-red'></i></label>
-          <input type="text" name="name" id="name" value="" placeholder="Название документа">
-          </div>
-          <div data-role="fieldcontain">
-            <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
-          <input type="text" name="num" value="" placeholder="Номер документа">
-          </div>
-          <div data-role="fieldcontain">
-            <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
-          <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
-				<div id="dt" class="hasDatepicker text-input" data-inline="false" data-role="date" placeholder="Дата" >
-					<span class="placeholder" id="date-placeholder">Дата</span>
-					<input type="hidden" name="date" value="" id="datehidden"/>
-					<div></div>
-				</div>
-			</div>
-		  </div>
-          <div data-role="fieldcontain">
-            <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
-          <input type="text" name="org" value="" placeholder="Принявший орган">
-          </div>
-          <button class="center-btn" id="doc_button">Отправить</button>
-				</div>
-			</div>
-
-      <div id="register_tabs" class="ui-content">
-        <div data-role="tabs">
-          <div data-role="navbar" class="light-tab">
-            <ul>
-              <li><a href="#auth_tab" data-theme="a" data-ajax="false" class="ui-btn-active"><span>Авторизация</span></a></li>
-              <li><a href="#register_tab" data-theme="a" data-ajax="false"><span>Регистрация</span></a></li>
-            </ul>
-          </div>
-          <div id="auth_tab" class="ui-content1">
-            <form action="#" method="post" id="auth_tab_form" class="login-theme light-theme" onsubmit="u.doAuth();return false;">
-              <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
-              <div data-role="fieldcontain">
-                <label for="r_email"><i class='fa fa-circle color-red'></i></label>
-                <input type="email" name="email" id="r_email" value="" data-clear-btn="true" placeholder="E-mail">
-              </div>
-              <div data-role="fieldcontain">
-                <label for="r_uid"><i class='fa fa-circle color-red'></i></label>
-                <input type="text" name="uid" id="r_uid" value="" data-clear-btn="true" placeholder="UIN">
-              </div>
-              <div data-role="fieldcontain">
-                <label for="r_fio"></label>
-                <input type="text" name="fio" id="r_fio" value="" data-clear-btn="true" placeholder="ФИО">
-              </div>
-              <button id="auth_button">Войти</button>
-            </form>
-          </div>
-          <div id="register_tab" class="ui-content1">
-              <p>Доступ предоставляется на 2 месяца с момента регистрации.</p>
-            <form action="#" method="post" id="register_form" class="login-theme light-theme" onsubmit="u.register();return false;">
-            <input type="hidden" id="reg_tab_flag" name="reg_flag" value="reg">
-              <div data-role="fieldcontain">
-                <label for="email"><i class='fa fa-circle color-red'></i></label>
-                <input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
-              </div>
-              <div data-role="fieldcontain">
-                <label for="fio"><i class='fa fa-circle color-red'></i></label>
-                <input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО">
-              </div>
-              <div data-role="fieldcontain">
-                <label for="tel"><i class='fa fa-circle color-red'></i></label>
-                <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Телефон">
-              </div>
-              <div data-role="fieldcontain">
-                <label for="org"></label>
-                <input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Организации">
-              </div>
-              <button id="reg_button">Регистрация</button>
-            </form>
+            <div></div>
           </div>
         </div>
       </div>
+      <div data-role="fieldcontain">
+        <label for="name" style="visibility: hidden"><i class='fa fa-circle color-red'></i></label>
+        <input type="text" name="org" value="" placeholder="Принявший орган">
+      </div>
+      <button class="center-btn" id="doc_button">Отправить</button>
+    </div>
+  </div>
 
-			<div id="media" class="ui-content">
-				<div data-role="tabs">
-					<div data-role="navbar">
-						<ul>
-							<li><a href="#video" data-theme="a" data-ajax="false"><span>Видео</span></a></li>
-							<li><a href="#audio" data-theme="a" data-ajax="false"><span>Аудио</span></a></li>
-						</ul>
-					</div>
-					<div id="video" class="ui-content1">
-						<ul data-role="listview" data-inset="false" data-icon="false">
-						</ul>
-					</div>
-					<div id="audio" class="ui-content1">
-						<ul data-role="listview" class="list-separated-blue" data-inset="false" data-icon="false">
-						</ul>
-					</div>
-				</div>
-			</div>
+  <div id="register_tabs" class="ui-content">
+    <div data-role="tabs">
+      <div data-role="navbar" class="light-tab">
+        <ul>
+          <li><a href="#auth_tab" data-theme="a" data-ajax="false" class="ui-btn-active"><span>Авторизация</span></a>
+          </li>
+          <li><a href="#register_tab" data-theme="a" data-ajax="false"><span>Регистрация</span></a></li>
+        </ul>
+      </div>
+      <div id="auth_tab" class="ui-content1">
+        <form action="#" method="post" id="auth_tab_form" class="login-theme light-theme"
+              onsubmit="u.doAuth();return false;">
+          <input type="hidden" id="reg_flag" name="reg_flag" value="reg">
 
-			<div id="call" class="ui-content light-theme">
-				<div class="inside">
-					<strong class="blue-title">Горячая линия<br> Консультант плюс</strong>
-					<p>Горячая линия компании "М-стайл" работает с 09-30 до 18-00 часов по будним дням.</p>
-					<div class="big-links-block">
-						<a href="javascript:window.open('http://www.m-style.spb.su', '_system','location=yes');">Веб-сайт</a>
-						<a href="tel:+79219238591">+7 921 923 8591</a>
-					</div>
-					<a style="margin-left:13px;" class="circle-icon skype" href="javascript:window.open('skype:m-style_consultantplus?chat', '_system','location=yes');"><img src="./images/design/icon-skype.png" alt="skype"></a>
-					<a class="circle-icon viber" href="viber://+79219238591"><img src="./images/design/icon-viber.png" alt="viber"></a>
-					<br/>
-					<a class="circle-icon blue" href="#" onclick="window.open('http://vk.com/','_system','location=yes');"><img src="./images/design/icon-vk.png" alt="vk"></a>
-					<a class="circle-icon lightblue" href="#" onclick="window.open('http://twitter.com/','_system','location=yes');"><img src="./images/design/icon-twitter.png" alt="twitter"></a>
-					<a class="circle-icon fblue" href="#" onclick="window.open('http://facebook.com/','_system','location=yes');"><img src="./images/design/icon-fb.png" alt="f"></a>
-					<a class="circle-icon red" href="#" onclick="window.open('http://google.com/','_system','location=yes');"><img src="./images/design/icon-googleplus.png" alt="g+"></a>
-				</div>
-			</div>
-		</div> <!-- content -->
+          <div data-role="fieldcontain">
+            <label for="r_email"><i class='fa fa-circle color-red'></i></label>
+            <input type="email" name="email" id="r_email" value="" data-clear-btn="true" placeholder="E-mail">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="r_uid"><i class='fa fa-circle color-red'></i></label>
+            <input type="text" name="uid" id="r_uid" value="" data-clear-btn="true" placeholder="UIN">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="r_fio"></label>
+            <input type="text" name="fio" id="r_fio" value="" data-clear-btn="true" placeholder="ФИО">
+          </div>
+          <button id="auth_button">Войти</button>
+        </form>
+      </div>
+      <div id="register_tab" class="ui-content1">
+        <p>Доступ предоставляется на 2 месяца с момента регистрации.</p>
 
-	</div> <!-- page -->
-	<div class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-role="footer" data-tap-toggle="false" data-position="fixed" data-theme="b">
-		<div role="navigation" class="ui-navbar" data-role="navbar" id="main_menu">
-			<a href="#news" data-ajax="false" class="bg-orange ui-link ui-btn"></a>
-			<a href="#seminars" data-ajax="false" class="bg-blue ui-link ui-btn"></a>
-			<a href="#media" data-ajax="false" class="bg-gray ui-link ui-btn"></a>
-			<a href="#doc_order" data-ajax="false" class="bg-purple ui-link ui-btn"></a>
-			<a href="#docs" data-ajax="false" class="bg-lightgray ui-link ui-btn"></a>
-			<a href="#call" data-ajax="false" class="bg-green ui-link ui-btn"></a>
-		</div>
-	</div> 
-	</body>  .
-  <script src="./js/jquery.min.js"></script>
-  <script src="./js/jquery.mobile.min.js"></script>
-  <script src="./js/script.js"></script>
-  <script src="./js/media.js"></script>
-  <script src="./js/jQuery.ui.datepicker.js"></script>
-  <script src="./js/jquery.ui.datepicker.mobile.js"></script>
-  <script>
-    $(document).bind("mobileinit", function(){
-      $.mobile.defaultPageTransition="none";
-    });
-	$("#datehidden").datepicker({
-		onSelect: function(dateText, inst) {
-			$('#date-placeholder').text(dateText).removeClass('placeholder');
-		}
-	});
-	$("#dt").click(function() {
-		$("#datehidden").datepicker("show");
-	});
-  </script>
+        <form action="#" method="post" id="register_form" class="login-theme light-theme"
+              onsubmit="u.register();return false;">
+          <input type="hidden" id="reg_tab_flag" name="reg_flag" value="reg">
+
+          <div data-role="fieldcontain">
+            <label for="email"><i class='fa fa-circle color-red'></i></label>
+            <input type="email" name="email" id="email" value="" data-clear-btn="true" placeholder="E-mail">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="fio"><i class='fa fa-circle color-red'></i></label>
+            <input type="text" name="fio" id="fio" value="" data-clear-btn="true" placeholder="ФИО">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="tel"><i class='fa fa-circle color-red'></i></label>
+            <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" placeholder="Телефон">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="org"></label>
+            <input type="text" name="org" id="org" value="" data-clear-btn="true" placeholder="Организации">
+          </div>
+          <button id="reg_button">Регистрация</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="media" class="ui-content">
+    <div data-role="tabs">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#video" data-theme="a" data-ajax="false"><span>Видео</span></a></li>
+          <li><a href="#audio" data-theme="a" data-ajax="false"><span>Аудио</span></a></li>
+        </ul>
+      </div>
+      <div id="video" class="ui-content1">
+        <ul data-role="listview" data-inset="false" data-icon="false">
+        </ul>
+      </div>
+      <div id="audio" class="ui-content1">
+        <ul data-role="listview" class="list-separated-blue" data-inset="false" data-icon="false">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="call" class="ui-content light-theme">
+    <div class="inside">
+      <strong class="blue-title">Горячая линия<br> Консультант плюс</strong>
+
+      <p>Горячая линия компании "М-стайл" работает с 09-30 до 18-00 часов по будним дням.</p>
+
+      <div class="big-links-block">
+        <a href="javascript:window.open('http://www.m-style.spb.su', '_system','location=yes');">Веб-сайт</a>
+        <a href="tel:+79219238591">+7 921 923 8591</a>
+      </div>
+      <a style="margin-left:13px;" class="circle-icon skype"
+         href="javascript:window.open('skype:m-style_consultantplus?chat', '_system','location=yes');"><img
+              src="./images/design/icon-skype.png" alt="skype"></a>
+      <a class="circle-icon viber" href="viber://+79219238591"><img src="./images/design/icon-viber.png"
+                                                                    alt="viber"></a>
+      <br/>
+      <a class="circle-icon blue" href="#" onclick="window.open('http://vk.com/','_system','location=yes');"><img
+              src="./images/design/icon-vk.png" alt="vk"></a>
+      <a class="circle-icon lightblue" href="#"
+         onclick="window.open('http://twitter.com/','_system','location=yes');"><img
+              src="./images/design/icon-twitter.png" alt="twitter"></a>
+      <a class="circle-icon fblue" href="#" onclick="window.open('http://facebook.com/','_system','location=yes');"><img
+              src="./images/design/icon-fb.png" alt="f"></a>
+      <a class="circle-icon red" href="#" onclick="window.open('http://google.com/','_system','location=yes');"><img
+              src="./images/design/icon-googleplus.png" alt="g+"></a>
+    </div>
+  </div>
+</div>
+<!-- content -->
+
+</div>
+<!-- page -->
+<div class="ui-footer ui-bar-b ui-footer-fixed slideup" role="contentinfo" data-role="footer" data-tap-toggle="false"
+     data-position="fixed" data-theme="b">
+  <div role="navigation" class="ui-navbar" data-role="navbar" id="main_menu">
+    <a href="#news" data-ajax="false" class="bg-orange ui-link ui-btn"></a>
+    <a href="#seminars" data-ajax="false" class="bg-blue ui-link ui-btn"></a>
+    <a href="#media" data-ajax="false" class="bg-gray ui-link ui-btn"></a>
+    <a href="#doc_order" data-ajax="false" class="bg-purple ui-link ui-btn"></a>
+    <a href="#docs" data-ajax="false" class="bg-lightgray ui-link ui-btn"></a>
+    <a href="#call" data-ajax="false" class="bg-green ui-link ui-btn"></a>
+  </div>
+</div>
+</body>
+.
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.mobile.min.js"></script>
+<script src="./js/script.js"></script>
+<script src="./js/media.js"></script>
+<script src="./js/jQuery.ui.datepicker.js"></script>
+<script src="./js/jquery.ui.datepicker.mobile.js"></script>
+<script>
+  $(document).bind("mobileinit", function () {
+    $.mobile.defaultPageTransition = "none";
+  });
+  $("#datehidden").datepicker({
+    onSelect:function (dateText, inst) {
+      $('#date-placeholder').text(dateText).removeClass('placeholder');
+    }
+  });
+  $("#dt").click(function () {
+    $("#datehidden").datepicker("show");
+  });
+</script>
 </html>
