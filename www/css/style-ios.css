@@ -666,3 +666,9 @@ div.hasDatepicker {
 	padding:0.4em;
 	max-width: none;
 	}
+.seminar-time{
+	color:#595959;
+	font-size:0.7em;
+	font-style:italic;
+	margin: 0.3em 0;
+	}

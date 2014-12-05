@@ -683,3 +683,9 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 }
 */
 
+.seminar-time{
+	color:#595959;
+	font-size:0.7em;
+	font-style:italic;
+	margin: 0.3em 0;
+	}
