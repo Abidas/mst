@@ -470,6 +470,8 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 
 #main_menu a {
     width: 16.6%;
+	border: 0;
+	}
 }
 video{
 	width:100%;
