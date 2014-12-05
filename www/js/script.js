@@ -495,7 +495,7 @@ var docs = {
     for (var k in d)
     {
       $('#docs ul').append('<li><button data-id="' + d[k]['id']
-          + '" class="grey-btn right-doc-btn">Заказать</button><h2>' + d[k]['title']
+          + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button><h2>' + d[k]['title']
           + '</h2><p>' + d[k]['desc']
           + '</p></li>');
     }
