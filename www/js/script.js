@@ -28,45 +28,6 @@ var i7e = {
     });
 
     document.addEventListener("backbutton", i7e.goBack, false);
-//    document.addEventListener("deviceready", onDeviceReady, false);
-//    document.addEventListener("backbutton", function(e){
-//      alert($.mobile.activePage);
-//      if($.mobile.activePage.is('#news')){
-//        e.preventDefault();
-//        if (confirm("Закрыть приложение")) {
-//          navigator.app.exitApp();
-//        }
-//        alert('dont close');
-//      }
-//      else {
-//        alert('dont close');
-//        navigator.app.backHistory()
-//      }
-//    }, false);
-
-//    $(window).on("navigate", function (event, data) {
-//      console.log(event);
-//      console.log(data);
-//      var direction = data.state.direction;
-//      if (direction == 'back') {
-//        alert('go back');
-////        if (i7e.history.length == 1) return;
-//        var q = i7e.history.pop();
-//        console.log(q);
-//        if (q == '#news_single') i7e.changePage('#news');
-//        /*
-//
-//        if (q == '#need_auth' || q == '#msg' || q == '#auth_dialog') {
-//          $(q).popup("close");
-//        } else {
-//          q = i7e.history.pop();
-//          i7e.history.push(q);
-//          console.log(q);
-//          i7e.changePage(q);
-//        }
-//        */
-//      }
-//    });
 
     // навигация подвал
     var actions = {
@@ -374,7 +335,14 @@ var seminar = {
     $('#seminars ul').html('');
     for (var k in d)
     {
-      var sss = '<li><h2>' + d[k]['title'] + '</h2><p class="seminar-price">';
+      // форматируем время
+      var t = new Date(d[k]['start_time']);
+      var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
+      tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
+
+      // строка на вывод
+      var sss = '<li><h2>' + d[k]['title'];
+      sss += '</h2><time class="seminar-time">' + tt + '</time><p class="seminar-price">';
       sss +=  (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'];
       if (in_array(d[k]['id'], booked) || d[k]['is_applied']) {
         sss += '</p><a class="light-btn" href="javascript:void(0)" data-role="button">Вы записаны</a></li>';
@@ -868,4 +836,9 @@ function in_array(needle, haystack, strict) {	// Checks if a value exists in an 
   }
 
   return found;
+}
+
+// добавляет ноль в начале, приводя число вида 1:2 к виду 01:02
+function lz(n) {
+  return n > 9 ? n : '0' + n;
 }
