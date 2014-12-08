@@ -9,6 +9,7 @@ html .ui-overlay-b,
 .ui-overlay-b .ui-page-theme-b{
 	background:#efeff4;
 	color:#333;
+	-webkit-overflow-scrolling: touch;
 	}
 html .ui-page-theme-b .ui-btn,
 html .ui-page-theme-b .ui-btn:hover{
@@ -44,7 +45,7 @@ html .ui-page-theme-b .ui-footer .ui-btn{
 	margin:0 0 1em 0;
 	}
 .ui-header .ui-btn-right{
-	display:none;
+	display:block;
 	}
 .ui-footer,
 .ui-footer.ui-bar-b{
@@ -354,6 +355,18 @@ html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 		float:right;
 		width:auto;
 		}
+	.ui-header .header-more-btn{
+		width:42px;
+		height:42px;
+		padding:0;
+		border:0;
+		display:block;
+		background:none transparent !important;
+		box-shadow:none !important;
+		}
+		.header-more-btn img{
+			width:100%;
+			}
 .separated-list > li,
 .ui-page-theme-b .light-theme .ui-listview.separated-list .ui-body-inherit{
 	border-top:1px solid #c6c6c6;
