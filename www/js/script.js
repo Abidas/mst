@@ -330,7 +330,7 @@ var news = {
         $('#news_single div.inside').append('<a href="#" onclick=\'window.open("http://vk.com/video'
                 + news.dat[id]['attachment']['video']['owner_id']
                 +'_'+news.dat[id]['attachment']['video']['vid']
-                +'")\'>'
+                +'", "_system")\'>'
                 + news._outImg('<img src="' + news.dat[id]['attachment']['video']['image_small'] + '">')
                 +'</a>');
 
