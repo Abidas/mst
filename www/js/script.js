@@ -207,10 +207,12 @@ var news = {
     d.shift(); // первый элемент - количество записей
 
     for (var k in d) {
+
       var ddd = {
         'id': 'vk' + d[k]['id'],
         'text': d[k]['text'],
-        'date': d[k]['date']
+        'date': d[k]['date'],
+        'attachment': d[k]['attachment']
       };
 
       // заголовок - содержание
@@ -296,7 +298,7 @@ var news = {
       var t = new Date(d[k]['date']*1000);
       var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
       tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
-      d[k]['desc'] = d[k]['desc'].replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a href='$&'>$&</a>");
+      
       
       // вывод
       class_name = '';
@@ -304,17 +306,21 @@ var news = {
       $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
-          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '</p></a></li>');
+          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '...</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
   },
 
   // вывод одной новости
   open: function(id) {
-    //news.dat[id]['desc'] = news.dat[id]['desc'].replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a href='$&'>$&</a>");
+    text = news.dat[id]['desc'];
+    if (typeof news.dat[id]['text'] != "undefined") {
+        text = news.dat[id]['text'];
+    }
+    text = text.replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a href='$&'>$&</a>");
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
-    $('#news_single div.inside').append('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
+    $('#news_single div.inside').append('<p>' + text.replace("\n", '</p><p>') + '</p>');
     i7e.changePage('#news_single');
   },
 
