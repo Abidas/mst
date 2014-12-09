@@ -1,4 +1,4 @@
-var NEWS_ENTITY_COUNT = 5
+var NEWS_ENTITY_COUNT = 20
 
 // интерфейс и работа с ним
 var i7e = {
