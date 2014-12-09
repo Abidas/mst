@@ -375,9 +375,13 @@ var seminar = {
       tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
 
       // строка на вывод
-      var sss = '<li><h2>' + d[k]['title'];
-      sss += '</h2><time class="seminar-time">' + tt + '</time><p class="seminar-price">';
-      sss +=  (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'];
+      var sss = '<li>'
+            + '<a href="javascript:seminar.openSem(\'' + d[k]['title'] + '\',\''+tt+'\',\'' + d[k]['desc'] + '\')" '
+            + 'style="background: transparent; text-align: left; margin: 0; color: black; padding: 10px; width: 100%;">'
+                + '<h2>' + d[k]['title']
+                + '</h2><time class="seminar-time">' + tt + '</time><p class="seminar-price">'
+                + (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'] 
+            + '</a>';
       if (in_array(d[k]['id'], booked) || d[k]['is_applied']) {
         sss += '</p><a class="light-btn" href="javascript:void(0)" data-role="button">Вы записаны</a></li>';
       } else {
