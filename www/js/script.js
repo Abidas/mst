@@ -76,10 +76,10 @@ var i7e = {
   goBack: function(e) {
     e.preventDefault();
     if(i7e.history.length == 1) {
-      if (confirm("Закрыть приложение")) {
+      //if (confirm("Закрыть приложение")) {
         navigator.app.exitApp();
         app.exitApp();
-      }
+      //}
     }
     else {
       var q = i7e.history.shift(); // текущая страница
