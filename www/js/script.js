@@ -1,4 +1,5 @@
 var NEWS_ENTITY_COUNT = 20
+var INTERNET_ERROR_TEXT = 'Нет подключения к интернету'
 
 // интерфейс и работа с ним
 var i7e = {
@@ -78,10 +79,10 @@ var i7e = {
   goBack: function(e) {
     e.preventDefault();
     if(i7e.history.length == 1) {
-      if (confirm("Закрыть приложение")) {
+     // if (confirm("Закрыть приложение")) {
         navigator.app.exitApp();
         app.exitApp();
-      }
+     // }
     }
     else {
       var q = i7e.history.shift(); // текущая страница
@@ -155,7 +156,7 @@ var i7e = {
     show: function(t, dd, f) {
       if (f) i7e.msg.current_f = f;
       if (t == 'Ошибка' && !dd) {
-        dd = 'Проверьте соединение с Интернетом и попробуйте еще раз.';
+        dd = INTERNET_ERROR_TEXT;
 
         if (i7e.history[0] =='#news') {
           news.dat = i7e.storage.load("news");
@@ -320,7 +321,7 @@ var news = {
     text = news.dat[id]['desc'];
     if (typeof news.dat[id]['text'] != "undefined")
         text = news.dat[id]['text'];
-    text = text.replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a href='$&'>$&</a>");
+    text = text.replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>");
 
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
@@ -701,7 +702,7 @@ var ajx = {
     var q = Offline.state == 'up';
     if (!q) {
       if (dont_show) return q;
-      i7e.msg.show('', 'Нет подключения к интернету.',
+      i7e.msg.show('', INTERNET_ERROR_TEXT,
           function(){console.log(1);});
     }
     return q;
