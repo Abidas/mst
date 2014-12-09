@@ -327,10 +327,10 @@ var news = {
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
     
     if (typeof news.dat[id]['attachment'] != "undefined" && typeof news.dat[id]['attachment']['video'] != "undefined") 
-        $('#news_single div.inside').append('<a href="http://vk.com/video'
+        $('#news_single div.inside').append('<a href="#" onclick=\'window.open("http://vk.com/video'
                 + news.dat[id]['attachment']['video']['owner_id']
                 +'_'+news.dat[id]['attachment']['video']['vid']
-                +'">'
+                +'")\'>'
                 + news._outImg('<img src="' + news.dat[id]['attachment']['video']['image_small'] + '">')
                 +'</a>');
 
