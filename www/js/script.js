@@ -666,7 +666,7 @@ var ajx = {
     var q = Offline.state == 'up';
     if (!q) {
       if (dont_show) return q;
-      i7e.msg.show('Ошибка соединения', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
+      i7e.msg.show('', 'Нет подключения к интернету.',
           function(){console.log(1);});
     }
     return q;
