@@ -313,7 +313,7 @@ var news = {
           img = '<img src="' + d[k]['attachment']['video']['image_small'] + '">';
       $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
-          + (img ? news._outImg(img) : '') +
+          + (img ? news._outImg(img) : '')
           + '<h2>' + d[k]['title'] + '</h2>'+'<br><time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '...</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
