@@ -296,7 +296,8 @@ var news = {
       var t = new Date(d[k]['date']*1000);
       var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
       tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
-
+      d[k]['desc'] = d[k]['desc'].replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a href='$&'>$&</a>");
+      
       // вывод
       class_name = '';
       var img = news._getImg(d[k]);
@@ -310,6 +311,7 @@ var news = {
 
   // вывод одной новости
   open: function(id) {
+    //news.dat[id]['desc'] = news.dat[id]['desc'].replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a href='$&'>$&</a>");
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
     $('#news_single div.inside').append('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
