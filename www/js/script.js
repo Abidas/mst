@@ -1,4 +1,4 @@
-global NEWS_ENTITY_COUNT = 20
+var NEWS_ENTITY_COUNT = 5
 
 // интерфейс и работа с ним
 var i7e = {
@@ -205,7 +205,7 @@ var news = {
     d = d['response'];
     d.shift(); // первый элемент - количество записей
 
-    iterator = 0
+    iterator = 1
     for (var k in d) {
       var ddd = {
         'id': 'vk' + d[k]['id'],
@@ -233,7 +233,7 @@ var news = {
       news.dat[ddd['id']] = ddd;
 
       // Количество новостей 
-      if (++iterator > NEWS_ENTITY_COUNT) break;
+      if (++iterator > NEWS_ENTITY_COUNT-1) break;
     }
     news.loadFinisher();
   },
@@ -241,7 +241,7 @@ var news = {
   // загрузка локальных новостей
   loadLocal: function(d) {
     if (!d) return;
-    iterator = 0
+    iterator = 1
     for (var k in d) {
       var dt = new Date(d[k]['created']);
       dt.setHours(dt.getHours() - 4); // смещение на 4 часа
@@ -252,7 +252,7 @@ var news = {
         'date' : Math.round(dt.getTime() / 1000)
       };
       // Количество новостей 
-      if (++iterator > NEWS_ENTITY_COUNT) break;
+      if (++iterator > NEWS_ENTITY_COUNT-1) break;
     }
     news.loadFinisher();
   },
