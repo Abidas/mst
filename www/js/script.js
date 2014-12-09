@@ -158,7 +158,7 @@ var i7e = {
       $('#msg_title').show();
       if (t == 'Ошибка' && !dd) {
         dd = INTERNET_ERROR_TEXT;
-        $('#msg_title').hide();
+       
         if (i7e.history[0] =='#news') {
           news.dat = i7e.storage.load("news");
           if (news.dat) {
@@ -167,6 +167,8 @@ var i7e = {
           return;
         }
       }
+
+      if (dd == INTERNET_ERROR_TEXT || t == '')  $('#msg_title').hide(); 
       $('#msg_title').text(t);
       $('#msg_content').html(dd);
       $('#msg_contents').css('overflow-y', 'scroll');
