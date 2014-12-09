@@ -1,5 +1,5 @@
 var NEWS_ENTITY_COUNT = 20
-var INTERNET_ERROR_TEXT = 'Нет подключения к интернету'
+var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету'
 
 // интерфейс и работа с ним
 var i7e = {
@@ -155,9 +155,10 @@ var i7e = {
     current_f: '',
     show: function(t, dd, f) {
       if (f) i7e.msg.current_f = f;
+      $('#msg_title').show();
       if (t == 'Ошибка' && !dd) {
         dd = INTERNET_ERROR_TEXT;
-        t = ''
+        $('#msg_title').hide();
         if (i7e.history[0] =='#news') {
           news.dat = i7e.storage.load("news");
           if (news.dat) {
