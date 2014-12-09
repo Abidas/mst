@@ -288,16 +288,22 @@ var news = {
 
     var lngth = 150; // количество выводимых символов в анонсе новости
     var iterator = 0;
+
     for (var k in d)
     {
       if (++iterator > NEWS_ENTITY_COUNT) break;
+
+      var t = new Date(d[k]['date']*1000);
+      var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
+      tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
+
       // вывод
       class_name = '';
       var img = news._getImg(d[k]);
       $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
-          + '<h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'].substr(0, lngth) + '</p></a></li>');
+          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
   },
