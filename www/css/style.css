@@ -29,9 +29,11 @@ input {
 	background:#ffffff;
 	color:#000000;
 	}
+/*
 html .ui-page-theme-b .main  .ui-btn{
 	color:#000000;
 	}
+*/
 .ui-page-theme-b .ui-li-has-thumb{
 	border-bottom: 1px solid #6DCAEC;
 	margin:5px;
@@ -287,7 +289,7 @@ padding: 1em;
 		width:60%;
 		color:#ffffff;
 		margin:1em auto 0 auto;
-		background-color: #282828;
+		__background-color: #282828;
 		}
 	.ui-page-theme-b #register_form .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear,
 	.ui-page-theme-b .login-theme .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear{
@@ -298,6 +300,7 @@ padding: 1em;
 	.ui-page-theme-b .login-theme .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear:hover{
 		box-shadow:none;
 		}
+	.ui-page-theme-b .login-theme .ui-btn,
 	.ui-btn#reg_button,
 	#doc_order .ui-btn#doc_button,
 	.login-theme .ui-btn{
@@ -308,10 +311,17 @@ padding: 1em;
 		padding: 0.4em;
 		margin: 1em auto;
 		}
+		html .ui-page-theme-b .login-theme .ui-btn:hover,
+		html .ui-page-theme-b .login-theme .ui-btn:active
 		#doc_order .ui-btn#doc_button:hover,
 		#doc_order .ui-btn#doc_button:active{
 			background:#0891c3;
 			box-shadow:0 0 0 5px rgba(55,169,211,0.5);
+			}
+		html .ui-page-theme-b .login-theme .ui-btn.ui-icon-delete{
+			background:transparent;
+			box-shadow:none;
+			margin:0;
 			}
 	.ui-btn#reg_button,
 	.login-theme .ui-btn{
@@ -319,6 +329,7 @@ padding: 1em;
 		color:#000000;
 		margin:1em auto;
 		}
+	/*
 	.ui-page-theme-b .login-theme .ui-btn{
 		background:#4bbde7;
 		box-shadow:none;
@@ -333,6 +344,7 @@ padding: 1em;
 		html .ui-page-theme-b .login-theme .ui-btn#auth_button:active{
 			background:#4badc7;
 			}
+	*/
 html .ui-page-theme-b .main .ui-btn.light-btn,
 html .ui-page-theme-b .main .ui-btn.light-btn:hover{
 	text-align:center;

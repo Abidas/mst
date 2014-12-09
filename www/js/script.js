@@ -1,3 +1,6 @@
+var NEWS_ENTITY_COUNT = 20
+var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету'
+
 // интерфейс и работа с ним
 var i7e = {
   history: [],
@@ -76,10 +79,10 @@ var i7e = {
   goBack: function(e) {
     e.preventDefault();
     if(i7e.history.length == 1) {
-      //if (confirm("Закрыть приложение")) {
+     // if (confirm("Закрыть приложение")) {
         navigator.app.exitApp();
         app.exitApp();
-      //}
+     // }
     }
     else {
       var q = i7e.history.shift(); // текущая страница
@@ -152,9 +155,10 @@ var i7e = {
     current_f: '',
     show: function(t, dd, f) {
       if (f) i7e.msg.current_f = f;
+      $('#msg_title').show();
       if (t == 'Ошибка' && !dd) {
-        dd = 'Проверьте соединение с Интернетом и попробуйте еще раз.';
-
+        dd = INTERNET_ERROR_TEXT;
+       
         if (i7e.history[0] =='#news') {
           news.dat = i7e.storage.load("news");
           if (news.dat) {
@@ -163,6 +167,8 @@ var i7e = {
           return;
         }
       }
+
+      if (dd == INTERNET_ERROR_TEXT || t == '')  $('#msg_title').hide(); 
       $('#msg_title').text(t);
       $('#msg_content').html(dd);
       $('#msg_contents').css('overflow-y', 'scroll');
@@ -188,6 +194,7 @@ var news = {
       news.loaders_num = 2; // количество источников
       ajx.getNews(news.loadVk);
       ajx.getLocalNews(news.loadLocal);
+ 
     } else {
       news.dat = i7e.storage.load("news");
       if (news.dat) {
@@ -204,10 +211,12 @@ var news = {
     d.shift(); // первый элемент - количество записей
 
     for (var k in d) {
+
       var ddd = {
         'id': 'vk' + d[k]['id'],
         'text': d[k]['text'],
-        'date': d[k]['date']
+        'date': d[k]['date'],
+        'attachment': d[k]['attachment']
       };
 
       // заголовок - содержание
@@ -228,6 +237,7 @@ var news = {
       }
 
       news.dat[ddd['id']] = ddd;
+
     }
     news.loadFinisher();
   },
@@ -237,7 +247,7 @@ var news = {
     if (!d) return;
     for (var k in d) {
       var dt = new Date(d[k]['created']);
-      dt.setHours(dt.getHours() - 4); // смещение на 4 часа
+      //dt.setHours(dt.getHours()-4); // смещение на 4 часа
       news.dat[d[k]['id']] = {
         'id' : 'loc' + d[k]['id'],
         'title' : d[k]['title'],
@@ -265,7 +275,6 @@ var news = {
         news.dat[sortable[k]['id']] = sortable[k];
       }
       i7e.storage.save("news", news.dat);
-
       news.show();
     }
   },
@@ -282,24 +291,50 @@ var news = {
     }
 
     var lngth = 150; // количество выводимых символов в анонсе новости
-    for (var k in d)
-    {
+    keys = Object.keys(d).slice(-NEWS_ENTITY_COUNT);
+
+    for (i=0; i<keys.length; i++)
+    { 
+      k = keys[i];
+
+      var t = new Date(d[k]['date']*1000);
+      var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
+      tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
+     
       // вывод
       class_name = '';
       var img = news._getImg(d[k]);
+      imgs = '';
+      if (typeof d[k]['attachment'] != "undefined" && typeof d[k]['attachment']['video'] != "undefined") 
+          img = '<img src="' + d[k]['attachment']['video']['image_small'] + '">';
       $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
-          + '<h2>' + d[k]['title'] + '</h2><p>' + d[k]['desc'].substr(0, lngth) + '</p></a></li>');
+          + '<h2>' + d[k]['title'] + '</h2>'+'<br><time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '...</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
   },
 
   // вывод одной новости
   open: function(id) {
+
+    text = news.dat[id]['desc'];
+    if (typeof news.dat[id]['text'] != "undefined")
+        text = news.dat[id]['text'];
+    text = text.replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>");
+
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
-    $('#news_single div.inside').append('<p>' + news.dat[id]['desc'].replace("\n", '</p><p>') + '</p>');
+    
+    if (typeof news.dat[id]['attachment'] != "undefined" && typeof news.dat[id]['attachment']['video'] != "undefined") 
+        $('#news_single div.inside').append('<a href="#" onclick=\'window.open("http://vk.com/video'
+                + news.dat[id]['attachment']['video']['owner_id']
+                +'_'+news.dat[id]['attachment']['video']['vid']
+                +'", "_system")\'>'
+                + news._outImg('<img src="' + news.dat[id]['attachment']['video']['image_small'] + '">')
+                +'</a>');
+
+    $('#news_single div.inside').append('<p>' + text.replace("\n", '</p><p>') + '</p>');
     i7e.changePage('#news_single');
   },
 
@@ -341,9 +376,13 @@ var seminar = {
       tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
 
       // строка на вывод
-      var sss = '<li><h2>' + d[k]['title'];
-      sss += '</h2><time class="seminar-time">' + tt + '</time><p class="seminar-price">';
-      sss +=  (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'];
+      var sss = '<li>'
+            + '<a href="javascript:seminar.openSem(\'' + d[k]['title'] + '\',\''+tt+'\',\'' + d[k]['desc'] + '\')" '
+            + 'style="background: transparent; text-align: left; margin: 0; color: black; padding: 10px; width: 100%;">'
+                + '<h2>' + d[k]['title']
+                + '</h2><time class="seminar-time">' + tt + '</time><p class="seminar-price">'
+                + (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'] 
+            + '</a>';
       if (in_array(d[k]['id'], booked) || d[k]['is_applied']) {
         sss += '</p><a class="light-btn" href="javascript:void(0)" data-role="button">Вы записаны</a></li>';
       } else {
@@ -380,6 +419,13 @@ var seminar = {
   // обработка ответа о записи на семинар
   joinCb: function(d) {
     i7e.msg.show('Успешно', 'Вы были успешно записаны на семинар.');
+  },
+
+ openSem: function(title,date,desc) {
+    $('#news_single div.inside').html('<h1>' + title + '</h1>');
+    $('#news_single div.inside').append('<time class="seminar-time">'+date+'</time>');
+    $('#news_single div.inside').append('<p>' + desc.replace("\n", '</p><p>') + '</p>');
+    i7e.changePage('#news_single');
   }
 };
 
@@ -408,7 +454,7 @@ var va = {
     }
 
     for (var k in d) {
-      $('#audio ul').append('<li class="audio-item">'
+      $('#audio ul').append('<li class="au54133544dio-item">'
           + '<span class="playaudio audio-control-btn"><i class="fa fa-play"></i></span>'
           + '<span class="audio-name">' + d[k]['title']
           + '</span>'
@@ -460,12 +506,17 @@ var docs = {
   show: function(d) {
     $('#docs ul').html('');
 
+    console.log(d);
+
     for (var k in d)
     {
       $('#docs ul').append('<li><button data-id="' + d[k]['id']
-          + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button><h2>' + d[k]['title']
-          + '</h2><p>' + d[k]['desc']
-          + '</p></li>');
+          + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button>'
+          + '<a href="javascript:docs.openDoc(\'' + d[k]['title'] + '\',\'' + d[k]['desc'] + '\')" class="ui-btn" style="color: black">'
+          	+ '<h2>' + d[k]['title'] + '</h2>'
+          	+ '<p>' + d[k]['desc'] + '</p>'
+          + '</a>'
+          + '</li>');
     }
     $('#docs ul').listview( "refresh" );
   },
@@ -507,6 +558,12 @@ var docs = {
   // обработка ответа об отправке формы
   orderCb: function(d) {
     i7e.msg.show("Заказ документа", "Заказ осуществлен успешно");
+  },
+
+ openDoc: function(title,desc) {
+    $('#news_single div.inside').html('<h1>' + title + '</h1>');
+    $('#news_single div.inside').append('<p>' + desc.replace("\n", '</p><p>') + '</p>');
+    i7e.changePage('#news_single');
   }
 };
 
@@ -645,7 +702,7 @@ var ajx = {
     var q = Offline.state == 'up';
     if (!q) {
       if (dont_show) return q;
-      i7e.msg.show('Ошибка соединения', 'Проверьте соединение с Интернетом и попробуйте еще раз.',
+      i7e.msg.show('', INTERNET_ERROR_TEXT,
           function(){console.log(1);});
     }
     return q;
