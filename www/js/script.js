@@ -245,10 +245,9 @@ var news = {
   // загрузка локальных новостей
   loadLocal: function(d) {
     if (!d) return;
-
     for (var k in d) {
       var dt = new Date(d[k]['created']);
-      dt.setHours(dt.getHours() - 4); // смещение на 4 часа
+      //dt.setHours(dt.getHours()-4); // смещение на 4 часа
       news.dat[d[k]['id']] = {
         'id' : 'loc' + d[k]['id'],
         'title' : d[k]['title'],
@@ -276,7 +275,6 @@ var news = {
         news.dat[sortable[k]['id']] = sortable[k];
       }
       i7e.storage.save("news", news.dat);
-
       news.show();
     }
   },
@@ -293,17 +291,16 @@ var news = {
     }
 
     var lngth = 150; // количество выводимых символов в анонсе новости
-    var iterator = 0;
+    keys = Object.keys(d).slice(-NEWS_ENTITY_COUNT);
 
-    for (var k in d)
-    {
-      if (++iterator > NEWS_ENTITY_COUNT) break;
+    for (i=0; i<keys.length; i++)
+    { 
+      k = keys[i];
 
       var t = new Date(d[k]['date']*1000);
       var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
       tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
-      
-      
+     
       // вывод
       class_name = '';
       var img = news._getImg(d[k]);
