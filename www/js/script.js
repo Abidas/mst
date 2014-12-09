@@ -208,9 +208,6 @@ var news = {
 
     for (var k in d) {
 
-
-      console.log(ddd);
-
       var ddd = {
         'id': 'vk' + d[k]['id'],
         'text': d[k]['text'],
@@ -293,8 +290,6 @@ var news = {
 
     var lngth = 150; // количество выводимых символов в анонсе новости
     var iterator = 0;
-
-    console.log(d);
 
     for (var k in d)
     {
@@ -419,6 +414,13 @@ var seminar = {
   // обработка ответа о записи на семинар
   joinCb: function(d) {
     i7e.msg.show('Успешно', 'Вы были успешно записаны на семинар.');
+  },
+
+ openSem: function(title,date,desc) {
+    $('#news_single div.inside').html('<h1>' + title + '</h1>');
+    $('#news_single div.inside').append('<time class="seminar-time">'+date+'</time>');
+    $('#news_single div.inside').append('<p>' + desc.replace("\n", '</p><p>') + '</p>');
+    i7e.changePage('#news_single');
   }
 };
 
@@ -499,12 +501,17 @@ var docs = {
   show: function(d) {
     $('#docs ul').html('');
 
+    console.log(d);
+
     for (var k in d)
     {
       $('#docs ul').append('<li><button data-id="' + d[k]['id']
-          + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button><h2>' + d[k]['title']
-          + '</h2><p>' + d[k]['desc']
-          + '</p></li>');
+          + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button>'
+          + '<a href="javascript:docs.openDoc(\'' + d[k]['title'] + '\',\'' + d[k]['desc'] + '\')" class="ui-btn" style="color: black">'
+          	+ '<h2>' + d[k]['title'] + '</h2>'
+          	+ '<p>' + d[k]['desc'] + '</p>'
+          + '</a>'
+          + '</li>');
     }
     $('#docs ul').listview( "refresh" );
   },
@@ -546,6 +553,12 @@ var docs = {
   // обработка ответа об отправке формы
   orderCb: function(d) {
     i7e.msg.show("Заказ документа", "Заказ осуществлен успешно");
+  },
+
+ openDoc: function(title,desc) {
+    $('#news_single div.inside').html('<h1>' + title + '</h1>');
+    $('#news_single div.inside').append('<p>' + desc.replace("\n", '</p><p>') + '</p>');
+    i7e.changePage('#news_single');
   }
 };
 
