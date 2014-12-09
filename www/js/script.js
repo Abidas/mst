@@ -157,7 +157,7 @@ var i7e = {
       if (f) i7e.msg.current_f = f;
       if (t == 'Ошибка' && !dd) {
         dd = INTERNET_ERROR_TEXT;
-
+        t = ''
         if (i7e.history[0] =='#news') {
           news.dat = i7e.storage.load("news");
           if (news.dat) {
