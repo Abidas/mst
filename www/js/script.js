@@ -208,6 +208,9 @@ var news = {
 
     for (var k in d) {
 
+
+      console.log(ddd);
+
       var ddd = {
         'id': 'vk' + d[k]['id'],
         'text': d[k]['text'],
@@ -291,6 +294,8 @@ var news = {
     var lngth = 150; // количество выводимых символов в анонсе новости
     var iterator = 0;
 
+    console.log(d);
+
     for (var k in d)
     {
       if (++iterator > NEWS_ENTITY_COUNT) break;
@@ -303,23 +308,36 @@ var news = {
       // вывод
       class_name = '';
       var img = news._getImg(d[k]);
+      imgs = '';
+      if (typeof d[k]['attachment'] != "undefined" && typeof d[k]['attachment']['video'] != "undefined") 
+          img = '<img src="' + d[k]['attachment']['video']['image_small'] + '">';
       $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
-          + (img ? news._outImg(img) : '')
-          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '...</p></a></li>');
+          + (img ? news._outImg(img) : '') +
+          + '<h2>' + d[k]['title'] + '</h2>'+'<br><time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '...</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
   },
 
   // вывод одной новости
   open: function(id) {
+
     text = news.dat[id]['desc'];
-    if (typeof news.dat[id]['text'] != "undefined") {
+    if (typeof news.dat[id]['text'] != "undefined")
         text = news.dat[id]['text'];
-    }
     text = text.replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a href='$&'>$&</a>");
+
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
+    
+    if (typeof news.dat[id]['attachment'] != "undefined" && typeof news.dat[id]['attachment']['video'] != "undefined") 
+        $('#news_single div.inside').append('<a href="http://vk.com/video'
+                + news.dat[id]['attachment']['video']['owner_id']
+                +'_'+news.dat[id]['attachment']['video']['vid']
+                +'">'
+                + news._outImg('<img src="' + news.dat[id]['attachment']['video']['image_small'] + '">')
+                +'</a>');
+
     $('#news_single div.inside').append('<p>' + text.replace("\n", '</p><p>') + '</p>');
     i7e.changePage('#news_single');
   },
@@ -429,7 +447,7 @@ var va = {
     }
 
     for (var k in d) {
-      $('#audio ul').append('<li class="audio-item">'
+      $('#audio ul').append('<li class="au54133544dio-item">'
           + '<span class="playaudio audio-control-btn"><i class="fa fa-play"></i></span>'
           + '<span class="audio-name">' + d[k]['title']
           + '</span>'
