@@ -190,6 +190,7 @@ var news = {
       news.loaders_num = 2; // количество источников
       ajx.getNews(news.loadVk);
       ajx.getLocalNews(news.loadLocal);
+ 
     } else {
       news.dat = i7e.storage.load("news");
       if (news.dat) {
@@ -205,7 +206,6 @@ var news = {
     d = d['response'];
     d.shift(); // первый элемент - количество записей
 
-    iterator = 1
     for (var k in d) {
       var ddd = {
         'id': 'vk' + d[k]['id'],
@@ -232,8 +232,6 @@ var news = {
 
       news.dat[ddd['id']] = ddd;
 
-      // Количество новостей 
-      if (++iterator > NEWS_ENTITY_COUNT-1) break;
     }
     news.loadFinisher();
   },
@@ -241,7 +239,7 @@ var news = {
   // загрузка локальных новостей
   loadLocal: function(d) {
     if (!d) return;
-    iterator = 1
+
     for (var k in d) {
       var dt = new Date(d[k]['created']);
       dt.setHours(dt.getHours() - 4); // смещение на 4 часа
@@ -251,8 +249,6 @@ var news = {
         'desc' : d[k]['desc'],
         'date' : Math.round(dt.getTime() / 1000)
       };
-      // Количество новостей 
-      if (++iterator > NEWS_ENTITY_COUNT-1) break;
     }
     news.loadFinisher();
   },
@@ -291,8 +287,10 @@ var news = {
     }
 
     var lngth = 150; // количество выводимых символов в анонсе новости
+    var iterator = 0;
     for (var k in d)
     {
+      if (++iterator > NEWS_ENTITY_COUNT) break;
       // вывод
       class_name = '';
       var img = news._getImg(d[k]);
