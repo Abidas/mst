@@ -348,7 +348,7 @@ html .ui-page-theme-b .ui-popup-container .ui-body-a{
 html .ui-page-theme-b .main .ui-btn.grey-btn,
 html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 	text-align:center;
-	background:#c6c6c6;
+	/*background:#c6c6c6;*/
 	}
 	.right-doc-btn,
 	button.ui-btn.right-doc-btn{

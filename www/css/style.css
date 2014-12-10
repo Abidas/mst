@@ -357,8 +357,19 @@ html .ui-page-theme-b .main .ui-btn.light-btn:hover{
 html .ui-page-theme-b .main .ui-btn.grey-btn,
 html .ui-page-theme-b .main .ui-btn.grey-btn:hover{
 	text-align:center;
-	background:#c6c6c6;
+	color:#ffffff;
+	background:#4bbde7;
+	box-shadow:0 0 0 5px rgba(75,189,231,0.5);
+	border-radius:4px;
+	border-bottom:1px solid #46b0d7;
+	padding: 0.4em;
+	margin: 1em auto;
 	}
+	html .ui-page-theme-b .main .ui-btn.grey-btn:hover,
+	html .ui-page-theme-b .main .ui-btn.grey-btn:active{
+		background:#0891c3;
+		box-shadow:0 0 0 5px rgba(55,169,211,0.5);
+		}
 	.right-doc-btn,
 	button.ui-btn.right-doc-btn{
 		float:right;
