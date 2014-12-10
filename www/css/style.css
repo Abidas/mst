@@ -141,7 +141,8 @@ padding: 1em;
   overflow-y: scroll;
   padding:0 1em;
 }
-.ui-page-theme-b .light-theme .ui-listview .ui-body-inherit{
+.ui-page-theme-b .light-theme .ui-listview .ui-body-inherit,
+html .ui-page-theme-b .ui-listview .ui-btn{
 	color:#333;
 	}
 	.ui-content .ui-listview > .ui-li-static{
