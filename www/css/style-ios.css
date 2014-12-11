@@ -9,7 +9,6 @@ html .ui-overlay-b,
 .ui-overlay-b .ui-page-theme-b{
 	background:#efeff4;
 	color:#333;
-	-webkit-overflow-scrolling: touch;
 	}
 html .ui-page-theme-b .ui-btn,
 html .ui-page-theme-b .ui-btn:hover{
@@ -95,27 +94,27 @@ html .ui-page-theme-b .ui-footer .ui-btn{
 	padding:0;
 	}
 .ui-footer .ui-navbar a.ui-btn.bg-orange{
-	background:url(../images/design/rss.png) center center no-repeat #ff8c2f;
+	background:url(../images/design/rss.png) center center no-repeat #f7941e;
 	background-size:auto 100%;
 	}
 .ui-footer .ui-navbar a.ui-btn.bg-blue{
-	background:url(../images/design/user.png) center center no-repeat #539cd1;
+	background:url(../images/design/user.png) center center no-repeat #939598;
 	background-size:auto 100%;
 	}
 .ui-footer .ui-navbar a.ui-btn.bg-gray{
-	background:url(../images/design/media.png) center center no-repeat #404040;
+	background:url(../images/design/media.png) center center no-repeat #5c9ec7;
 	background-size:auto 100%;
 	}
 .ui-footer .ui-navbar a.ui-btn.bg-purple{
-	background:url(../images/design/down.png) center center no-repeat #72507e;
+	background:url(../images/design/down.png) center center no-repeat #7458a6;
 	background-size:auto 100%;
 	}
 .ui-footer .ui-navbar a.ui-btn.bg-lightgray{
-	background:url(../images/design/table.png) center center no-repeat #d9d9d9;
+	background:url(../images/design/table.png) center center no-repeat #939598;
 	background-size:auto 100%;
 	}
 .ui-footer .ui-navbar a.ui-btn.bg-green{
-	background:url(../images/design/phone.png) center center no-repeat #6cca39;
+	background:url(../images/design/phone.png) center center no-repeat #6fbe44;
 	background-size:auto 100%;
 	}
 
