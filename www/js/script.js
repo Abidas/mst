@@ -384,7 +384,7 @@ var seminar = {
                 + (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'] 
             + '</a>';
       if (in_array(d[k]['id'], booked) || d[k]['is_applied']) {
-        sss += '</p><a class="light-btn" href="javascript:void(0)" data-role="button">Вы записаны</a></li>';
+        sss += '</p><a class="light-btn" data-role="button" data-ajax="false">Вы записаны</a></li>';
       } else {
         sss += '</p><a class="light-btn" href="javascript:seminar.join(' + d[k]['id']
             + ')" data-role="button" id="sem' + d[k]['id'] + '">Записаться</a></li>';
@@ -392,6 +392,11 @@ var seminar = {
       $('#seminars ul').append(sss);
     }
     $('#seminars ul').listview( "refresh" );
+
+	$('#seminars ul .light-btn').removeClass('ui-btn-icon-notext ui-icon-carat-r');
+	$('#seminars ul .light-btn').each(function(){
+		$(this).html($(this).attr('title'));
+	});
   },
   //  запись на семинар
   join: function(n) {
