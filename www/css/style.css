@@ -712,3 +712,6 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 	font-style:italic;
 	margin: 0.3em 0;
 	}
+.ui-listview{
+	overflow: hidden;
+	}

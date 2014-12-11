@@ -587,6 +587,7 @@ video{
 			}
 #seminars .ui-listview{
 	margin:1em -1em;
+	overflow: hidden;
 	}
 	.ui-page-theme-b #seminars .ui-listview li,
 	.ui-page-theme-b #docs .ui-listview li{
