@@ -1,7 +1,9 @@
 var NEWS_ENTITY_COUNT = 20;
 var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету';
 var LINE_SEPARATOR = /[\n]/g;
-var URL_REGEXP = /(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\.\?\;\(\)\=a-azA-z-\d\&\_\-\%]*)*\/?/g
+var TAG_REGEXP = /<([\w]{1,})>/g
+var URL_REGEXP = /(https?:\/\/)(([a-z]){1,}([a-z\d\-\_]){0,}.){1,}([a-z]{2,})\/?([\d\%a-zA-Z\?\&\;\=\-\_\+\.\/\(\)]{1,})?/g
+// /(https?:\/\/)?([\w\.]+)\.([a-zA-Z\-\_]{2,6}\.?)(\/[\.\?\;\(\)\=a-zA-Z\-\d\&\_\-\%]*)*\/?/g
 // /(https?:\/\/)?(www\.)?([-а-яa-z0-9_\.]{2,}\.)(рф|[a-z]{2,6})((\/[-а-яa-z0-9_]{1,})?\/?([a-z0-9_-]{2,}\.[a-z]{2,6})?(\?[a-z0-9_]{2,}=[-0-9]{1,})?((\&[a-z0-9_]{2,}=[-0-9]{1,}){1,})?)/i   
 // /(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g
 var LINE_PREVIEW_MAX = 150; // количество выводимых символов в анонсе новости
@@ -302,6 +304,7 @@ var news = {
 
     keys = Object.keys(d).slice(-NEWS_ENTITY_COUNT);
 
+    console.log(d);
     for (i=0; i<keys.length; i++)
     { 
       k = keys[i];
@@ -319,7 +322,7 @@ var news = {
       $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
-          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, LINE_PREVIEW_MAX) + '...</p></a></li>');
+          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].replace(TAG_REGEXP,"").substr(0, LINE_PREVIEW_MAX) + '...</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
   },
@@ -386,7 +389,7 @@ var seminar = {
       var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
       tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
 
-      desc = DATA_SEMINARS[k]['desc'].substr(0, LINE_PREVIEW_MAX)+'...';
+      desc = DATA_SEMINARS[k]['desc'].replace(TAG_REGEXP,"").substr(0, LINE_PREVIEW_MAX)+'...';
       DATA_SEMINARS[k]['desc'] = d[k]['desc'].replace(LINE_SEPARATOR, '<br>');      
 
       // строка на вывод
@@ -533,7 +536,7 @@ var docs = {
 
     for (var k in d)
     {
-      desc = DATA_DOCS[k]['desc'].substr(0, LINE_PREVIEW_MAX)+'...';
+      desc = DATA_DOCS[k]['desc'].replace(TAG_REGEXP,"").substr(0, LINE_PREVIEW_MAX)+'...';
       DATA_DOCS[k]['desc'] = d[k]['desc'].replace(LINE_SEPARATOR, '<br>');
       $('#docs ul').append('<li><button data-id="' + d[k]['id']
           + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button>'
