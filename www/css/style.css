@@ -21,7 +21,6 @@ input {
 	color:#000000;
 	}
 .ui-mobile [data-role="page"]{
-	bottom:62px;
 	z-index:1;
 	}
 .ui-overlay-b .ui-page-theme-b{
@@ -129,7 +128,6 @@ padding: 1em;
 
 .main {
   display: block;
-  clear:both;
 }
 
 .ui-panel {
