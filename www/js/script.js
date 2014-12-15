@@ -1,7 +1,7 @@
 var NEWS_ENTITY_COUNT = 20;
 var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету';
 var LINE_SEPARATOR = /[\n]/g;
-var URL_REGEXP = /(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\S]*)*\/?/g
+var URL_REGEXP = /(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\.\?\;\(\)\=a-azA-z-\d\&\_\-\%]*)*\/?/g
 // /(https?:\/\/)?(www\.)?([-а-яa-z0-9_\.]{2,}\.)(рф|[a-z]{2,6})((\/[-а-яa-z0-9_]{1,})?\/?([a-z0-9_-]{2,}\.[a-z]{2,6})?(\?[a-z0-9_]{2,}=[-0-9]{1,})?((\&[a-z0-9_]{2,}=[-0-9]{1,}){1,})?)/i   
 // /(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g
 var LINE_PREVIEW_MAX = 150; // количество выводимых символов в анонсе новости
@@ -236,8 +236,9 @@ var news = {
             + date.getFullYear());
       }
       ddd['title'] = qq[0];
-      ddd['desc'] = qq[1];
-      ddd['text'] = qq[1];
+
+      desc = d[k]['text'].split(qq[0]+'<br><br>');
+      ddd['text'] = ddd['desc'] = desc[desc.length - 1];     
 
       // фоточка
       var img = news._getImg(d[k]);
@@ -529,8 +530,6 @@ var docs = {
   show: function(d) {
     DATA_DOCS = d;
     $('#docs ul').html('');
-
-    console.log(d);
 
     for (var k in d)
     {
