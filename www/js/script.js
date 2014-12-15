@@ -304,7 +304,6 @@ var news = {
 
     keys = Object.keys(d).slice(-NEWS_ENTITY_COUNT);
 
-    console.log(d);
     for (i=0; i<keys.length; i++)
     { 
       k = keys[i];
