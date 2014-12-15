@@ -1,5 +1,7 @@
-var NEWS_ENTITY_COUNT = 20
-var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету'
+var NEWS_ENTITY_COUNT = 20;
+var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету';
+
+var DATA_SEMINARS;
 
 // интерфейс и работа с ним
 var i7e = {
@@ -366,9 +368,10 @@ var seminar = {
   },
   // вывести полученные с сервера семинары
   show: function(d) {
+    DATA_SEMINARS = d;
     var booked = i7e.storage.load('booked_seminars');
     $('#seminars ul').html('');
-    for (var k in d)
+    for (k in d) 
     {
       // форматируем время
       var t = new Date(d[k]['start_time']);
@@ -377,12 +380,12 @@ var seminar = {
 
       // строка на вывод
       var sss = '<li>'
-            + '<a href="javascript:seminar.openSem(\'' + d[k]['title'] + '\',\''+tt+'\',\'' + d[k]['desc'] + '\')" '
+             + '<a href="javascript:seminar.openSem('+k+')" '
             + 'style="background: transparent; text-align: left; margin: 0; color: black; padding: 10px; width: 100%;">'
                 + '<h2>' + d[k]['title']
                 + '</h2><time class="seminar-time">' + tt + '</time><p class="seminar-price">'
-                + (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'] 
-            + '</a>';
+                + (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'].replace(/[/\n]/g, '<br>')+ '</p>'
+            + '</a>'; 
       if (in_array(d[k]['id'], booked) || d[k]['is_applied']) {
         sss += '</p><a class="light-btn" data-role="button" data-ajax="false">Вы записаны</a></li>';
       } else {
@@ -426,11 +429,16 @@ var seminar = {
     i7e.msg.show('Успешно', 'Вы были успешно записаны на семинар.');
   },
 
- openSem: function(title,date,desc) {
-    $('#news_single div.inside').html('<h1>' + title + '</h1>');
+ openSem: function(i) {
+    // форматируем время
+    t = new Date(DATA_SEMINARS[i]['start_time']);
+    date = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ' +
+        lz(t.getHours()) + ':' + lz(t.getMinutes());
+
+    $('#news_single div.inside').html('<h1>' + DATA_SEMINARS[i]['title'] + '</h1>');
     $('#news_single div.inside').append('<time class="seminar-time">'+date+'</time>');
-    $('#news_single div.inside').append('<p>' + desc.replace("\n", '</p><p>') + '</p>');
-    i7e.changePage('#news_single');
+    $('#news_single div.inside').append('<p>' + DATA_SEMINARS[i]['desc'].replace(/[/\n]/g, '<br>') + '</p>');
+    i7e.changePage('#news_single'); 
   }
 };
 
