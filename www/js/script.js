@@ -1,5 +1,10 @@
 var NEWS_ENTITY_COUNT = 20;
 var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету';
+var LINE_SEPARATOR = /[\n]/g;
+var URL_REGEXP = /(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\S]*)*\/?/g
+// /(https?:\/\/)?(www\.)?([-а-яa-z0-9_\.]{2,}\.)(рф|[a-z]{2,6})((\/[-а-яa-z0-9_]{1,})?\/?([a-z0-9_-]{2,}\.[a-z]{2,6})?(\?[a-z0-9_]{2,}=[-0-9]{1,})?((\&[a-z0-9_]{2,}=[-0-9]{1,}){1,})?)/i   
+// /(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g
+var LINE_PREVIEW_MAX = 150; // количество выводимых символов в анонсе новости
 
 var DATA_SEMINARS;
 var DATA_DOCS;
@@ -294,7 +299,6 @@ var news = {
       return;
     }
 
-    var lngth = 150; // количество выводимых символов в анонсе новости
     keys = Object.keys(d).slice(-NEWS_ENTITY_COUNT);
 
     for (i=0; i<keys.length; i++)
@@ -314,7 +318,7 @@ var news = {
       $('#news ul').prepend('<li class="ui-li-has-thumb"><a href="javascript:news.open(\'' + d[k]['id']
           + '\');$(this).removeClass(\'ui-btn-active ui-focus\');" data-direction="reverse" style="padding-left:0">'
           + (img ? news._outImg(img) : '')
-          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, lngth) + '...</p></a></li>');
+          + '<h2>' + d[k]['title'] + '</h2>'+'<time class="seminar-time">' + tt + '</time>'+'<p>' + d[k]['desc'].substr(0, LINE_PREVIEW_MAX) + '...</p></a></li>');
     }
     $('#news ul').listview( "refresh" );
   },
@@ -326,7 +330,7 @@ var news = {
     if (typeof news.dat[id]['text'] != "undefined")
         text = news.dat[id]['text'];
         
-    text = text.replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>");
+    text = text.replace(URL_REGEXP, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>");
 
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
     $('#news_single div.inside').append(news._getImg(news.dat[id]));
@@ -381,13 +385,16 @@ var seminar = {
       var tt = t.getDate() + '.' + (t.getMonth() + 1) + '.' + t.getFullYear() + ' в ';
       tt += lz(t.getHours()) + ':' + lz(t.getMinutes());
 
+      desc = DATA_SEMINARS[k]['desc'].substr(0, LINE_PREVIEW_MAX)+'...';
+      DATA_SEMINARS[k]['desc'] = d[k]['desc'].replace(LINE_SEPARATOR, '<br>');      
+
       // строка на вывод
       var sss = '<li>'
              + '<a href="javascript:seminar.openSem('+k+')" '
             + 'style="background: transparent; text-align: left; margin: 0; color: black; padding: 10px; width: 100%;">'
                 + '<h2>' + d[k]['title']
                 + '</h2><time class="seminar-time">' + tt + '</time><p class="seminar-price">'
-                + (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + d[k]['desc'].replace(/[/\n]/g, '<br>')+ '</p>'
+                + (d[k]['cost'] * 1 > 0 ? d[k]['cost'] + ' руб.' : 'Бесплатный') + '</p><p>' + desc + '</p>'
             + '</a>'; 
       if (in_array(d[k]['id'], booked) || d[k]['is_applied']) {
         sss += '</p><a class="light-btn" data-role="button" data-ajax="false">Вы записаны</a></li>';
@@ -440,7 +447,7 @@ var seminar = {
 
     $('#news_single div.inside').html('<h1>' + DATA_SEMINARS[i]['title'] + '</h1>');
     $('#news_single div.inside').append('<time class="seminar-time">'+date+'</time>');
-    $('#news_single div.inside').append('<p>' + DATA_SEMINARS[i]['desc'].replace(/[/\n]/g, '<br>') + '</p>');
+    $('#news_single div.inside').append('<p>' + DATA_SEMINARS[i]['desc'].replace(URL_REGEXP, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>") + '</p>');
     i7e.changePage('#news_single'); 
   }
 };
@@ -527,11 +534,13 @@ var docs = {
 
     for (var k in d)
     {
+      desc = DATA_DOCS[k]['desc'].substr(0, LINE_PREVIEW_MAX)+'...';
+      DATA_DOCS[k]['desc'] = d[k]['desc'].replace(LINE_SEPARATOR, '<br>');
       $('#docs ul').append('<li><button data-id="' + d[k]['id']
           + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button>'
           + '<a href="javascript:docs.openDoc('+k+')" class="ui-btn" style="color: black">'
           	+ '<h2>' + d[k]['title'] + '</h2>'
-          	+ '<p>' + d[k]['desc'].replace(/[/\n]/g, '<br>') + '</p>'
+          	+ '<p>' + desc + '</p>'
           + '</a>'
           + '</li>');
     }
@@ -579,7 +588,7 @@ var docs = {
 
  openDoc: function(k) {
     $('#news_single div.inside').html('<h1>' + DATA_DOCS[k]['title'] + '</h1>');
-    $('#news_single div.inside').append('<p>' + DATA_DOCS[k]['desc'].replace(/[/\n]/g, '<br>') + '</p>');
+    $('#news_single div.inside').append('<p>' + DATA_DOCS[k]['desc'].replace(URL_REGEXP, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>") + '</p>');
     i7e.changePage('#news_single');
   }
 };
