@@ -232,6 +232,7 @@ var news = {
       }
       ddd['title'] = qq[0];
       ddd['desc'] = qq[1];
+      ddd['text'] = qq[1];
 
       // фоточка
       var img = news._getImg(d[k]);
@@ -324,6 +325,7 @@ var news = {
     text = news.dat[id]['desc'];
     if (typeof news.dat[id]['text'] != "undefined")
         text = news.dat[id]['text'];
+        
     text = text.replace(/(https?:\/\/)?([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?/g, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>");
 
     $('#news_single div.inside').html('<h1>' + news.dat[id]['title'] + '</h1>');
