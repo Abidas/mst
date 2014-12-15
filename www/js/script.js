@@ -2,6 +2,7 @@ var NEWS_ENTITY_COUNT = 20;
 var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету';
 
 var DATA_SEMINARS;
+var DATA_DOCS;
 
 // интерфейс и работа с ним
 var i7e = {
@@ -517,6 +518,7 @@ var docs = {
   },
   // вывести полученные с сервера документы
   show: function(d) {
+    DATA_DOCS = d;
     $('#docs ul').html('');
 
     console.log(d);
@@ -525,9 +527,9 @@ var docs = {
     {
       $('#docs ul').append('<li><button data-id="' + d[k]['id']
           + '" class="grey-btn right-doc-btn ui-btn ui-shadow ui-corner-all">Заказать</button>'
-          + '<a href="javascript:docs.openDoc(\'' + d[k]['title'] + '\',\'' + d[k]['desc'] + '\')" class="ui-btn" style="color: black">'
+          + '<a href="javascript:docs.openDoc('+k+')" class="ui-btn" style="color: black">'
           	+ '<h2>' + d[k]['title'] + '</h2>'
-          	+ '<p>' + d[k]['desc'] + '</p>'
+          	+ '<p>' + d[k]['desc'].replace(/[/\n]/g, '<br>') + '</p>'
           + '</a>'
           + '</li>');
     }
@@ -573,9 +575,9 @@ var docs = {
     i7e.msg.show("Заказ документа", "Заказ осуществлен успешно");
   },
 
- openDoc: function(title,desc) {
-    $('#news_single div.inside').html('<h1>' + title + '</h1>');
-    $('#news_single div.inside').append('<p>' + desc.replace("\n", '</p><p>') + '</p>');
+ openDoc: function(k) {
+    $('#news_single div.inside').html('<h1>' + DATA_DOCS[k]['title'] + '</h1>');
+    $('#news_single div.inside').append('<p>' + DATA_DOCS[k]['desc'].replace(/[/\n]/g, '<br>') + '</p>');
     i7e.changePage('#news_single');
   }
 };
