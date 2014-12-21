@@ -8,7 +8,7 @@ a{
 	}
 html .ui-overlay-b,
 .ui-overlay-b .ui-page-theme-b{
-	background:#efeff4;
+	background:#ffffff;
 	color:#333;
 	}
 html .ui-page-theme-b .ui-btn,
@@ -126,7 +126,6 @@ html .ui-page-theme-b .ui-footer .ui-btn{
 
 .ui-content {
 display: none;
-border-top: 1px solid #c8c7cc;
 margin:1em 0 0 0;
 padding:0;
 }
@@ -632,7 +631,7 @@ video{
 	width:auto;
 	}
 #one{
-    padding-top: 55px;
+    padding-top: 30px;
     padding-bottom: 65px;
 	min-height: 300px;
 	border-top:6px solid #000;
@@ -696,4 +695,7 @@ div.hasDatepicker {
 	}
 .ui-content .ui-listview{
 margin: 0 -1em;
+}
+#call{
+margin-top:0;
 }
