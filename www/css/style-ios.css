@@ -302,7 +302,7 @@ html .ui-page-theme-b .ui-popup-container .ui-body-a{
 		text-shadow:none;
 		}
 #register_form{
-	padding:1em;
+	padding:0 1em;
 	}
 	#register_form .ui-field-contain{
 		border:0;
@@ -324,13 +324,19 @@ html .ui-page-theme-b .ui-popup-container .ui-body-a{
 	.ui-page-theme-b .light-theme .ui-btn.center-btn{
 		width:60%;
 		color:#ffffff;
-		margin:2em auto;
+		margin:1em auto;
 		}
 	.ui-page-theme-b #register_form .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear{
 		width:32px;
 		margin:0;
 		top:3px;
 		}
+	#register_tab{
+		padding-top:0;
+		}
+		#register_tab .ui-field-contain{
+			padding:0.5em 0;
+			}
 	::-webkit-input-placeholder { /* WebKit browsers */
 		color:    #fff;
 	}
