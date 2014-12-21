@@ -4,6 +4,7 @@ a{
 .ui-content{
 	background:#ffffff;
 	color:#333;
+	word-break:break-all;
 	}
 html .ui-overlay-b,
 .ui-overlay-b .ui-page-theme-b{
