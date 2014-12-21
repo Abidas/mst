@@ -80,11 +80,13 @@ html .ui-page-theme-b .ui-footer,
 .ui-navbar{
 	display:table;
 	width:100%;
+	border-collapse:collapse;
 	}
 .ui-footer .ui-navbar a.ui-btn{
 	display:table-cell;
 	height:64px;
 	padding:0;
+	border:0;
 	}
 .ui-footer .ui-navbar a.ui-btn.bg-orange{
 	background:url(../images/design/rss.png) center center no-repeat #f7941e;
