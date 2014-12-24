@@ -2,7 +2,6 @@ body{
 	font-family:Arial,Helvetica,sans-serif;
 	background:#ffffff;
 	border-top:1px solid #000;
-	word-break:break-all;
 	}
 input {
     outline: none;
