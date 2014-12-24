@@ -720,7 +720,7 @@ var u = {
 };
 
 var ajx = {
-	base: 'http://mstyle.view.indev-group.eu/',
+	base: 'http://mob.m-style.su/',
 
   checkConnection: function(dont_show)
   {
