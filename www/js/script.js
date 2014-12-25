@@ -481,9 +481,9 @@ var va = {
 
     for (var k in d) {
       $('#audio ul').append('<li class="au54133544dio-item">'
-          + '<span class="playaudio audio-control-btn"><i class="fa fa-play"></i></span>'
           + '<span class="audio-name">' + d[k]['title']
           + '</span>'
+          + '<span class="playaudio audio-control-btn"><i class="fa fa-play"></i></span>'
           + '<div class="progress-bar"><span class="progress-bg"></span><span class="progress-current"></span>'
           + '<span class="progress-marker"></span></div>'
           + '<audio src="' + ajx.base + d[k]['file_url'].substr(1)
