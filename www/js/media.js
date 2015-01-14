@@ -52,22 +52,32 @@ function initAudio() {
 //      console.log('offset: ' + offset + " .. " + percent + " .. " +  audio.currentTime + " .. " + seekTo);
     }
   });
-  $('audio').on('timeupdate',function(){
+  $('audio').on('progress',function(){
     var audio = this;
     var currentPos = audio.currentTime;
     var maxduration = audio.duration;
+    var buff = audio.buffered.end(0);
+    for (i=0; i<audio.buffered.length; i++) {
+        if ( audio.buffered.start(i)<=currentPos && 
+	     audio.buffered.end(i)>=currentPos) {
+		var buff = audio.buffered.end(i);
+        }
+    }
+    var buf_percentage = 100 * buff / maxduration;
     var percentage = 100 * currentPos / maxduration; //in %
 //    console.log('prc: ' + currentPos + ' : ' + maxduration  + ' = ' + percentage);
-    changePos(this, percentage);
+    changePos(this, percentage, buf_percentage);
   });
   $('audio').on('ended',function(){
 //    console.log('ended');
     $(this).siblings('.audio-control-btn').removeClass('pauseaudio').addClass('playaudio').html('<i class="fa fa-play"></i>');
-    changePos(this, 0);
+    changePos(this, 0, 0);
   });
 }
 
-function changePos(context, val) {
+function changePos(context, val, buf) {
   $(context).siblings('.progress-bar').find('.progress-current').css('width',val+'%');
+  $(context).siblings('.progress-bar').find('.progress-bg-buff').css('width',buf+'%');
   $(context).siblings('.progress-bar').find('.progress-marker').css('left',val+'%');
+  
 }

@@ -484,10 +484,10 @@ var va = {
           + '<span class="audio-name">' + d[k]['title']
           + '</span>'
           + '<span class="playaudio audio-control-btn"><i class="fa fa-play"></i></span>'
-          + '<div class="progress-bar"><span class="progress-bg"></span><span class="progress-current"></span>'
+          + '<div class="progress-bar"><span class="progress-bg-buff"></span><span class="progress-bg"></span><span class="progress-current"></span>'
           + '<span class="progress-marker"></span></div>'
           + '<audio src="' + ajx.base + d[k]['file_url'].substr(1)
-          + '">Your browser does not support the <code>audio</code> element.</audio></li>');
+          + '" autobuffer="false">Your browser does not support the <code>audio</code> element.</audio></li>');
     }
     $('#audio ul').listview( "refresh" );
     initAudio();

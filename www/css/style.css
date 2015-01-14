@@ -582,35 +582,44 @@ video{
 		padding:1px 0;
 		height:40px;
 		position:relative;
-		}
-		.progress-bg{
-			display:block;
-			height:2px;
-			margin:20px 0;
-			background:#d9d9d9;
-			}
-			.progress-current{
-				position:absolute;
-				left:0;
-				top:20px;
-				height:4px;
-				width:0%;
-				background:#33B5E5;
-				z-index:1;
-				}
-			.progress-marker{
-				display:block;
-				width:10px;
-				height:10px;
-				margin:-4px 0 0 -4px;
-				position:absolute;
-				left:0%;
-				z-index:2;
-				top:21px;
-				background:#33B5E5;
-				border-radius:50%;
-				box-shadow:0 0 0 8px rgba(51,179,226,0.5);
-				}
+	}
+	.progress-bg{
+		display:block;
+		height:2px;
+		margin:20px 0;
+		background:#d9d9d9;
+	}
+	.progress-current{
+		position:absolute;
+		left:0;
+		top:20px;
+		height:4px;
+		width:0%;
+		background:#33B5E5;
+		z-index:1;
+	}
+	.progress-marker{
+		display:block;
+		width:10px;
+		height:10px;
+		margin:-4px 0 0 -4px;
+		position:absolute;
+		left:0%;
+		z-index:2;
+		top:21px;
+		background:#33B5E5;
+		border-radius:50%;
+		box-shadow:0 0 0 8px rgba(51,179,226,0.5);
+	}
+	.progress-bg-buff{
+		position:absolute;
+		left:0;
+		top:20px;
+		height:4px;
+		width:0%;
+		z-index:1;
+		background:#9BCAFF;
+	}
 	.audio-control-btn{
 		display:block;
 		width:32px;
