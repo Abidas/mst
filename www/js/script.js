@@ -490,6 +490,7 @@ var va = {
           + '">Your browser does not support the <code>audio</code> element.</audio></li>');
     }
     $('#audio ul').listview( "refresh" );
+    initAudio();
   },
   // вывести полученные с сервера данные по видео
   showVideo: function(d) {
