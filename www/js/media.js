@@ -52,7 +52,7 @@ function initAudio() {
 //      console.log('offset: ' + offset + " .. " + percent + " .. " +  audio.currentTime + " .. " + seekTo);
     }
   });
-  $('audio').on('progress',function(){
+  $('audio').bind('progress',function(){
     var audio = this;
     var currentPos = audio.currentTime;
     var maxduration = audio.duration;
