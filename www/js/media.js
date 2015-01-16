@@ -79,5 +79,7 @@ function changePos(context, val, buf) {
   $(context).siblings('.progress-bar').find('.progress-current').css('width',val+'%');
   $(context).siblings('.progress-bar').find('.progress-bg-buff').css('width',buf+'%');
   $(context).siblings('.progress-bar').find('.progress-marker').css('left',val+'%');
+
+  console.log(val,buf);
   
 }
