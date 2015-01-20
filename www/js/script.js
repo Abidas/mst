@@ -458,20 +458,24 @@ var seminar = {
 // работа с видео и аудио
 var va = {
   youtube_channel_name: 'feevaev', // имя канала на ютубе с кторого получать список видео
+
+  is_audio_loaded: 0,
   init: function() {
-    // 2do - клик на вкладку видео
     $('#media #video').show();
     $('#media #video').click();
   },
   open: function() {
     ajx.getSeminars(function(){
       $('#video ul').html('<li>... загрузка ...</li>');
-      $('#audio ul').html('<li>... загрузка ...</li>');
+      if (!va.is_audio_loaded) $('#audio ul').html('<li>... загрузка ...</li>');
       ajx.getMedia(va.showVideo, {author:  va.youtube_channel_name}, va.showAudio, {fl_type: 0});
     });
   },
   // вывести полученные с сервера данные по аудио
   showAudio: function(d) {
+    if (va.is_audio_loaded) return;
+
+    va.is_audio_loaded = 1;
     $('#audio ul').html('');
 
     if (!d.length) {
@@ -487,7 +491,7 @@ var va = {
           + '<div class="progress-bar"><span class="progress-bg-buff"></span><span class="progress-bg"></span><span class="progress-current"></span>'
           + '<span class="progress-marker"></span></div>'
           + '<audio src="' + ajx.base + d[k]['file_url'].substr(1)
-          + '" autobuffer="false">Your browser does not support the <code>audio</code> element.</audio></li>');
+          + '" autobuffer="false" preload="none">Your browser does not support the <code>audio</code> element.</audio></li>');
     }
     $('#audio ul').listview( "refresh" );
     initAudio();

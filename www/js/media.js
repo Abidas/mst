@@ -30,7 +30,6 @@ function initAudio() {
     var audio = $(this).siblings('audio');
     if($(this).hasClass('playaudio')){
       audio.trigger('play');
-      audio.trigger('continue');
       $(this).removeClass('playaudio').addClass('pauseaudio').html('<i class="fa fa-pause"></i>');
     }
     else{
@@ -56,12 +55,12 @@ function initAudio() {
     var audio = this;
     var currentPos = audio.currentTime;
     var maxduration = audio.duration;
-    var buff = audio.buffered.end(0);
-    for (i=0; i<audio.buffered.length; i++) {
-        if ( audio.buffered.start(i)<=currentPos && 
-	     audio.buffered.end(i)>=currentPos) {
-		var buff = audio.buffered.end(i);
-        }
+    var buff = 0;
+    if (audio.onprogress ) buff = audio.buffered.end(0);
+    for (i = 0; i < audio.buffered.length; i++) {
+      if (audio.buffered.start(i) <= currentPos && audio.buffered.end(i) >= currentPos) {
+        buff = audio.buffered.end(i);
+      }
     }
     var buf_percentage = 100 * buff / maxduration;
     var percentage = 100 * currentPos / maxduration; //in %
@@ -80,6 +79,5 @@ function changePos(context, val, buf) {
   $(context).siblings('.progress-bar').find('.progress-bg-buff').css('width',buf+'%');
   $(context).siblings('.progress-bar').find('.progress-marker').css('left',val+'%');
 
-  console.log(val,buf);
-  
+//  console.log(val, buf);
 }
