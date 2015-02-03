@@ -28,13 +28,15 @@
     <preference name="disable-cursor" value="true" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
-    <icon src="img/icon_a_bar/logoApp_01.png" />
-    <icon gap:platform="android" gap:qualifier="ldpi" src="img/icon_a_bar/drawable-ldpi/logoApp_01.png" />
-    <icon gap:platform="android" gap:qualifier="mdpi" src="img/icon_a_bar/drawable-mdpi/logoApp_01.png" />
-    <icon gap:platform="android" gap:qualifier="hdpi" src="img/icon_a_bar/drawable-hdpi/logoApp_01.png" />
-    <icon gap:platform="android" gap:qualifier="xhdpi" src="img/icon_a_bar/drawable-xhdpi/logoApp_01.png" />
 
-<platform name="ios">
+    <platform name="android">
+              <icon src="res/android/ldpi.png" density="ldpi" />
+              <icon src="res/android/mdpi.png" density="mdpi" />
+              <icon src="res/android/hdpi.png" density="hdpi" />
+              <icon src="res/android/xhdpi.png" density="xhdpi" />
+    </platform>
+
+    <platform name="ios">
               <!-- iOS 8.0+ -->
               <!-- iPhone 6 Plus  -->
               <icon src="res/ios/icon-60@3x.png" width="180" height="180" />
@@ -61,13 +63,8 @@
               <!-- iPad Spotlight and Settings Icon -->
               <icon src="res/ios/icon-50.png" width="50" height="50" />
               <icon src="res/ios/icon-50@2x.png" width="100" height="100" />
-     </platform>
-<!--
-    <icon gap:platform="ios" height="57" src="img/icon_a_launch/drawable-hdpi/logoApp_01.png" width="57" />
-    <icon gap:platform="ios" height="72" src="img/icon_a_launch/drawable-hdpi/logoApp_01.png" width="72" />
-    <icon gap:platform="ios" height="114" src="img/icon_a_launch/drawable-xxhdpi/logoApp_01.png" width="114" />
-    <icon gap:platform="ios" height="144" src="img/icon_a_launch/drawable-xxhdpi/logoApp_01.png" width="144" />
--->
+    </platform>
+
     <gap:splash src="img/sp_a/splash_a.png" />
 
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="img/sp_a/drawable-ldpi/splash_a.png" />
