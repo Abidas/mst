@@ -33,11 +33,41 @@
     <icon gap:platform="android" gap:qualifier="mdpi" src="img/icon_a_bar/drawable-mdpi/logoApp_01.png" />
     <icon gap:platform="android" gap:qualifier="hdpi" src="img/icon_a_bar/drawable-hdpi/logoApp_01.png" />
     <icon gap:platform="android" gap:qualifier="xhdpi" src="img/icon_a_bar/drawable-xhdpi/logoApp_01.png" />
+
+<platform name="ios">
+              <!-- iOS 8.0+ -->
+              <!-- iPhone 6 Plus  -->
+              <icon src="res/ios/icon-60@3x.png" width="180" height="180" />
+              <!-- iOS 7.0+ -->
+              <!-- iPhone / iPod Touch  -->
+              <icon src="res/ios/icon-60.png" width="60" height="60" />
+              <icon src="res/ios/icon-60@2x.png" width="120" height="120" />
+              <!-- iPad -->
+              <icon src="res/ios/icon-76.png" width="76" height="76" />
+              <icon src="res/ios/icon-76@2x.png" width="152" height="152" />
+              <!-- iOS 6.1 -->
+              <!-- Spotlight Icon -->
+              <icon src="res/ios/icon-40.png" width="40" height="40" />
+              <icon src="res/ios/icon-40@2x.png" width="80" height="80" />
+              <!-- iPhone / iPod Touch -->
+              <icon src="res/ios/icon.png" width="57" height="57" />
+              <icon src="res/ios/icon@2x.png" width="114" height="114" />
+              <!-- iPad -->
+              <icon src="res/ios/icon-72.png" width="72" height="72" />
+              <icon src="res/ios/icon-72@2x.png" width="144" height="144" />
+              <!-- iPhone Spotlight and Settings Icon -->
+              <icon src="res/ios/icon-small.png" width="29" height="29" />
+              <icon src="res/ios/icon-small@2x.png" width="58" height="58" />
+              <!-- iPad Spotlight and Settings Icon -->
+              <icon src="res/ios/icon-50.png" width="50" height="50" />
+              <icon src="res/ios/icon-50@2x.png" width="100" height="100" />
+     </platform>
+<!--
     <icon gap:platform="ios" height="57" src="img/icon_a_launch/drawable-hdpi/logoApp_01.png" width="57" />
     <icon gap:platform="ios" height="72" src="img/icon_a_launch/drawable-hdpi/logoApp_01.png" width="72" />
     <icon gap:platform="ios" height="114" src="img/icon_a_launch/drawable-xxhdpi/logoApp_01.png" width="114" />
     <icon gap:platform="ios" height="144" src="img/icon_a_launch/drawable-xxhdpi/logoApp_01.png" width="144" />
-
+-->
     <gap:splash src="img/sp_a/splash_a.png" />
 
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="img/sp_a/drawable-ldpi/splash_a.png" />
