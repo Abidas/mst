@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.mstyle.application" version="1.0.19" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>М-стайл</name>
+    <name>М-СТАЙЛ</name>
     <description>
-        М-стайл
+        М-СТАЙЛ
     </description>
     <author email="idea@indev-group.ru" href="http://indev-group.ru">
         indev-group.ru
