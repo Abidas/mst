@@ -939,3 +939,5 @@ function lz(n) {
 
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
+
+alert(gaPlugin);
