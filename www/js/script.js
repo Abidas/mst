@@ -11,6 +11,13 @@ var LINE_PREVIEW_MAX = 150; // количество выводимых симв�
 var DATA_SEMINARS;
 var DATA_DOCS;
 
+var gaPlugin;
+
+function onDeviceReady() {
+    gaPlugin = window.plugins.gaPlugin;
+    gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
+}
+
 // интерфейс и работа с ним
 var i7e = {
   history: [],
