@@ -16,7 +16,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
-    //gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
+    gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
 }
 
 // интерфейс и работа с ним
