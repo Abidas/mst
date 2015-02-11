@@ -942,18 +942,18 @@ function lz(n) {
   return n > 9 ? n : '0' + n;
 }
 
-function successHandler()
-{
-    console.log("init success");
+function successHandler() {
+    console.log("successHandler");
 }
 
-function errorHandler()
-{
-    console.log("init failed");
+function errorHandler() {
+    console.log("errorHandler");
 }
 
 function nativePluginResultHandler() {
+    console.log("nativePluginResultHandler");
 }
 
 function nativePluginErrorHandler() {
+    console.log("nativePluginErrorHandler");
 }
