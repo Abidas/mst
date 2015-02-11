@@ -12,6 +12,12 @@ var DATA_SEMINARS;
 var DATA_DOCS;
 
 var gaPlugin;
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    gaPlugin = window.plugins.gaPlugin;
+    gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
+    gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
+}
 
 // интерфейс и работа с ним
 var i7e = {
@@ -935,9 +941,3 @@ function in_array(needle, haystack, strict) {	// Checks if a value exists in an 
 function lz(n) {
   return n > 9 ? n : '0' + n;
 }
-
-
-    gaPlugin = window.plugins.gaPlugin;
-    gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
-
-alert(gaPlugin);
