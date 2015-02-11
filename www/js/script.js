@@ -335,7 +335,7 @@ var news = {
 
   // вывод одной новости
   open: function(id) {
-
+    gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "News", "Open", news.dat[id]['text'], 1);
     text = news.dat[id]['desc'];
     if (typeof news.dat[id]['text'] != "undefined")
         text = news.dat[id]['text'];
@@ -521,6 +521,7 @@ var va = {
     $('#video ul').listview( "refresh" );
   },
   openVideo: function(url) {
+    gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Video", "Open", url, 1);
     $('#popupVideo iframe').prop('src', 'http://www.youtube.com/embed/' + url);
     $('#popupVideo').popup('open');
   }
@@ -600,6 +601,7 @@ var docs = {
   },
 
  openDoc: function(k) {
+    gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Documents", "Open", DATA_DOCS[k]['title'], 1);
     $('#news_single div.inside').html('<h1>' + DATA_DOCS[k]['title'] + '</h1>');
     $('#news_single div.inside').append('<p>' + DATA_DOCS[k]['desc'].replace(URL_REGEXP, "<a  href=\"#\" onclick=\"window.open('$&', '_system');\">$&</a>") + '</p>');
     i7e.changePage('#news_single');
