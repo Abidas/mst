@@ -19,16 +19,6 @@ function onDeviceReady() {
     //gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
 }
 
-function successHandler()
-{
-    console.log("init success");
-}
-
-function errorHandler()
-{
-    console.log("init failed");
-}
-
 // интерфейс и работа с ним
 var i7e = {
   history: [],
@@ -950,4 +940,20 @@ function in_array(needle, haystack, strict) {	// Checks if a value exists in an 
 // добавляет ноль в начале, приводя число вида 1:2 к виду 01:02
 function lz(n) {
   return n > 9 ? n : '0' + n;
+}
+
+function successHandler()
+{
+    console.log("init success");
+}
+
+function errorHandler()
+{
+    console.log("init failed");
+}
+
+function nativePluginResultHandler() {
+}
+
+function nativePluginErrorHandler() {
 }
