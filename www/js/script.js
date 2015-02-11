@@ -14,9 +14,11 @@ var DATA_DOCS;
 var gaPlugin;
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
+    console.log('onDeviceReady');
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
     gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
+    console.log('onDeviceReady', gaPlugin);
 }
 
 // интерфейс и работа с ним
