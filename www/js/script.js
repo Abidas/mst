@@ -1,4 +1,6 @@
 var NEWS_ENTITY_COUNT = 20;
+var EMAIL_LENGTH_MAX = 45;
+var EMAIL_LENGTH_ERROR = 'Ваш e-mail слишком длинный';
 var INTERNET_ERROR_TEXT = 'Нет подключения к Интернету';
 var LINE_SEPARATOR = /[\n]/g;
 var TAG_REGEXP = /<([\w]{1,})>/g
@@ -678,6 +680,12 @@ var u = {
       i7e.msg.show('Ошибка', 'Пожалуйста, заполните все обязательные поля');
       return;
     }
+
+    if (p['email'].length > EMAIL_LENGTH_MAX) {
+       i7e.msg.show('Ошибка', EMAIL_LENGTH_ERROR);
+       return
+    }
+
     ajx.doAuth(p, u.doAuthCb);
   },
   // авторизация, ответ от сервера
@@ -710,6 +718,12 @@ var u = {
       i7e.msg.show('Ошибка', 'Пожалуйста, заполните все обязательные поля');
       return;
     }
+
+    if (p['email'].length > EMAIL_LENGTH_MAX) {
+       i7e.msg.show('Ошибка', EMAIL_LENGTH_ERROR);
+       return
+    }
+
     p['imei'] = Math.round(Math.random() * 100000000) + '';
     p['imei'] = p['imei'].repeat( 15 );
     p['imie'] = p['imei'].substr(0, 15);
