@@ -20,9 +20,9 @@ function onDeviceReady() {
     gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
     gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
     $(".analytics-button").bind( "click", function() {
+		console.log("clickTabHandler");
         gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Page", "Open", $(this).attr('href'), 1);
     });
-	console.log(gaPlugin);
 }
 
  
