@@ -19,7 +19,7 @@ function onDeviceReady() {
     gaPlugin = window.plugins.gaPlugin;
     gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
     gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
-    $(".analytics-button").bind( "click", function() {
+    $(".analytics-button").on( "tap", function() {
 		console.log("clickTabHandler");
         gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Page", "Open", $(this).attr('href'), 1);
     });
