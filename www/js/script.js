@@ -17,11 +17,12 @@ var gaPlugin;
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     gaPlugin = window.plugins.gaPlugin;
-    gaPlugin.init(successHandler, errorHandler, "UA-59443343-2", 10);
+    gaPlugin.init(successHandler, errorHandler, "UA-37539826-3", 10);
     gaPlugin.trackPage(nativePluginResultHandler, nativePluginErrorHandler, "index.html");
     $(".analytics-button").bind( "click", function() {
         gaPlugin.trackEvent( nativePluginResultHandler, nativePluginErrorHandler, "Page", "Open", $(this).attr('href'), 1);
     });
+	console.log(gaPlugin);
 }
 
  
